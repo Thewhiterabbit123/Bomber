@@ -5,6 +5,7 @@ struct s_coordinate {
 };
 
 struct s_player {
+	int playerId;
 	char nickName[NICK_SIZE];
 	s_coordinate place;
 	short hp;
