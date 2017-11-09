@@ -1,3 +1,6 @@
+#ifndef GAME_H
+#define GAME_H
+
 #include <iostream>
 #include <vector>
 #include "Define.h"
@@ -17,33 +20,28 @@ public:
 		 EventManager *_eventManager, 
 		 StateManager *_stateManager,
 		 ResolveManager *_resolveManager):
+
 		field(_field),
 		time(_time),
 		eventManager(_eventManager),
 		stateManager(_stateManager),
 		resolveManager(_resolveManager) {};
-	void StartGame();
+
 	void KillCharacter();
 	void DestroyBomb();
-
-
+	void StartGame();
+	void EndGame();
+	void CreateCharacter();
+	void CreateBomb();
+	void GetTime();
+	void GetField();
+	void ParsePacket();
+	void Pause();
+	void StartMenu();
+	void Update();
 };
 
-void Game::KillCharacter() {	//kills player who has 0 hp
-	/* Передача всем игрокам
-	сигнала о том, что персонаж
-	умер. Удаление игрока из
-	вектора. */
-
-
-}
-
-void Game::DestroyBomb() {
-
-}
-
-
-
+#endif
 
 
 
