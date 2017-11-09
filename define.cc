@@ -22,6 +22,8 @@
 #define SET_MEDICINE_EVENT 9
 #define PICK_MEDICINE_EVENT 10
 #define KILL_BOMBER 11
+#define PAUSE 12
+#define START 13
 
 //  event masks сделать структуру event
 
