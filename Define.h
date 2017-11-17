@@ -17,7 +17,7 @@ enum Event {
 	KILL_BOMBER
 };
 
-//
+////
 //  map
 
 #define MAP_ROW_SIZE 20
