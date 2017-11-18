@@ -3,42 +3,26 @@
 
 #include <iostream>
 #include <vector>
-#include "Define.h"
+#include "../Define.h"
 
 class Game {
-private:
-	vector<Player> player(PLAYER_COUNT); 
-	vector<Bomb> bomb(BOMB_COUNT);
-	Field field;
-	Time time;
-	EventManager *eventManager;
-	StateManager *stateManager;
-	ResolveManager *resolveManager;
-public:
-	Game(Field &_field,
-		 Time &_time,
-		 EventManager *_eventManager, 
-		 StateManager *_stateManager,
-		 ResolveManager *_resolveManager):
+	private:
+		vector<Player> player; 
+		vector<Bomb> bomb;
+		Field field;
+		Time time;
+		EventContainer eventContainer;
+	public:
+		Game(const & vector<string> name, const & Field _field);
 
-		field(_field),
-		time(_time),
-		eventManager(_eventManager),
-		stateManager(_stateManager),
-		resolveManager(_resolveManager) {};
-
-	void KillCharacter();
-	void DestroyBomb();
-	void StartGame();
-	void EndGame();
-	void CreateCharacter();
-	void CreateBomb();
-	void GetTime();
-	void GetField();
-	void ParsePacket();
-	void Pause();
-	void StartMenu();
-	void Update();
+		void Step();
+		void KillCharacter();
+		void DestroyBomb();
+		void EndGame();
+		void CreateBomb();
+		void GetTime();
+		void GetField();
+		void StartMenu();
 };
 
 #endif

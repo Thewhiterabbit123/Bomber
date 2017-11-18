@@ -1,11 +1,10 @@
-#ifndef STRUCT_H
-#define STRUCT_H
+#pragma once
 
 struct Coordinate {
 	int x;
 	int y;
-	Coordinate(int _x, int _y): x(_x), y(_y) {};
-	Coordinate& operator = (Coordinate& rhs) { return Coordinate(this->x = rhs.x, this->y = rhs.y); };
+	Coordinate(const int &_x, const int &_y): x(_x), y(_y) {};
+	Coordinate& operator = (const Coordinate& rhs) { return Coordinate(this->x = rhs.x, this->y = rhs.y); };
 };
 
 struct PlayerInfo {
@@ -36,7 +35,7 @@ struct Medicine {
 };
 
 //Запрос от клиента к серверу
-struct initRequest {
+struct InitRequest {
 	int type;
 	char nickName[NICK_SIZE];
 };
@@ -74,7 +73,7 @@ struct MapNowAnswer {
 struct PlayerEventRequest {
 	int type;
 	unsigned int clientId;
-	unsigned int event; 
+	EventInfo event; 
 };
 
 //  change on map
@@ -85,7 +84,7 @@ struct Change {
 
 struct EventInfo {
 	int eventType;
-	Coordinate place;
+	Coordinate changePosition;
 };
 
-#endif STRUCT_H
+
