@@ -1,22 +1,21 @@
-#ifndef PLAYER_H
-#define PLAYER_H
-#include "struct.h"
+#pragma once
+#include "Object.h"
+#include "../Define.h"
+#include <string>
 
-class Player {
-public:
-	Player(Coordinate startpos, int skinId);
-	void Move(int x, int y);
-	void PutBomb();
-	void GetDamage(int amount);
-	void Heal(int amount);
-	int GetHp();
-	int GetBomb();
-	Coordinate GetPosition();
-private:
-	int bomb;
-	int hp;
-	Coordinate position;
-	int skin;
+class Player : public Object {
+	public:
+		Player();
+		Player(std::string playerName, int playerSkin);
+		void SetPosition(enum Event);
+		void PutBomb();
+		void GetDamage();
+		void Heal();
+		int GetHp();
+		int GetBomb();
+	private:
+		std::string name;
+		int bomb;
+		int hp;
+		int skin;
 };
-
-#endif PLAYER_H

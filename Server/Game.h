@@ -1,49 +1,38 @@
+#ifndef GAME_H
+#define GAME_H
+
+#include "../Define.h"
+#include "Field.h"
+#include "Player.h"
+#include "Bomb.h"
+
 #include <iostream>
 #include <vector>
-#include "Define.h"
+#include <queue>
+
+using namespace std;
 
 class Game {
-private:
-	vector<Player> player(PLAYER_COUNT); 
-	vector<Bomb> bomb(BOMB_COUNT);
-	Field field;
-	Time time;
-	EventManager *eventManager;
-	StateManager *stateManager;
-	ResolveManager *resolveManager;
-public:
-	Game(Field &_field,
-		 Time &_time,
-		 EventManager *_eventManager, 
-		 StateManager *_stateManager,
-		 ResolveManager *_resolveManager):
-		field(_field),
-		time(_time),
-		eventManager(_eventManager),
-		stateManager(_stateManager),
-		resolveManager(_resolveManager) {};
-	void StartGame();
-	void KillCharacter();
-	void DestroyBomb();
-
-
+	private:
+		vector<Player> player; 
+		vector<Bomb> bomb;
+		Field field;
+		Time time;
+		queue<Event> eventContainer;
+	public:
+		Game(const & vector<string> name, const & Field _field);
+		AYE
+		void Step();
+		void KillCharacter();
+		void DestroyBomb();
+		void EndGame();
+		void CreateBomb(const Bomb &_bomb);
+		void GetTime();
+		void GetField();
+		void StartMenu();
 };
 
-void Game::KillCharacter() {	//kills player who has 0 hp
-	/* Передача всем игрокам
-	сигнала о том, что персонаж
-	умер. Удаление игрока из
-	вектора. */
-
-
-}
-
-void Game::DestroyBomb() {
-
-}
-
-
-
+#endif
 
 
 
