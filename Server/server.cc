@@ -61,7 +61,8 @@ void server_loop()
 	    int bytes = read(*sock, buffer(buff), boost::bind(read_complete,buff,_1,_2));
 	    std::string msg(buff, bytes);
 
-	   	int playerId = game.CreateUser() 
+        std::string name;
+	   	int playerId = game.CreatePlayer(name);
 	    
 	    playersCount++;
     	//boost::thread(boost::bind(client_session, sock));
