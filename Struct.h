@@ -1,5 +1,9 @@
 #pragma once
+
+#include "Define.h"
+
 #define "Define.h"
+
 struct Coordinate {
 	int x;
 	int y;
@@ -84,7 +88,7 @@ struct Change {
 }
 
 struct EventInfo {
-	int eventType;
+	Event eventType;
 	Coordinate changePosition;
 };
 

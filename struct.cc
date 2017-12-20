@@ -1,4 +1,3 @@
-
 struct s_coordinate {
 	int x;
 	int y;

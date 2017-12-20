@@ -5,16 +5,28 @@
 #include <string>
 using namespace std;
 
-Game::Game(const &vector<string> name, const & Field _field)
+Game::Game(const vector<string> & name, const Field & _field)
 {
+    player.reserve(PLAYER_COUNT);
+    bomb.reserve(BOMB_COUNT);
 	field = _field;
 	for (int i = 0; i < PLAYER_COUNT; i++) {
-		Player _player(name[i]);
-		player.push(_player, i);
+		Player _player(name[i], i);
+		player.push_back(_player);
 	}
 }
 
+Game::Game() {
+	player.reserve(PLAYER_COUNT);
+    bomb.reserve(BOMB_COUNT);
+    field = globalField;
+}
 
+int Game::CreatePlayer(const std::string & name) {
+    static int skinNum = 0;
+    player.push_back(Player(name, skinNum));
+    skinNum++;
+}
 
 void Game::KillCharacter() {	//kills player who has 0 hp
 	/* Передача всем игрокам
@@ -33,7 +45,7 @@ void Game::EndGame() {
 }
 
 void Game::CreateBomb(const Bomb &_bomb) {
-	bomb.push(_bomb);
+	bomb.push_back(_bomb);
 }
 
 void Game::GetTime() {

@@ -9,6 +9,7 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <string>
 
 using namespace std;
 
@@ -18,10 +19,11 @@ class Game {
 		vector<Bomb> bomb;
 		Field field;
 		Time time;
-		queue<Event> eventContainer;
+		queue<Change> eventContainer;
 	public:
-		Game(const & vector<string> name, const & Field _field);
-		AYE
+		Game(const vector<string> & name, const Field &_field);
+		Game();
+		int CreatePlayer(const std::string & name);
 		void Step();
 		void KillCharacter();
 		void DestroyBomb();
