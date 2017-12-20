@@ -2,14 +2,12 @@
 
 #include "Define.h"
 
-#define "Define.h"
-
 struct Coordinate {
 	int x;
 	int y;
 	Coordinate(const int &_x, const int &_y): x(_x), y(_y) {};
-	Coordinate(const Coordinate & coordinate): x(coordinate.x), y(coordinate.y): {}
-	Coordinate& operator = (const Coordinate& rhs) { return Coordinate(this->x = rhs.x, this->y = rhs.y); };
+	Coordinate(const Coordinate & coordinate): x(coordinate.x), y(coordinate.y) {};
+	const Coordinate& operator = (const Coordinate& rhs) { return Coordinate(this->x = rhs.x, this->y = rhs.y); }
 };
 
 struct PlayerInfo {
@@ -17,6 +15,11 @@ struct PlayerInfo {
 	Coordinate place;
 	short hp;
 	short bombCount;
+};
+
+struct EventInfo {
+	Event eventType;
+	Coordinate changePosition;
 };
 
 struct BombInfo {
@@ -31,12 +34,12 @@ struct BlockInfo {
 
 struct NewBomb {
 	int newBombId;
-	s_coordinate place;
+	Coordinate place;
 };
 
 struct Medicine {
 	int medicineId;
-	s_coordinate place; 
+	Coordinate place;
 };
 
 //Запрос от клиента к серверу
@@ -85,11 +88,8 @@ struct PlayerEventRequest {
 struct Change {
 	unsigned int id;
 	struct EventInfo; //сделать структуру event
-}
-
-struct EventInfo {
-	Event eventType;
-	Coordinate changePosition;
 };
 
+struct Time {
 
+};

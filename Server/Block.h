@@ -9,8 +9,9 @@ class Block: public Object {
 		BlockType type;
 	public:
         Block();
-		Block(const BlockType & _type = EMPTY,
-			  const Coordinate & _position);
+		Block   (const Coordinate & _position,
+                const BlockType & _type = EMPTY
+			    );
 		int SetType(const BlockType &_type);
 		int GetType();
 		int ExplodeBlock();
