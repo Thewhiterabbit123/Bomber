@@ -5,14 +5,10 @@ BomberGame::BomberGame(QWidget* parent): QGraphicsView(parent)
     allScreens = new QStackedLayout();
     menu = new MenuWidget();
     game = new GameWidget();
-    //pageComboBox = new QComboBox();
     allScreens -> addWidget(menu);
-    //pageComboBox->addItem(tr("menu"));
     allScreens -> addWidget(game);
-    //pageComboBox->addItem(tr("game"));
     setLayout(allScreens);
 
-    //connect(pageComboBox, SIGNAL(activated(int)), allScreens, SLOT(setCurrentIndex(int));
 
     connect(menu, SIGNAL(setScreen(int)), allScreens, SLOT(setCurrentIndex(int)));
     connect(game, SIGNAL(setScreen(int)), allScreens, SLOT(setCurrentIndex(int)));

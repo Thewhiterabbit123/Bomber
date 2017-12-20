@@ -3,8 +3,8 @@
 
 
 #include <QWidget>
-#include <QVBoxLayout>
-#include <QPushButton>
+
+#include "ui_gamewidgetui.h"
 
 class GameWidget: public QWidget{
     Q_OBJECT
@@ -12,8 +12,8 @@ public:
     explicit GameWidget(QWidget* parent = NULL);
 
 private:
-    QVBoxLayout* gameLayout;
-    QPushButton* backButton;
+
+    Ui::game* gameUi;
 
 signals:
     void setScreen(int);
