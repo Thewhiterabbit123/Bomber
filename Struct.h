@@ -1,85 +1,91 @@
-
-struct s_coordinate {
+#pragma once
+#define "Define.h"
+struct Coordinate {
 	int x;
 	int y;
+	Coordinate(const int &_x, const int &_y): x(_x), y(_y) {};
+	Coordinate(const Coordinate & coordinate): x(coordinate.x), y(coordinate.y): {}
+	Coordinate& operator = (const Coordinate& rhs) { return Coordinate(this->x = rhs.x, this->y = rhs.y); };
 };
 
-struct s_player {
+struct PlayerInfo {
 	char nickName[NICK_SIZE];
-	s_coordinate place;
+	Coordinate place;
 	short hp;
 	short bombCount;
 };
 
-struct s_bomb {
+struct BombInfo {
 	int bombId; //нельзя присваивать нулю
-	s_coordinate place;
+	Coordinate place;
 };
 
-struct s_block {
+struct BlockInfo {
 	int blockId;
 	int type; 
 };
 
-struct s_newBomb {
+struct NewBomb {
 	int newBombId;
 	s_coordinate place;
 };
 
-struct s_medicine {
+struct Medicine {
 	int medicineId;
 	s_coordinate place; 
 };
 
 //Запрос от клиента к серверу
-struct s_initRequest {
+struct InitRequest {
 	int type;
 	char nickName[NICK_SIZE];
 };
 
-struct s_initAnswer {
+struct InitAnswer {
 	int type;
 	unsigned int clientId;
 };
 
-struct s_isReadyRequest {
+struct IsReadyRequest {
 	int type;
 	unsigned int clientId;
 };
 
-struct s_isReadyAnswer {
+struct IsReadyAnswer {
 	int type;
 	bool ready;
 };
 
-struct s_mapNowRequest {
+struct MapNowRequest {
 	int type;
 	unsigned int clientId;
 };
 
-struct s_mapNowAnswer {
+struct MapNowAnswer {
 	int type;
 
-	s_player player[PLAYER_COUNT + 1];
-	s_bomb bomb[BOMB_COUNT + 1];
-	s_block block[BLOCK_COUNT + 1]; 
-	s_newBomb newBomb[BLOCK_COUNT + 1];
-	s_medicine medicine[BLOCK_COUNT + 1];
+	PlayerInfo player[PLAYER_COUNT + 1];
+	BombInfo bomb[BOMB_COUNT + 1];
+	BlockInfo block[BLOCK_COUNT + 1]; 
+	NewBomb newBomb[BLOCK_COUNT + 1];
+	Medicine medicine[BLOCK_COUNT + 1];
 };
 
-struct s_playerEventRequest {
+struct PlayerEventRequest {
 	int type;
 	unsigned int clientId;
-	unsigned int event; 
+	EventInfo event; 
 };
 
 //  change on map
-struct s_change {
+struct Change {
 	unsigned int id;
-	struct event; //сделать структуру event
+	struct EventInfo; //сделать структуру event
 }
 
-struct s_event {
+struct EventInfo {
 	int eventType;
-	s_coordinate place;
+	Coordinate changePosition;
 };
+
+
