@@ -9,7 +9,7 @@
 class Parser {
     public:
         void parseLine(std::string);
-        int getMyId(std::string);
+        int  getMyId(std::string);
         void makeMapFromString(std::string);
     private:
         int _id;

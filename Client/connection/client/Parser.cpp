@@ -48,8 +48,8 @@ int Parser::getMyId(std::string name) {
 }
 
 void Parser::makeMapFromString(std::string _map) {
-    for(int i = 0; i < 20; i++) {
-        for(int j = 0; j < 13; j++) {
+    for(int i = 0; i < 13; i++) {
+        for(int j = 0; j < 20; j++) {
             parseMap.push_back(_map[i]);
         }
     }

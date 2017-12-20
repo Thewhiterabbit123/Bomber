@@ -5,6 +5,8 @@
 #include "Parse.h"
 
 Client::Client() {
+    socket = new boost::asio::ip::tcp::socket(service);
+
     logfile.exceptions (std::ofstream::failbit | std::ofstream::badbit);
     try {
         logfile.open("/home/nadia/Technopark/project/Bomber/Client/connection/client/client.log");
@@ -14,35 +16,60 @@ Client::Client() {
     }
 }
 
-void Client::doConnect() {
-
+void Client::Connect() {
+     socket->connect(boost::asio::ip::tcp::endpoint(boost::asio::ip::address::from_string(_host), _port));
 }
 
 void Client::getParam() {
-    std::ifstream file;
-    file.exceptions (std::ifstream::failbit | std::ifstream::badbit);
+    std::ifstream configFile;
+    configFile.exceptions (std::ifstream::failbit | std::ifstream::badbit);
     try {
-        file.open("/home/nadia/Technopark/project/Bomber/Client/connection/client/config.conf");
-        file >> this->_host >> this->_port;
+        configFile.open("/home/nadia/Technopark/project/Bomber/Client/connection/client/config.conf");
+        configFile >> this->_host >> this->_port;
         std::cout << _host << " " << _port << '\n';
     } catch (std::ifstream::failure e) {
-        logfile << " cant open conf file";
+        logfile << " cant open conf configFile";
     }
 
-    file.close();
+    configFile.close();
 }
 
 void Client::disconnect() {
 }
 
 void Client::getMessage() {
-    parse.parseLine("2 kjnhpohpoihj 2 2 3 4 2 3 1 2 4 3 2 4");
-    std::cout << parse.getMyId("lol");
+    boost::system::error_code error;
+    boost::asio::streambuf receive_buffer;
+    boost::asio::read(*socket, receive_buffer, boost::asio::transfer_all(), error);
 
+    if(error && error != boost::asio::error::eof) {
+        std::cout << "receive failed: " << error.message() << std::endl;
+    } else {
+        inputMessage = makeString(receive_buffer);
+        parse.parseLine(inputMessage);
+    }
 }
 
-//Client::~Client() {
-//	logfile.close();
-//}
+void Client::sendMessage(std::string msg) {
+     boost::system::error_code error;
+     boost::asio::write(*socket, boost::asio::buffer(msg), error);
+
+     if(error) {
+       std::cout << "send failed: " << error.message() << std::endl;
+     } else {
+       std::cout << "send correct!" << std::endl;
+   }
+}
+
+std::string Client::makeString(boost::asio::streambuf& streambuf) {
+  return {boost::asio::buffers_begin(streambuf.data()),
+          boost::asio::buffers_end(streambuf.data())};
+}
+
+
+Client::~Client() {
+    logfile.close();
+    delete socket;
+}
 
 
