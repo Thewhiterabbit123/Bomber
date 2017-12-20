@@ -1,4 +1,9 @@
-#include "game.h"
+#include "Game.h"
+#include "Player.h"
+#include "Field.h"
+#include <vector>
+#include <string>
+using namespace std;
 
 Game::Game(const &vector<string> name, const & Field _field)
 {
@@ -16,9 +21,6 @@ void Game::KillCharacter() {	//kills player who has 0 hp
 	сигнала о том, что персонаж
 	умер. Удаление игрока из
 	вектора. */
-
-
-
 }
 
 void Game::DestroyBomb() {
@@ -34,7 +36,7 @@ void Game::CreateBomb(const Bomb &_bomb) {
 	bomb.push(_bomb);
 }
 
-void GetTime() {
+void Game::GetTime() {
 
 }
 

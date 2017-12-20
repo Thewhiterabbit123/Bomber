@@ -3,12 +3,13 @@
 
 class Object {
 		public:
-			Object(Coordinate startPosition): id(globalId++) {};
+            Object();
+			Object(Coordinate startPosition);
 			int GetId();
 			Coordinate GetPosition();
 		private:
-			static int globalId;
 			int id;
+            void SetId();
 		protected:
 			Coordinate position;
 };

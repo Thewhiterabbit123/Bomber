@@ -1,9 +1,10 @@
 #pragma once
-
+#define "Define.h"
 struct Coordinate {
 	int x;
 	int y;
 	Coordinate(const int &_x, const int &_y): x(_x), y(_y) {};
+	Coordinate(const Coordinate & coordinate): x(coordinate.x), y(coordinate.y): {}
 	Coordinate& operator = (const Coordinate& rhs) { return Coordinate(this->x = rhs.x, this->y = rhs.y); };
 };
 
