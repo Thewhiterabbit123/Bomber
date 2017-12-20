@@ -6,7 +6,10 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/asio.hpp>
 
+#include <vector>
 #include "Game.h"
+#include "Field.h"
+
 
 #define CLIENT_COUNT 4
 using namespace boost::asio;
@@ -15,6 +18,9 @@ using namespace boost::system;
 typedef boost::shared_ptr<ip::tcp::socket> socket_ptr;
 io_service service;
 socket_ptr usersSockPtrs[CLIENT_COUNT];
+
+//std::vector<std::string> name;
+//Field field;
 Game game;
 
 size_t read_complete(char * buff, const error_code & err, size_t bytes) 
@@ -61,7 +67,7 @@ void server_loop()
 	    int bytes = read(*sock, buffer(buff), boost::bind(read_complete,buff,_1,_2));
 	    std::string msg(buff, bytes);
 
-	   	int playerId = game.CreateUser() 
+	   	//int playerId = game.CreateUser() 
 	    
 	    playersCount++;
     	//boost::thread(boost::bind(client_session, sock));
