@@ -1,0 +1,22 @@
+/* Вызывается, когда клиент запускает поиск (после ввода никнейма и нажатия галочки) */
+void clientInit(std::string nickname);
+
+/* Получение карты == Начало игры */
+void startGame(std::vector<int> map, std::map<int, int> playerPos, std::map<std::string, int> player); // playerPos = (x*20+y, id)
+
+/* Что произошло, с кем произошло GAME TO UI */
+void playerMove(int idPlayer, int happened);
+void playerSetBomb(int idPlayer, int idBomb);
+void playerDie(int idPlayer);
+
+/* UI TO GAME */
+void clientAction(int action); // 4 - Left, 8 - Up, 2 - Down, 6 - Right, 5 - Set Bomb
+
+/* Бомба взрывается */
+void explodeBomb(int idBomb);
+
+/* Взрывается ящик */
+void explodeBox(int pos); // pos = (x*20+y, id)
+
+/*  */
+
