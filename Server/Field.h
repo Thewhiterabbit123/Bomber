@@ -2,16 +2,21 @@
 
 #include "Block.h"
 #include "../Define.h"
+#include "../Struct.h"
 
 #include <vector>
+#include <string>
 
 using namespace std;
 
 class Field {
 	private:
-		vector< vector<Block> > field;
+		vector<Block> field;
 	public:
 		Field();
-		vector< vector<Block> > & GetField();
+		Field(const Field & _field);
+        const Field & operator = (const Field & rhs);
+		vector<Block>& GetField();
+		string& fieldToString();
 };
 

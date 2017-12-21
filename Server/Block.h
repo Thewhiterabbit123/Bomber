@@ -7,10 +7,10 @@ class Block: public Object {
 	private:
 		BlockType type;
 	public:
-        Block();
-		Block   (const Coordinate & _position,
-                const BlockType & _type = EMPTY
-			    );
+        Block(): Object(), type(EMPTY) {};
+		Block (const Coordinate & _position,
+			   const BlockType & _type = EMPTY
+		);
 		int SetType(const BlockType &_type);
 		int GetType();
 		int ExplodeBlock();
