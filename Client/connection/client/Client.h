@@ -5,16 +5,17 @@
 #include <iostream>
 #include <map>
 #include <fstream>
-#include "Parse.h"
+#include "Parser.h"
+
 class Client {
 	public:
         Client();
         ~Client();
-		void disconnect();
         void Connect();
         std::string getMessage();
         void sendMessage(std::string);
         void setMyId(int);
+        std::string prepareMessageToServer(int);
 
 	private: 
         std::ofstream logfile;

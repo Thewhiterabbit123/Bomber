@@ -10,20 +10,23 @@ void Game::play() {
     int happens = parser->parseLine(messageFromServer);
 
     switch(happens) {
-        case 00: {
+        case IDPACKET: {
             client->setMyId(parser->getMyId());
+            logfile << "I'VE GOT MY ID. THIS IS IT - " << parser->getMyId() << std::endl;
             break;
         }
-        case 01: {
+        case INITPACKET: {
             parser->getMap();
             parser->getPosOfPlayer();
+            parser->getNickname();
             break;
             //call signal for Dima
         }
-        case 02: {
+        case EVENTPACKET: {
+            parser->getEvent();
+            logfile << "SOME SHIT HAPPENS" << std::endl;
             break;
         }
-
     }
 }
 

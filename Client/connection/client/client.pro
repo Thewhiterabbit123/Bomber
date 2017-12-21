@@ -23,8 +23,9 @@ SOURCES += \
 
 HEADERS += \
     Client.h \
-    Parse.h \
-    Game.h
+    Game.h \
+    Header.h \
+    Parser.h
 
 DISTFILES += \
     client.pro.user

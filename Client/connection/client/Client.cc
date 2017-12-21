@@ -2,7 +2,7 @@
 #include <iostream>
 #include <map>
 #include <fstream>
-#include "Parse.h"
+#include "Parser.h"
 
 Client::Client() {
     socket = new boost::asio::ip::tcp::socket(service);
@@ -14,12 +14,11 @@ Client::Client() {
     } catch (std::ofstream::failure e) {
         std::cerr << "Exception opening/reading/closing log file\n";
     }
-    std::cout << "THIS IS CONSTRUCTOR OF CLIENT\n";
 }
 
 void Client::Connect() {
      socket->connect(boost::asio::ip::tcp::endpoint(boost::asio::ip::address::from_string(_host), _port));
-     std::cout << "CONNECT\n";
+     logfile << "I'VE BEEN CONNECTED TO " << _host << " ON PORT " << _port << std::endl;
 }
 
 void Client::getParam() {
@@ -36,9 +35,6 @@ void Client::getParam() {
     configFile.close();
 }
 
-void Client::disconnect() {
-}
-
 std::string Client::getMessage() {
     char msg[1024];
     int len = socket->receive(boost::asio::buffer(msg));
@@ -50,14 +46,14 @@ std::string Client::getMessage() {
 void Client::sendMessage(std::string msg) {
      boost::system::error_code error;
      boost::asio::write(*socket, boost::asio::buffer(msg), error);
-     std::cout << "SEND\n";
+
      if(error) {
        std::cout << "send failed: " << error.message() << std::endl;
        logfile << "send failed: " << error.message() << std::endl;
      } else {
        std::cout << "send correct!" << std::endl;
        logfile << "send correct!" << std::endl;
-   }
+     }
 }
 
 
@@ -69,4 +65,10 @@ Client::~Client() {
 
 void Client::setMyId(int id) {
     myId = id;
+}
+
+std::string Client::prepareMessageToServer(int event) {
+    std::string msg;
+    msg += (myId + '0') + ' ' + (event + '0') + ' ';
+    return msg;
 }

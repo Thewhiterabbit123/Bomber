@@ -2,12 +2,13 @@
 #define GAME_H
 #include "Client.h"
 #include <QObject>
+#include "Header.h"
 
 class Game : public QObject {
     Q_OBJECT
 
     public:
-        Game(QObject* parent = 0): QObject(parent) {};
+         Game(QObject* parent = 0): QObject(parent) {};
         ~Game();
         void play();
     signals:
