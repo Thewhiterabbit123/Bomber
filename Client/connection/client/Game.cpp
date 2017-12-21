@@ -1,7 +1,10 @@
 #include "Game.h"
 
-Game::Game()
-{
-
+void Game::play() {
+    client = new Client();
+    client->Connect();
 }
 
+Game::~Game() {
+    delete client;
+}

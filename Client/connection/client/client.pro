@@ -18,12 +18,14 @@ LIBS += \
 SOURCES += \
     main.cpp \
     Client.cc \
-    Parser.cpp
+    Parser.cpp \
+    Game.cpp
 
 HEADERS += \
     Client.h \
     Parse.h \
-    Position.h
+    Position.h \
+    Game.h
 
 DISTFILES += \
     client.pro.user

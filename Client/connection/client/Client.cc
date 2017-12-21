@@ -14,6 +14,7 @@ Client::Client() {
     } catch (std::ofstream::failure e) {
         std::cerr << "Exception opening/reading/closing log file\n";
     }
+    std::cout << "THIS IS CONSTRUCTOR OF CLIENT\n";
 }
 
 void Client::Connect() {

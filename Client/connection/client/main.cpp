@@ -1,9 +1,8 @@
-#include "Client.h"
 #include <fstream>
-#include "Parse.h"
+#include "Game.h"
 
 int main() {
-    Client client;
-    client.Connect();
+    Game game;
+    game.play();
 }
 
