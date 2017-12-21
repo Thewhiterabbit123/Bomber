@@ -1,4 +1,3 @@
-#pragma once
 #include <iostream>
 #include <string>
 #include <boost/thread/thread.hpp>
@@ -8,72 +7,132 @@
 
 #include <vector>
 #include "Game.h"
-#include "Field.h"
+#include "../Define.h"
 
 
-#define CLIENT_COUNT 4
-using namespace boost::asio;
-using namespace boost::system;
+#define CLIENT_COUNT 4 
 
-typedef boost::shared_ptr<ip::tcp::socket> socket_ptr;
-io_service service;
+int portNum = 8001;
+typedef boost::shared_ptr<boost::asio::ip::tcp::socket> socket_ptr;
+boost::asio::io_service service;
 socket_ptr usersSockPtrs[CLIENT_COUNT];
+int playersId [CLIENT_COUNT];
 
-//std::vector<std::string> name;
-//Field field;
+
 Game game;
 
-size_t read_complete(char * buff, const error_code & err, size_t bytes) 
-{
-	if ( err) return 0;
-	bool found = std::find(buff, buff + bytes, '\n') < buff + bytes;
-	// we read one-by-one until we get to enter, no buffering
-	return found ? 0 : 1;
-}
-
-void client_session(socket_ptr sock)
+void client_session(socket_ptr sock, int clientId)
  {
+ 	std::cout << "game: " << clientId << endl;
+ 	//  SEND MAP
+ 	std::string msg;
+ 	msg += "20";
+ 	for (int i = 0; i < CLIENT_COUNT; i++) {
+ 		std::string nickName = game.
+ 		msg += ' '; msg += playersId[i] + '0'; msg += ' '; msg += nickName;
+ 	}
+	try {
+		sock->send(boost::asio::buffer(msg)); 
+	}
+	catch(boost::system::system_error e) {
+		std::cout << e.code() << std::endl;
+		continue;
+	}
+ 	msg.resize(0);
+ 	//  GET NAMES
+ 	//  SEND NAMES + ID
+
     while (true)
-     {
-     	if(sock->available()){
-	        char buff[512];
-	        // size_t len = sock->read_some(buffer(buff));
-	        // if ( len > 0) 
-	        // write(*sock, buffer("ok", 2));
-	        int bytes = read(*sock, buffer(buff), boost::bind(read_complete,buff,_1,_2));
-	        std::string msg(buff, bytes);
-	        sock->write_some(buffer(msg));
-	        std::string::size_type n = msg.find(std::string("exit"));
-	        if (n != std::string::npos)
-	        	return;
-	    }
-	    else {
-	    	sock->write_some(buffer(std::string("WAIT\n")));
-	    	//sleep(10);
-	    }
+    {
+    	if(sock->available()) {
+    		char buff[512];
+			int bytes = 0;
+			try {
+				bytes = sock->receive(boost::asio::buffer(buff));
+			}
+			catch(boost::system::system_error e) {
+				std::cout << e.code() << std::endl;
+				continue;
+			}
+			if (bytes > 0){
+				std::string packetStr(buff, bytes);
+				///
+			}
+    	}
+
+    	if (0/*  EVENT  */) {;
+    		/////////
+   //  		try {
+			// 	sock->send(boost::asio::buffer(idPack)); 
+			// }
+			// catch(boost::system::system_error e) {
+			// 	std::cout << e.code() << std::endl;
+			// 	continue;
+			// }
+    	}
+   //   	if(sock->available()){
+	  //       char buff[512];
+	  //       // size_t len = sock->read_some(buffer(buff));
+	  //       // if ( len > 0) 
+	  //       // write(*sock, buffer("ok", 2));
+	  //       int bytes = read(*sock, buffer(buff), boost::bind(read_complete,buff,_1,_2));
+	  //       std::string msg(buff, bytes);
+	  //       sock->write_some(buffer(msg));
+	  //       std::string::size_type n = msg.find(std::string("exit"));
+	  //       if (n != std::string::npos)
+	  //       	return;
+	  //   }
+	  //   else {
+	  //   	try{
+		 //    	sock->write_some(buffer(std::string("WAIT\n")));
+			// }
+			// catch(boost::system::system_error e) 
+			// {
+			// 	std::cout << e.code() << std::endl;
+			// 	return;
+			// }
+	  //   	//sleep(10);
+	  //   }
     }
 }
 
 void server_loop() 
 {
 	int playersCount = 0;
-	ip::tcp::acceptor acceptor(service, ip::tcp::endpoint(ip::tcp::v4(),8001));
+	boost::asio::ip::tcp::acceptor acceptor(service, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(),portNum));
+	std::cout << "Server run on port: " << portNum << std::endl;
 	while ( playersCount < CLIENT_COUNT) 
 	{	
 		char buff[512];
-    	socket_ptr sock(new ip::tcp::socket(service));
+    	socket_ptr sock(new boost::asio::ip::tcp::socket(service));
 	    acceptor.accept(*sock);
 	    usersSockPtrs[playersCount] = sock;
-	    int bytes = read(*sock, buffer(buff), boost::bind(read_complete,buff,_1,_2));
-	    std::string msg(buff, bytes);
-
-	   	//int playerId = game.CreateUser() 
-	    
+	    int bytes = 0;
+	    try {
+		    	bytes = sock->receive(boost::asio::buffer(buff));
+			}
+		catch(boost::system::system_error e) {
+			std::cout << e.code() << std::endl;
+			continue;
+		}
+	    std::string nickName(buff, bytes);
+	   	int playerId = game.CreatePlayer(nickName);
+	   	playersId[playersCount] = playerId;
+		std::string idPack;
+		idPack += "00 ";
+		idPack += '0' + playerId;
+	    try {
+			sock->send(boost::asio::buffer(idPack)); 
+			}
+		catch(boost::system::system_error e) {
+			std::cout << e.code() << std::endl;
+			continue;
+		}
+		std::cout << "player: " << playerId << " conected" <<std::endl;   
 	    playersCount++;
-    	//boost::thread(boost::bind(client_session, sock));
 	}
 	for (int i = 0; i < CLIENT_COUNT; i++){
-		boost::thread(boost::bind(client_session, usersSockPtrs[i]));
+		boost::thread(boost::bind(client_session, usersSockPtrs[i], playersId[i]));
 	}
 	while (true) ;
 
@@ -81,6 +140,12 @@ void server_loop()
 
 int main(int argc, char* argv[]) 
 {
+	if (argc > 1) {
+		int port = atoi(argv[1]);
+		if(port > 2000){
+			portNum = port;
+		}
+	}
 	server_loop();
 }
 
