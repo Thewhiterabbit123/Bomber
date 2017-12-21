@@ -1,11 +1,13 @@
-#ifndef STRUCT_H
-#define STRUCT_H
+#pragma once
+
+#include "Define.h"
 
 struct Coordinate {
 	int x;
 	int y;
-	Coordinate(int _x, int _y): x(_x), y(_y) {};
-	Coordinate& operator = (Coordinate& rhs) { return Coordinate(this->x = rhs.x, this->y = rhs.y); };
+	Coordinate(const int &_x, const int &_y): x(_x), y(_y) {};
+	Coordinate(const Coordinate & coordinate): x(coordinate.x), y(coordinate.y) {};
+	const Coordinate& operator = (const Coordinate& rhs) { return Coordinate(this->x = rhs.x, this->y = rhs.y); }
 };
 
 struct PlayerInfo {
@@ -13,6 +15,11 @@ struct PlayerInfo {
 	Coordinate place;
 	short hp;
 	short bombCount;
+};
+
+struct EventInfo {
+	Event eventType;
+	Coordinate changePosition;
 };
 
 struct BombInfo {
@@ -27,16 +34,16 @@ struct BlockInfo {
 
 struct NewBomb {
 	int newBombId;
-	s_coordinate place;
+	Coordinate place;
 };
 
 struct Medicine {
 	int medicineId;
-	s_coordinate place; 
+	Coordinate place;
 };
 
 //Запрос от клиента к серверу
-struct initRequest {
+struct InitRequest {
 	int type;
 	char nickName[NICK_SIZE];
 };
@@ -74,18 +81,15 @@ struct MapNowAnswer {
 struct PlayerEventRequest {
 	int type;
 	unsigned int clientId;
-	unsigned int event; 
+	EventInfo event; 
 };
 
 //  change on map
 struct Change {
 	unsigned int id;
 	struct EventInfo; //сделать структуру event
-}
-
-struct EventInfo {
-	int eventType;
-	Coordinate place;
 };
 
-#endif STRUCT_H
+struct Time {
+
+};
