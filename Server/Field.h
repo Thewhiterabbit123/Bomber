@@ -6,6 +6,8 @@
 
 #include <vector>
 #include <string>
+#include <fstream>
+#include <iostream>
 
 using namespace std;
 
@@ -15,8 +17,8 @@ class Field {
 	public:
 		Field();
 		Field(const Field & _field);
-        const Field & operator = (const Field & rhs);
+        const Field & operator = (Field & rhs);
 		vector<Block>& GetField();
-		string& fieldToString();
+		string fieldToString();
 };
 

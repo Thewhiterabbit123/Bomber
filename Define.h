@@ -23,22 +23,6 @@ enum BlockType {
 	WALL //невзрываемая стена
 };
 
-
-enum Event { 
-	NO_EVENT,
-	UP_EVENT,
-	DOWN_EVENT,
-	LEFT_EVENT,
-	RIGHT_EVENT,
-	SET_BOMB_EVENT,
-	EXPLODE_BOMB_EVENT,
-	SET_NEWBOMB_EVENT,
-	PICK_NEWBOMB_EVENT,
-	SET_MEDICINE_EVENT,
-	PICK_MEDICINE_EVENT,
-	KILL_BOMBER
-};
-
 ////
 //  map
 
