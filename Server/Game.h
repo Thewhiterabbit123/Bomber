@@ -1,5 +1,4 @@
-#ifndef GAME_H
-#define GAME_H
+#pragma once
 
 #include "../Define.h"
 #include "Field.h"
@@ -24,6 +23,7 @@ class Game {
 		Game(const vector<string> & name, const Field &_field);
 		Game();
 		int CreatePlayer(const std::string & name);
+        Player & FindPlayer(const unsigned int id);
 		void Step();
 		void KillCharacter();
 		void DestroyBomb();
@@ -33,9 +33,3 @@ class Game {
 		void GetField();
 		void StartMenu();
 };
-
-#endif
-
-
-
-

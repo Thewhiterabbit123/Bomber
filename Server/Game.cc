@@ -5,6 +5,8 @@
 #include <string>
 using namespace std;
 
+Field globalField;
+
 Game::Game(const vector<string> & name, const Field & _field)
 {
     player.reserve(PLAYER_COUNT);
@@ -28,6 +30,10 @@ int Game::CreatePlayer(const std::string & name) {
     player.push_back(currentPlayer);
     skinNum++;
     return currentPlayer.GetId();
+}
+
+Player & Game::FindPlayer(const unsigned int id) {
+
 }
 
 void Game::KillCharacter() {	//kills player who has 0 hp
@@ -55,7 +61,17 @@ void Game::GetTime() {
 }
 
 void Game::Step() {
+    while (true) {
+        Change change = eventContainer.front();
+        Event event = change.eventInfo.eventType;
+        unsigned int id = change.id;
+        eventContainer.pop();
+        switch (event) {
+            case UP_EVENT: std::cout << std::endl;
 
+
+        }
+    }
 }
 
 void Game::GetField() {

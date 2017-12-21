@@ -1,5 +1,4 @@
-#ifndef BLOCK_H
-#define BLOCK_H
+#pragma once
 
 #include "Object.h"
 #include "../Define.h"
@@ -16,5 +15,3 @@ class Block: public Object {
 		int GetType();
 		int ExplodeBlock();
 };
-
-#endif
