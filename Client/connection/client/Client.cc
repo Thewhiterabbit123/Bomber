@@ -19,6 +19,7 @@ Client::Client() {
 
 void Client::Connect() {
      socket->connect(boost::asio::ip::tcp::endpoint(boost::asio::ip::address::from_string(_host), _port));
+     std::cout << "CONNECT\n";
 }
 
 void Client::getParam() {
@@ -38,21 +39,18 @@ void Client::getParam() {
 void Client::disconnect() {
 }
 
-void Client::getMessage() {
+std::string Client::getMessage() {
     char msg[1024];
-    socket->receive(boost::asio::buffer(msg));
-
-    inputMessage += msg;
-
-    parse.parseLine(inputMessage);
-
-    inputMessage.clear();
+    int len = socket->receive(boost::asio::buffer(msg));
+    std::string inputMessage(msg, len);
+    std::cout << inputMessage << std::endl;
+    return inputMessage;
 }
 
 void Client::sendMessage(std::string msg) {
      boost::system::error_code error;
      boost::asio::write(*socket, boost::asio::buffer(msg), error);
-
+     std::cout << "SEND\n";
      if(error) {
        std::cout << "send failed: " << error.message() << std::endl;
        logfile << "send failed: " << error.message() << std::endl;
@@ -69,3 +67,6 @@ Client::~Client() {
 }
 
 
+void Client::setMyId(int id) {
+    myId = id;
+}

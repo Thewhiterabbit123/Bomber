@@ -24,7 +24,6 @@ SOURCES += \
 HEADERS += \
     Client.h \
     Parse.h \
-    Position.h \
     Game.h
 
 DISTFILES += \

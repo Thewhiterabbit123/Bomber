@@ -12,19 +12,18 @@ class Client {
         ~Client();
 		void disconnect();
         void Connect();
-        void getMessage();
+        std::string getMessage();
         void sendMessage(std::string);
+        void setMyId(int);
 
 	private: 
         std::ofstream logfile;
 
         int myId;
         int _port;
-        Parser parse;
 
+        std::string myName;
         std::string _host;
-        std::string inputMessage;
-        std::string outputMessage;
 
         boost::asio::io_service service;
         boost::asio::ip::tcp::socket *socket;

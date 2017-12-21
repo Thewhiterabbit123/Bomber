@@ -51,13 +51,11 @@ OBJECTS_DIR   = ./
 SOURCES       = ../client/main.cpp \
 		../client/Client.cc \
 		../client/Parser.cpp \
-		../client/Game.cpp moc_Parse.cpp \
-		moc_Game.cpp
+		../client/Game.cpp moc_Game.cpp
 OBJECTS       = main.o \
 		Client.o \
 		Parser.o \
 		Game.o \
-		moc_Parse.o \
 		moc_Game.o
 DIST          = ../client/client.pro.user \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -126,7 +124,6 @@ DIST          = ../client/client.pro.user \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		../client/client.pro ../client/Client.h \
 		../client/Parse.h \
-		../client/Position.h \
 		../client/Game.h ../client/main.cpp \
 		../client/Client.cc \
 		../client/Parser.cpp \
@@ -308,7 +305,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../client/Client.h ../client/Parse.h ../client/Position.h ../client/Game.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../client/Client.h ../client/Parse.h ../client/Game.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../client/main.cpp ../client/Client.cc ../client/Parser.cpp ../client/Game.cpp $(DISTDIR)/
 
 
@@ -332,16 +329,11 @@ check: first
 
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: moc_Parse.cpp moc_Game.cpp
+compiler_moc_header_make_all: moc_Game.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_Parse.cpp moc_Game.cpp
-moc_Parse.cpp: ../client/Position.h \
-		../client/Parse.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/nadia/Technopark/project/Bomber/Client/connection/client -I/usr/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../client/Parse.h -o moc_Parse.cpp
-
+	-$(DEL_FILE) moc_Game.cpp
 moc_Game.cpp: ../client/Client.h \
 		../client/Parse.h \
-		../client/Position.h \
 		../client/Game.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/nadia/Technopark/project/Bomber/Client/connection/client -I/usr/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../client/Game.h -o moc_Game.cpp
 
@@ -359,27 +351,20 @@ compiler_clean: compiler_moc_header_clean
 
 main.o: ../client/main.cpp ../client/Game.h \
 		../client/Client.h \
-		../client/Parse.h \
-		../client/Position.h
+		../client/Parse.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../client/main.cpp
 
 Client.o: ../client/Client.cc ../client/Client.h \
-		../client/Parse.h \
-		../client/Position.h
+		../client/Parse.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Client.o ../client/Client.cc
 
-Parser.o: ../client/Parser.cpp ../client/Parse.h \
-		../client/Position.h
+Parser.o: ../client/Parser.cpp ../client/Parse.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Parser.o ../client/Parser.cpp
 
 Game.o: ../client/Game.cpp ../client/Game.h \
 		../client/Client.h \
-		../client/Parse.h \
-		../client/Position.h
+		../client/Parse.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Game.o ../client/Game.cpp
-
-moc_Parse.o: moc_Parse.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_Parse.o moc_Parse.cpp
 
 moc_Game.o: moc_Game.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_Game.o moc_Game.cpp

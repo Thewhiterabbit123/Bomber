@@ -6,46 +6,52 @@
 #define MAPWIDTH 20
 #define MAPHEIGHT 13
 
-void Parser::parseLine(std::string line) {
+int Parser::parseLine(std::string line) {
     std::stringstream stream(line);
+    int typeOfPacket = 0;
     stream >> typeOfPacket;
 
     switch (typeOfPacket) {
         case 00: { //this packet need to get my id
             stream >> myId;
+            return 00;
             break;
         }
     //init packet - type 1, id and clients's name
-        case 1: {
+        case 01: {
             for(int i = 0; i < NUMBEROFPLAYERS; i++) {
-                stream >> _id;
+                int id = 0;
                 std::string name;
+
+                stream >> id;
                 stream >> name;
-                nickname[name] = _id;
+                nickname[name] = id;
+                return 01;
             }
             break;
         }
     //init packet with position of game entity. type - 2. map - first, then for id-position
-        case 2: {
+        case 02: {
             int localId = 0;
             int posOnVector = 0;
-            Position pos;
             std::string _map;
             stream >> _map; //get map from packet
             makeMapFromString(_map);
             for(int i = 0; i < NUMBEROFPLAYERS; i++) {
-                stream >> localId >> pos;  //get coordinat's of players
-                posOnVector = pos.x * MAPWIDTH + pos.y;
+                stream >> localId >> posOnVector;  //get coordinat's of players
                 posOfPlayer[localId] = posOnVector;
             }
-            //emit allReady(nickname, posOfPlayer, parseMap);
+            return 02;
             break;
         }
-        case 3: {
-            stream >> _id;
+        case 03: {
+            int id = 0;
+            int what = 0;
+            stream >> id;
             stream >> what;
+            return 03;
+            break;
         }
-
     }
 }
 
@@ -58,4 +64,20 @@ void Parser::makeMapFromString(std::string _map) {
 }
 std::vector<int> Parser::getParseMap() {
     return parseMap;
+}
+
+int Parser::getMyId() {
+    return myId;
+}
+
+std::map<std::string, int> Parser::getNickname() {
+    return nickname;
+}
+
+std::vector<int> Parser::getMap() {
+    return parseMap;
+}
+
+std::map<int, int> Parser::getPosOfPlayer() {
+    return posOfPlayer;
 }

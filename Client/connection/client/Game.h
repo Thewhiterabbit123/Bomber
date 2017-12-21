@@ -7,7 +7,7 @@ class Game : public QObject {
     Q_OBJECT
 
     public:
-      //  Game(QObject* parent = 0): QObject(parent) {connect(this, SIGNAL(allReady()), client-> )};
+        Game(QObject* parent = 0): QObject(parent) {};
         ~Game();
         void play();
     signals:
@@ -18,6 +18,7 @@ class Game : public QObject {
 
     private:
         Client *client;
+        Parser *parser;
 
 };
 
