@@ -8,6 +8,7 @@ struct Coordinate {
 	Coordinate(const int &_x, const int &_y): x(_x), y(_y) {};
 	Coordinate(const Coordinate & coordinate): x(coordinate.x), y(coordinate.y) {};
 	const Coordinate& operator = (const Coordinate& rhs) { x = rhs.x; y = rhs.y; return *this; }
+    bool operator == (const Coordinate & rhs) { return (x == rhs.x && y ==rhs.y); }
 };
 
 struct PlayerInfo {

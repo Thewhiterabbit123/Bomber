@@ -5,35 +5,26 @@
 #include <string>
 using namespace std;
 
-Field globalField;
-
-Game::Game(const vector<string> & name, const Field & _field)
-{
-    player.reserve(PLAYER_COUNT);
-    bomb.reserve(BOMB_COUNT);
-	field = _field;
-	for (int i = 0; i < PLAYER_COUNT; i++) {
-		Player _player(name[i], i);
-		player.push_back(_player);
-	}
-}
-
 Game::Game() {
 	player.reserve(PLAYER_COUNT);
     bomb.reserve(BOMB_COUNT);
-    field = globalField;
 }
 
 int Game::CreatePlayer(const std::string & name) {
-    static int skinNum = 0;
-    Player currentPlayer(name, skinNum);
+    Player currentPlayer(field, name);
     player.push_back(currentPlayer);
-    skinNum++;
     return currentPlayer.GetId();
 }
 
 Player & Game::FindPlayer(const unsigned int id) {
+    for (int i = 0; i < PLAYER_COUNT; i++)
+        if (player[i].GetId() == id)
+            return player[i];
 
+}
+
+string Game::GetPlayerNameById(const unsigned int id) {
+    return FindPlayer(id).GetName();
 }
 
 void Game::KillCharacter() {	//kills player who has 0 hp
@@ -62,15 +53,22 @@ void Game::GetTime() {
 
 void Game::Step() {
     while (true) {
-        Change change = eventContainer.front();
-        Event event = change.eventInfo.eventType;
-        unsigned int id = change.id;
-        eventContainer.pop();
-        switch (event) {
-            case UP_EVENT: std::cout << std::endl;
+        Change currentChange = eventContainer.front();  //  get Change from queue
+        eventContainer.pop();   //  delete Change from queue
+        Event currentEvent = currentChange.eventInfo.eventType;
+        unsigned int currentId = currentChange.id;
+        Coordinate currentCoordinate = currentChange.eventInfo.changePosition;
 
-
+        //  Player movement
+        if (currentEvent >= UP_EVENT && currentEvent <= RIGHT_EVENT) {
+            Player currentPlayer = FindPlayer(currentId);
+            currentPlayer.CheckPosition(currentCoordinate);
+            currentPlayer.SetPosition(currentEvent);
         }
+
+
+
+
     }
 }
 
