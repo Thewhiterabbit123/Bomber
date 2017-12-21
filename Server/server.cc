@@ -26,9 +26,9 @@ void client_session(socket_ptr sock, int clientId)
  	std::cout << "game: " << clientId << endl;
  	//  SEND MAP
  	std::string msg;
- 	msg += "20";
+ 	msg += "20"; // можно даже не отправлять
  	for (int i = 0; i < CLIENT_COUNT; i++) {
- 		std::string nickName = game.
+ 		std::string nickName = game.GetPlayerNameById(playersId[i]);
  		msg += ' '; msg += playersId[i] + '0'; msg += ' '; msg += nickName;
  	}
 	try {
@@ -36,11 +36,9 @@ void client_session(socket_ptr sock, int clientId)
 	}
 	catch(boost::system::system_error e) {
 		std::cout << e.code() << std::endl;
-		continue;
+		return;
 	}
  	msg.resize(0);
- 	//  GET NAMES
- 	//  SEND NAMES + ID
 
     while (true)
     {
