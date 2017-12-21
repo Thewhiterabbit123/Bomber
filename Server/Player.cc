@@ -1,5 +1,14 @@
 #include "Player.h"
 
+Player::Player(): Object(), name("Default"), bomb(BOMB_COUNT_ONE_PLAYER) {
+
+}
+
+Player::Player(std::string playerName, int playerSkin):
+        Object(), name(playerName), skin(playerSkin), hp(MAX_PLAYER_HP), bomb(BOMB_COUNT_ONE_PLAYER) {
+
+}
+
 void Player::SetPosition(Event move) {
 	switch(move) {
 		case UP_EVENT: 
@@ -26,7 +35,7 @@ void Player::GetDamage() {
 }
 
 void Player::Heal() {
-	if(hp < 3) {
+	if(hp < MAX_PLAYER_HP) {
 		hp++;
 	}
 }

@@ -1,11 +1,14 @@
 #pragma once
+
 #include "Object.h"
 #include "../Define.h"
+
 #include <string>
 
 class Player : public Object {
 	public:
-		Player(std::string playerName, int playerSkin): Object(), name(playerName), skin(playerSkin), hp(MAX_PLAYER_HP), bomb(BOMB_COUNT_ONE_PLAYER) {};
+		Player();
+		Player(std::string playerName, int playerSkin);
 		void SetPosition(enum Event);
 		void PutBomb();
 		void GetDamage();
