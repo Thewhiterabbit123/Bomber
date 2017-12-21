@@ -24,8 +24,10 @@ Game::Game() {
 
 int Game::CreatePlayer(const std::string & name) {
     static int skinNum = 0;
-    player.push_back(Player(name, skinNum));
+    Player currentPlayer(name, skinNum);
+    player.push_back(currentPlayer);
     skinNum++;
+    return currentPlayer.GetId();
 }
 
 void Game::KillCharacter() {	//kills player who has 0 hp
@@ -49,6 +51,18 @@ void Game::CreateBomb(const Bomb &_bomb) {
 }
 
 void Game::GetTime() {
+
+}
+
+void Game::Step() {
+
+}
+
+void Game::GetField() {
+
+}
+
+void Game::StartMenu() {
 
 }
 
