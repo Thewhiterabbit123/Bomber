@@ -18,6 +18,7 @@ boost::asio::io_service service;
 socket_ptr usersSockPtrs[CLIENT_COUNT];
 int playersId [CLIENT_COUNT];
 
+std::queue</> sendQueues[CLIENT_COUNT];
 
 Game game;
 
