@@ -1,10 +1,5 @@
 #include "Block.h"
 
-Block::Block(const BlockType & _type = EMPTY,
-             const Coordinate & _position):
-             Object(), type(_type), position(_position) {
-}
-
 Block::Block(): Object(), type(EMPTY) {
 
 }
@@ -20,6 +15,11 @@ int Block::ExplodeBlock() {
 
 int Block::SetType(const BlockType &_type) {
 	type = _type;
+}
+
+Block::Block(const Coordinate &_position, const BlockType &_type):
+		Object(), type(_type) {
+    position = _position;
 }
 
 
