@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QPixmap>
 #include <memory>
+#include <QPainter>
 #include "shared/imagePool/imagepool.h"
 #include "game/box/imagebox.h"
 
@@ -17,19 +18,35 @@ public:
         this->p_imagePool = copying->p_imagePool;
     }
 
-    explicit BoxWidget(ImageBox iconNumber, std::shared_ptr<ImagePool<ImageBox>> pool, QWidget *parent = 0): QWidget(parent), p_imagePool(pool){
+    explicit BoxWidget(ImageBox iconNumber, std::shared_ptr<ImagePool<ImageBox>> pool, QWidget *parent = 0): QWidget(parent), p_imagePool(pool), typeNow(iconNumber){
+        setMinimumHeight(38);
+        setMinimumWidth(38);
+        setMaximumHeight(38);
+        setMaximumWidth(38);
         setImage(iconNumber);
+
+        connect(this, SIGNAL(imageChanged()), SLOT(repaint()));
     }
 
 private:
     std::shared_ptr<ImagePool<ImageBox>> p_imagePool;
-signals:
+    ImageBox typeNow;
 
-public slots:
+signals:
+    void imageChanged();
+
+protected:
+    void paintEvent( QPaintEvent *event ){
+        QPainter painter(this);
+        painter.setRenderHint(QPainter::Antialiasing);
+        painter.drawPixmap(rect(), (const QPixmap&)*(p_imagePool.get()->get(this->typeNow).get()));
+    }
+
+//public slots:
+public:
     void setImage(ImageBox iconNumber){
-        QPalette boxPalette;
-        boxPalette.setBrush((this)->backgroundRole(), QBrush(*(p_imagePool->get(iconNumber))));
-        (this)->setPalette(boxPalette);
+        typeNow = iconNumber;
+        emit imageChanged();
     }
 };
 

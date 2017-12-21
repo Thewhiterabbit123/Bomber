@@ -3,7 +3,9 @@
 
 
 #include <QWidget>
+#include <vector>
 
+#include "game/box/boxwidget.h"
 #include "ui_gamewidgetui.h"
 
 class GameWidget: public QWidget{
@@ -14,6 +16,7 @@ public:
 private:
 
     Ui::game* gameUi;
+    std::vector<BoxWidget*> field;
 
 signals:
     void setScreen(int);

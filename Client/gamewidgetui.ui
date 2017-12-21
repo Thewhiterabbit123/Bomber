@@ -17,7 +17,7 @@
    <bool>false</bool>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-image: url(:/images/background.png);</string>
+   <string notr="true">background-image: url(:/images/background.png); width: 800px; height: 600px;</string>
   </property>
   <widget class="QWidget" name="background" native="true">
    <property name="geometry">
@@ -50,7 +50,7 @@
    <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>460</x>
+      <x>470</x>
       <y>-20</y>
       <width>341</width>
       <height>111</height>
@@ -101,8 +101,6 @@
          <bool>false</bool>
         </property>
        </widget>
-       <zorder>hpCountWidget</zorder>
-       <zorder>lineEdit</zorder>
       </widget>
      </item>
      <item>
@@ -153,16 +151,15 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="gridLayoutWidget">
+   <widget class="QWidget" name="field" native="true">
     <property name="geometry">
      <rect>
-      <x>39</x>
+      <x>20</x>
       <y>90</y>
-      <width>721</width>
-      <height>461</height>
+      <width>760</width>
+      <height>494</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="gridLayout"/>
    </widget>
   </widget>
  </widget>

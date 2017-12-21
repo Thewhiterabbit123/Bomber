@@ -19,8 +19,7 @@ TEMPLATE = app
 SOURCES += main.cpp \
     bombergame.cpp \
     game/gameWidget.cpp \
-    menu/menuWidget.cpp \
-    game/actionwidget.cpp
+    menu/menuWidget.cpp
 
 HEADERS  += \
     bombergame.h \
@@ -28,8 +27,7 @@ HEADERS  += \
     menu/menuWidget.h \
     game/box/boxwidget.h \
     shared/imagePool/imagepool.h \
-    game/box/imagebox.h \
-    game/actionwidget.h
+    game/box/imagebox.h
 
 FORMS    += \
     menuwidgetui.ui \
