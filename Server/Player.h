@@ -1,6 +1,8 @@
 #pragma once
+
 #include "Object.h"
 #include "../Define.h"
+
 #include <string>
 
 class Player : public Object {

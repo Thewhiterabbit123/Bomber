@@ -1,5 +1,4 @@
-#ifndef FIELD_H
-#define FIELD_H
+#pragma once
 
 #include "Block.h"
 #include "../Define.h"
@@ -15,8 +14,4 @@ class Field {
 		Field();
 		vector< vector<Block> > & GetField();
 };
-
-Field globalField;
-
-#endif
 

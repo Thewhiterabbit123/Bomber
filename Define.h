@@ -1,5 +1,4 @@
 #pragma once
-//  Event
 
 enum Event { 
 	NO_EVENT,
@@ -26,7 +25,7 @@ enum BlockType {
 
 //  map
 
-#define MAP_ROW_SIZE 20
+#define MAP_ROW_SIZE 13
 #define MAP_COLUMN_SIZE 20
 #define MAP_SIZE MAP_ROW_SIZE*MAP_COLUMN_SIZE
 
@@ -48,5 +47,3 @@ enum BlockType {
 //  block
 
 #define BLOCK_COUNT MAP_SIZE-PLAYER_COUNT
-
-
