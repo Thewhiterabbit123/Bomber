@@ -11,7 +11,7 @@ int Block::GetType() {
 
 int Block::ExplodeBlock() {
 	if (type == BOX)
-		type = WALL;
+		type = EMPTY;
 }
 
 int Block::SetType(const BlockType &_type) {

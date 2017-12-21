@@ -20,7 +20,6 @@ Player & Game::FindPlayer(const unsigned int id) {
     for (int i = 0; i < PLAYER_COUNT; i++)
         if (player[i].GetId() == id)
             return player[i];
-
 }
 
 string Game::GetPlayerNameById(const unsigned int id) {

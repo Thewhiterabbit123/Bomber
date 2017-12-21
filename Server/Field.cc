@@ -15,9 +15,23 @@ Field::Field() {
             field.push_back(curBlock);
         }
     } catch (std::ifstream::failure e) {
+
         std::cerr << " cant open conf fieldConfig";
     }
     fieldConfig.close();
+}
+
+Field::Field(const Field &_field) {
+    for (std::vector<Block>::iterator i = field.begin(); i != field.end(); i++) {
+        _field.field.push_back(i);
+    }
+}
+
+const Field & Field::operator=(const Field &rhs) {
+    for (std::vector<Block>::iterator i = field.begin(); i != field.end(); i++) {
+        _rhs.field.push_back(i);
+    }
+    return *this;
 }
 
 vector<Block>& Field::GetField() {

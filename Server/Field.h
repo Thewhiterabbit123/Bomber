@@ -14,6 +14,8 @@ class Field {
 		vector<Block> field;
 	public:
 		Field();
+		Field(const Field & _field);
+        const Field & operator = (const Field & rhs);
 		vector<Block>& GetField();
 		string& fieldToString();
 };
