@@ -11,9 +11,8 @@ void Parser::parseLine(std::string line) {
     stream >> typeOfPacket;
 
     switch (typeOfPacket) {
-        case 00: {
-            stream >> _id;
-            std::cout << _id;
+        case 00: { //this packet need to get my id
+            stream >> myId;
             break;
         }
     //init packet - type 1, id and clients's name
@@ -39,7 +38,6 @@ void Parser::parseLine(std::string line) {
                 posOnVector = pos.x * MAPWIDTH + pos.y;
                 posOfPlayer[localId] = posOnVector;
             }
-            myId = getMyId(myName);
             //emit allReady(nickname, posOfPlayer, parseMap);
             break;
         }
@@ -49,14 +47,6 @@ void Parser::parseLine(std::string line) {
         }
 
     }
-}
-
-int Parser::getMyId(std::string name) {
-    std::map<std::string, int>::iterator  it = nickname.find(name);
-    if( it != nickname.end() ) {
-        return it->second;
-    }
-    return 0;
 }
 
 void Parser::makeMapFromString(std::string _map) {

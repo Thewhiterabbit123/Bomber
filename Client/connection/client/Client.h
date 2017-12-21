@@ -14,8 +14,6 @@ class Client {
         void Connect();
         void getMessage();
         void sendMessage(std::string);
-        std::string makeString(boost::asio::streambuf&);
-
 
 	private: 
         std::ofstream logfile;

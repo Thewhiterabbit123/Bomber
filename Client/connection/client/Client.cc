@@ -55,14 +55,11 @@ void Client::sendMessage(std::string msg) {
 
      if(error) {
        std::cout << "send failed: " << error.message() << std::endl;
+       logfile << "send failed: " << error.message() << std::endl;
      } else {
        std::cout << "send correct!" << std::endl;
+       logfile << "send correct!" << std::endl;
    }
-}
-
-std::string Client::makeString(boost::asio::streambuf& streambuf) {
-  return {boost::asio::buffers_begin(streambuf.data()),
-          boost::asio::buffers_end(streambuf.data())};
 }
 
 

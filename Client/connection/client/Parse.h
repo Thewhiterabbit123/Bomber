@@ -13,7 +13,6 @@ class Parser: public QObject {
     public:
         Parser(QObject* parent = 0): QObject(parent) { };
         void parseLine(std::string);
-        int  getMyId(std::string);
         void makeMapFromString(std::string);
         std::vector<int> getParseMap();
     private:
