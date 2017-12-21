@@ -11,6 +11,11 @@ void Parser::parseLine(std::string line) {
     stream >> typeOfPacket;
 
     switch (typeOfPacket) {
+        case 00: {
+            stream >> _id;
+            std::cout << _id;
+            break;
+        }
     //init packet - type 1, id and clients's name
         case 1: {
             for(int i = 0; i < NUMBEROFPLAYERS; i++) {
@@ -35,12 +40,14 @@ void Parser::parseLine(std::string line) {
                 posOfPlayer[localId] = posOnVector;
             }
             myId = getMyId(myName);
+            //emit allReady(nickname, posOfPlayer, parseMap);
             break;
         }
         case 3: {
             stream >> _id;
             stream >> what;
         }
+
     }
 }
 

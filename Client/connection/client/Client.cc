@@ -39,16 +39,14 @@ void Client::disconnect() {
 }
 
 void Client::getMessage() {
-    boost::system::error_code error;
-    boost::asio::streambuf receive_buffer;
-    boost::asio::read(*socket, receive_buffer, boost::asio::transfer_all(), error);
+    char msg[1024];
+    socket->receive(boost::asio::buffer(msg));
 
-    if(error && error != boost::asio::error::eof) {
-        std::cout << "receive failed: " << error.message() << std::endl;
-    } else {
-        inputMessage = makeString(receive_buffer);
-        parse.parseLine(inputMessage);
-    }
+    inputMessage += msg;
+
+    parse.parseLine(inputMessage);
+
+    inputMessage.clear();
 }
 
 void Client::sendMessage(std::string msg) {

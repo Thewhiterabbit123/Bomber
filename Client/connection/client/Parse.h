@@ -5,11 +5,13 @@
 #include <map>
 #include <vector>
 #include "Position.h"
-//#include <QObject>
+#include <QObject>
 
-class Parser {
+class Parser: public QObject {
+    Q_OBJECT
+
     public:
-        Parser(): _id(0), what(0), typeOfPacket(0), myId(0) {};
+        Parser(QObject* parent = 0): QObject(parent) { };
         void parseLine(std::string);
         int  getMyId(std::string);
         void makeMapFromString(std::string);
@@ -23,6 +25,8 @@ class Parser {
         std::vector<int> parseMap;
         std::map<int, int> posOfPlayer;
         std::map<std::string, int> nickname;
+    signals:
+        void allReady();
 };
 
 #endif // PARSER_H
