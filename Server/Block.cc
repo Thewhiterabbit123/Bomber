@@ -9,9 +9,15 @@ int Block::GetType() {
 	return type;
 }
 
+std::string Block::GetTypeInString() {
+	std::string str;
+	str = std::to_string(GetType());
+	return str;
+}
+
 int Block::ExplodeBlock() {
 	if (type == BOX)
-		type = WALL;
+		type = EMPTY;
 }
 
 int Block::SetType(const BlockType &_type) {

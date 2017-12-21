@@ -3,14 +3,6 @@
 
 class Object {
 		public:
-<<<<<<< HEAD
-			Object(Coordinate startPosition): id(globalId++) {};
-			int GetId();
-			Coordinate GetPosition();
-		private:
-			static int globalId;
-			int id;
-=======
             Object();
 			Object(Coordinate startPosition);
 			int GetId();
@@ -18,7 +10,6 @@ class Object {
 		private:
 			int id;
             void SetId();
->>>>>>> RustamDevelop_
 		protected:
 			Coordinate position;
 };

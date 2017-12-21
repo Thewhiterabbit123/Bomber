@@ -1,17 +1,14 @@
 #include "Player.h"
 
-Player::Player(): Object(), name("Default"), bomb(BOMB_COUNT_ONE_PLAYER) {
-
-}
-
-Player::Player(std::string playerName, int playerSkin):
-        Object(), name(playerName), skin(playerSkin), hp(MAX_PLAYER_HP), bomb(BOMB_COUNT_ONE_PLAYER) {
-
+Player::Player(const Field &_field, const std::string _name): field(_field), Object(), name(_name), bomb(BOMB_COUNT_ONE_PLAYER), hp(MAX_PLAYER_HP) {
+    static int skinId = 0;
+    skin = skinId;
+    skinId++;
 }
 
 void Player::SetPosition(Event move) {
 	switch(move) {
-		case UP_EVENT: 
+        case UP_EVENT:
 			position.y++;
 			break;
 		case DOWN_EVENT: 
@@ -26,8 +23,17 @@ void Player::SetPosition(Event move) {
 	}
 }
 
+void Player::CheckPosition(const Coordinate &coordinate) {
+    if (position == coordinate)
+        return;
+    // обработать
+    position.x = coordinate.x;
+    position.y = coordinate.y;
+}
+
 void Player::PutBomb() {
-	bomb--;
+    if (bomb > 0)
+	    bomb--;
 }
 
 void Player::GetDamage() {
@@ -47,4 +53,9 @@ int Player::GetHp() {
 int Player::GetBomb() {
 	return bomb;
 }
+
+std::string Player::GetName() {
+    return name;
+}
+
 

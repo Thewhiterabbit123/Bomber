@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 #include "Object.h"
 #include "../Define.h"
 
@@ -13,5 +15,6 @@ class Block: public Object {
 		);
 		int SetType(const BlockType &_type);
 		int GetType();
+		std::string GetTypeInString();
 		int ExplodeBlock();
 };

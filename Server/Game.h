@@ -14,16 +14,16 @@ using namespace std;
 
 class Game {
 	private:
+        Field field;
 		vector<Player> player; 
 		vector<Bomb> bomb;
-		Field field;
 		Time time;
 		queue<Change> eventContainer;
 	public:
-		Game(const vector<string> & name, const Field &_field);
 		Game();
 		int CreatePlayer(const std::string & name);
         Player & FindPlayer(const unsigned int id);
+        string GetPlayerNameById(const unsigned int id);
 		void Step();
 		void KillCharacter();
 		void DestroyBomb();
