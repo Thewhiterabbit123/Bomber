@@ -154,11 +154,27 @@
    <widget class="QWidget" name="field" native="true">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>90</y>
-      <width>760</width>
-      <height>494</height>
+      <x>30</x>
+      <y>100</y>
+      <width>750</width>
+      <height>484</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QWidget" name="widgetPlayer" native="true">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>100</y>
+      <width>750</width>
+      <height>484</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: rgba(255, 255, 255, 0); margin: 0; padding: 0;</string>
     </property>
    </widget>
   </widget>
