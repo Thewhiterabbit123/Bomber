@@ -1,15 +1,17 @@
 #ifndef CLIENT_H
 #define CLIENT_H
 
-#include <boost/asio.hpp>
 #include <iostream>
 #include <map>
 #include <fstream>
+#include <QTcpSocket>
 #include "Parser.h"
+#include <QObject>
 
-class Client {
+class Client: public QObject {
+    Q_OBJECT
 	public:
-        Client();
+        Client(QObject* parent = 0): QObject(parent) {};
         ~Client();
         void Connect();
         std::string getMessage();
@@ -26,8 +28,9 @@ class Client {
         std::string myName;
         std::string _host;
 
-        boost::asio::io_service service;
-        boost::asio::ip::tcp::socket *socket;
+        QTcpSocket *socket;
+        //boost::asio::io_service service;
+        //boost::asio::ip::tcp::socket *socket;
 
         void getParam();
 };

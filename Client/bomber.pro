@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui widgets
+QT       += core gui widgets network
 
 
 CONFIG += c++11
@@ -38,7 +38,8 @@ HEADERS  += \
     game/person/animatedgraphicsitem.h \
     game/person/graphicsactor.h \
     game/view.h \
-    game/person/bombactor.h
+    game/person/bombactor.h \
+    appthread.h
 
 FORMS    += \
     menuwidgetui.ui \
@@ -49,3 +50,23 @@ FORMS    += \
 RESOURCES += \
     qgameres.qrc \
     resources.qrc
+
+
+INCLUDEPATH += "/usr/include"
+
+LIBS += \
+       -lboost_system\
+
+SOURCES += \
+    connection/client/Client.cc \
+    connection/client/Parser.cpp \
+    connection/client/Game.cpp
+
+HEADERS += \
+    connection/client/Client.h \
+    connection/client/Game.h \
+    connection/client/Header.h \
+    connection/client/Parser.h
+
+DISTFILES += \
+    connection/client/client.pro.user

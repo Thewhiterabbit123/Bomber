@@ -7,9 +7,10 @@ void Game::play() {
     std::string name = "naDYa";
     client->sendMessage(name);
     while(true) {
-        std::string messageFromServer = client->getMessage();
-        int event = parser->parseLine(messageFromServer);
-        eventSwitcher(event);
+        //sleep(50);
+      //  std::string messageFromServer = client->getMessage();
+        //int event = parser->parseLine(messageFromServer);
+        //eventSwitcher(event);
         //тут отправить сообщение серверу
     }
 }

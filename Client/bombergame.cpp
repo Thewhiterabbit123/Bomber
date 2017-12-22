@@ -1,8 +1,9 @@
 #include "bombergame.h"
 #include "iostream"
 
-BomberGame::BomberGame(QWidget* parent): QGraphicsView(parent)
-{
+BomberGame::BomberGame(QWidget* parent): QGraphicsView(parent){}
+
+void BomberGame::initGame(){
     allScreens = new QStackedLayout();
     std::cerr<< "menu widget" << std::endl;
     menu = new MenuWidget();
@@ -15,5 +16,4 @@ BomberGame::BomberGame(QWidget* parent): QGraphicsView(parent)
 
     connect(menu, SIGNAL(setScreen(int)), allScreens, SLOT(setCurrentIndex(int)));
     connect(game, SIGNAL(setScreen(int)), allScreens, SLOT(setCurrentIndex(int)));
-
 }

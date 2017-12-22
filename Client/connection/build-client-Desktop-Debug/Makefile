@@ -48,14 +48,14 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../client/main.cpp \
-		../client/Client.cc \
+SOURCES       = ../client/Client.cc \
 		../client/Parser.cpp \
-		../client/Game.cpp moc_Game.cpp
-OBJECTS       = main.o \
-		Client.o \
+		../client/Game.cpp \
+		../client/main.cpp moc_Game.cpp
+OBJECTS       = Client.o \
 		Parser.o \
 		Game.o \
+		main.o \
 		moc_Game.o
 DIST          = ../client/client.pro.user \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -125,10 +125,10 @@ DIST          = ../client/client.pro.user \
 		../client/client.pro ../client/Client.h \
 		../client/Game.h \
 		../client/Header.h \
-		../client/Parser.h ../client/main.cpp \
-		../client/Client.cc \
+		../client/Parser.h ../client/Client.cc \
 		../client/Parser.cpp \
-		../client/Game.cpp
+		../client/Game.cpp \
+		../client/main.cpp
 QMAKE_TARGET  = client
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = client
@@ -307,7 +307,7 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../client/Client.h ../client/Game.h ../client/Header.h ../client/Parser.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../client/main.cpp ../client/Client.cc ../client/Parser.cpp ../client/Game.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../client/Client.cc ../client/Parser.cpp ../client/Game.cpp ../client/main.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -351,19 +351,12 @@ compiler_clean: compiler_moc_header_clean
 
 ####### Compile
 
-main.o: ../client/main.cpp ../client/Game.h \
-		../client/Client.h \
-		../client/Parser.h \
-		../client/Header.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../client/main.cpp
-
 Client.o: ../client/Client.cc ../client/Client.h \
 		../client/Parser.h \
 		../client/Header.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Client.o ../client/Client.cc
 
-Parser.o: ../client/Parser.cpp ../client/Parser.h \
-		../client/Header.h
+Parser.o: ../client/Parser.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Parser.o ../client/Parser.cpp
 
 Game.o: ../client/Game.cpp ../client/Game.h \
@@ -371,6 +364,12 @@ Game.o: ../client/Game.cpp ../client/Game.h \
 		../client/Parser.h \
 		../client/Header.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Game.o ../client/Game.cpp
+
+main.o: ../client/main.cpp ../client/Game.h \
+		../client/Client.h \
+		../client/Parser.h \
+		../client/Header.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../client/main.cpp
 
 moc_Game.o: moc_Game.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_Game.o moc_Game.cpp

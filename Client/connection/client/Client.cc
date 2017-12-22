@@ -6,8 +6,9 @@
 
 #define BUFFSIZE 1024
 
-Client::Client() {
-    socket = new boost::asio::ip::tcp::socket(service);
+
+void Client::Connect() {
+     //socket->connect(boost::asio::ip::tcp::endpoint(boost::asio::ip::address::from_string(_host), _port));
 
     logfile.exceptions (std::ofstream::failbit | std::ofstream::badbit);
     try {
@@ -16,11 +17,11 @@ Client::Client() {
     } catch (std::ofstream::failure e) {
         std::cerr << "EXEPTION LOGFILE" << std::endl;
     }
-}
 
-void Client::Connect() {
-     socket->connect(boost::asio::ip::tcp::endpoint(boost::asio::ip::address::from_string(_host), _port));
-     logfile << "I'VE BEEN CONNECTED TO " << _host << " ON PORT " << _port << std::endl;
+    logfile << "I'VE BEEN CONNECTED TO " << _host << " ON PORT " << _port << std::endl;
+
+    socket = new QTcpSocket(this);
+    socket->connectToHost(QString::fromStdString(_host),_port);
 }
 
 void Client::getParam() {
@@ -38,28 +39,24 @@ void Client::getParam() {
 }
 
 std::string Client::getMessage() {
-    char msg[BUFFSIZE];
-    int len = socket->receive(boost::asio::buffer(msg));
-    std::string inputMessage(msg, len);
-    std::cout << inputMessage << std::endl;
+    std::string inputMessage;
+    while(socket->canReadLine()) {
+        inputMessage = QString::fromUtf8(socket->readLine()).trimmed().toStdString();
+    }
+
     return inputMessage;
 }
 
 void Client::sendMessage(std::string msg) {
-     boost::system::error_code error;
-     boost::asio::write(*socket, boost::asio::buffer(msg), error);
 
-     if(error) {
-       logfile << "send failed: " << error.message() << std::endl;
-     }
+     socket->write(QString::fromStdString(msg).toUtf8());
 }
 
 
 Client::~Client() {
-    boost::system::error_code err;
-    socket->close(err);
-    logfile.close();
+    socket->disconnectFromHost();
     delete socket;
+    logfile.close();
 }
 
 

@@ -18,7 +18,8 @@ LIBS += \
 SOURCES += \
     Client.cc \
     Parser.cpp \
-    Game.cpp
+    Game.cpp \
+    main.cpp
 
 HEADERS += \
     Client.h \

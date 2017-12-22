@@ -1,16 +1,25 @@
 #include <QApplication>
 #include <QThread>
-#include "bombergame.h"
+#include <iostream>
+#include "connection/client/Game.h"
+#include "appthread.h"
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    BomberGame game;
 
-    QApplication::processEvents();
-    QThread dmasta, nadya;
-    game.moveToThread(&dmasta);
-    game.show();
+    Game gameNetwork;
+    //QApplication::processEvents();
+    QThread network;
+    AppThread ui;
+    ui.start();
+    network.start();
+    gameNetwork.moveToThread(&network);
+    //gameNetwork.play();
+    while( ui.isRunning() ) {
+            //sleep( 1 );
+        }
+    std::cout << "here";
+    //a.exec();
     //dmasta.run();
-    return a.exec();
+    return 0;
 }

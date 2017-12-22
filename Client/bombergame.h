@@ -16,6 +16,7 @@ class BomberGame: public QGraphicsView
     Q_OBJECT
 public:
     explicit BomberGame(QWidget* parent = Q_NULLPTR);
+    void initGame();
 
 private:
     QStackedLayout* allScreens;
