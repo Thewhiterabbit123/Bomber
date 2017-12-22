@@ -114,7 +114,7 @@ void Game::Step() {
             bool IsMovement = currentPlayer.MakeMovement(currentEvent, newPosition);
             if (IsMovement)
                 SendMovePlayer(currentId, newPosition.ToInt());
-            boost::this_thread::sleep_for(boost::chrono::milliseconds(1));
+            boost::this_thread::sleep_for(boost::chrono::microseconds(250));
             continue;
         }
 
@@ -129,7 +129,7 @@ void Game::Step() {
             Bomb newBomb(currentPlayer.GetPosition());
             CreateBomb(newBomb);
             io.run();
-            boost::this_thread::sleep_for(boost::chrono::milliseconds(1));
+            boost::this_thread::sleep_for(boost::chrono::microseconds(250));
             continue;
 
         }
