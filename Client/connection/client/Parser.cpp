@@ -21,16 +21,11 @@ int Parser::parseLine(std::string line) {
             for(int i = 0; i < NUMBEROFPLAYERS; i++) {
                 int localId = 0;
                 int posOnVector = 0;
-                stream >> localId >> posOnVector;  //get coordinat's of players, posOnVector = x*MAPWIDTH + y
-                posOfPlayer[localId] = posOnVector;
-            }
-            for(int i = 0; i < NUMBEROFPLAYERS; i++) {
-                int id = 0;
                 std::string name;
 
-                stream >> id;
-                stream >> name;
-                nickname[name] = id;
+                stream >> localId >> name >> posOnVector;  //get coordinat's of players, posOnVector = x*MAPWIDTH + y
+                posOfPlayer[localId] = posOnVector;
+                nickname[name] = localId;
             }
             return START_GAME;
             break;
@@ -57,21 +52,26 @@ int Parser::parseLine(std::string line) {
         }
 
         case BOMB_EXPLODE: {
-            int bombId = 0;
             stream >> bombId;
+            return BOMB_EXPLODE;
             break;
         }
 
         case END_GAME: {
             int winnerId;
             stream >> winnerId;
-            std::string winnerName = getNameById(winnerId);
+            winnerName = getNameById(winnerId);
             return END_GAME;
             break;
         }
         case BOX_EXPLODE: {
-            int boxId = 0;
             stream >> boxId;
+            return BOX_EXPLODE;
+            break;
+        }
+        case PLAYER_DEAD: {
+            stream >> deadId;
+            return PLAYER_DEAD;
             break;
         }
     }
@@ -119,3 +119,18 @@ std::string Parser::getNameById(int id) {
     }
 }
 
+std::string Parser::getWinnerName() {
+    return winnerName;
+}
+
+int Parser::getBoxId() {
+    return boxId;
+}
+
+int Parser::getDeadId() {
+    return deadId;
+}
+
+int Parser::getBombId() {
+    return bombId;
+}

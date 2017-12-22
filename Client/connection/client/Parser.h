@@ -19,6 +19,10 @@ class Parser {
         std::map<int, int> getPosOfPlayer();
         std::pair<int, int> getEvent();
         std::pair<int, int> getBombEvent();
+        std::string getWinnerName();
+        int getBoxId();
+        int getDeadId();
+        int getBombId();
 
     private:
         int myId;
@@ -27,6 +31,10 @@ class Parser {
         std::map<int, int> posOfPlayer;
         std::map<std::string, int> nickname;
         std::pair<int, int> bombEvent;
+        std::string winnerName;
+        int boxId;
+        int deadId;
+        int bombId;
 };
 
 #endif // PARSER_H
