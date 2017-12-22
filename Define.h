@@ -1,12 +1,12 @@
 #pragma once
 
 enum Event {
-	SEND_ID,
-	START_GAME,
-	UP_EVENT,
-	DOWN_EVENT,
-	LEFT_EVENT,
-	RIGHT_EVENT,
+	SEND_ID, // 0
+	START_GAME, //  1
+	UP_EVENT, //  2
+	DOWN_EVENT,  //  3
+	LEFT_EVENT, //  4
+	RIGHT_EVENT, //  5
 	SET_BOMB_EVENT,
 	BOMB_EVENT,
 	MOVE_PLAYER,
