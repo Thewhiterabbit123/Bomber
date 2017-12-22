@@ -10,7 +10,7 @@ class Game : public QObject {
     public:
          Game(QObject* parent = 0): QObject(parent) {};
         ~Game();
-        void play();
+        void play(std::string name);
         void eventSwitcher(int);
 
     signals:
@@ -22,7 +22,7 @@ class Game : public QObject {
         void gameOver(std::string nickname);
 
     public slots:
-       // void Ready();
+        void allReady();
 
     private:
         Client *client;

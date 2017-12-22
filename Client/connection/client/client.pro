@@ -1,6 +1,7 @@
-QT -= network
+QT += network
 QT += core
-QT -= gui
+QT += gui
+QT += widgets
 
 TARGET = client
 CONFIG += console

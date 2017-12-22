@@ -1,18 +1,8 @@
 #include "Game.h"
 
-void Game::play() {
-    client = new Client();
+void Game::play(std::string name) {
+    client = new Client(name);
     parser = new Parser();
-    client->Connect();
-    std::string name = "naDYa";
-    client->sendMessage(name);
-    while(true) {
-        //sleep(50);
-      //  std::string messageFromServer = client->getMessage();
-        //int event = parser->parseLine(messageFromServer);
-        //eventSwitcher(event);
-        //тут отправить сообщение серверу
-    }
 }
 
 void Game::eventSwitcher(int event)  {
@@ -64,4 +54,9 @@ void Game::eventSwitcher(int event)  {
 Game::~Game() {
     delete client;
     delete parser;
+}
+
+void Game::buttonAction(int event) {
+    std::string msg = client->prepareMessageToServer(event);
+    client->sendMessage(msg);
 }

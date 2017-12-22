@@ -11,13 +11,18 @@
 class Client: public QObject {
     Q_OBJECT
 	public:
-        Client(QObject* parent = 0): QObject(parent) {};
+        Client(std::string name, QObject* parent = 0);
         ~Client();
-        void Connect();
         std::string getMessage();
         void sendMessage(std::string);
         void setMyId(int);
         std::string prepareMessageToServer(int);
+        std::string getInputMessage();
+
+    private slots:
+        void readyRead();
+        void connected();
+        void CloseClientConnection();
 
 	private: 
         std::ofstream logfile;
@@ -27,6 +32,7 @@ class Client: public QObject {
 
         std::string myName;
         std::string _host;
+        std::string inputMessage;
 
         QTcpSocket *socket;
         //boost::asio::io_service service;

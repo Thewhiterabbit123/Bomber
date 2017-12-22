@@ -2,14 +2,13 @@
 #include <iostream>
 #include <map>
 #include <fstream>
+#include <QDebug>
 #include "Parser.h"
 
 #define BUFFSIZE 1024
 
-
-void Client::Connect() {
-     //socket->connect(boost::asio::ip::tcp::endpoint(boost::asio::ip::address::from_string(_host), _port));
-
+Client::Client( std::string name, QObject* parent): QObject(parent) {
+    myName = name;
     logfile.exceptions (std::ofstream::failbit | std::ofstream::badbit);
     try {
         logfile.open("/home/nadia/Technopark/project/Bomber/Client/connection/client/client.log");
@@ -21,8 +20,14 @@ void Client::Connect() {
     logfile << "I'VE BEEN CONNECTED TO " << _host << " ON PORT " << _port << std::endl;
 
     socket = new QTcpSocket(this);
+    connect(socket, SIGNAL(readyRead()), this, SLOT(readyRead()));
+    connect(socket, SIGNAL(connected()), this, SLOT(connected()));
+    connect(socket, SIGNAL(disconnected()), this, SLOT(CloseClientConnection()));
+
     socket->connectToHost(QString::fromStdString(_host),_port);
-}
+    socket->waitForConnected(1000);
+};
+
 
 void Client::getParam() {
     std::ifstream configFile;
@@ -38,18 +43,22 @@ void Client::getParam() {
     configFile.close();
 }
 
-std::string Client::getMessage() {
-    std::string inputMessage;
-    while(socket->canReadLine()) {
-        inputMessage = QString::fromUtf8(socket->readLine()).trimmed().toStdString();
-    }
-
+std::string Client::getInputMessage() {
     return inputMessage;
 }
 
-void Client::sendMessage(std::string msg) {
+void Client::readyRead() {
+    while(socket->bytesAvailable()) {
+        inputMessage = QString::fromUtf8(socket->readLine()).trimmed().toStdString();
+        std::cout << inputMessage << std::endl;
+    }
+}
 
+void Client::sendMessage(std::string msg) {
+     std::cout << "send message" << std::endl;
      socket->write(QString::fromStdString(msg).toUtf8());
+     socket->flush();
+     socket->waitForBytesWritten();
 }
 
 
@@ -65,7 +74,15 @@ void Client::setMyId(int id) {
 }
 
 std::string Client::prepareMessageToServer(int event) {
-    std::string msg;
-    msg += (myId + '0') + ' ' + (event + '0') + ' ';
+    std::string msg = (myId + '0') + ' ' + (event + '0') + ' ';
     return msg;
+}
+
+void Client::connected() {
+    std::cerr << "connected" << std::endl;
+    sendMessage(myName);
+}
+
+void Client::CloseClientConnection() {
+    std::cout << "DISCONNECTED" << std::endl;
 }
