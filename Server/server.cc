@@ -16,19 +16,18 @@ Game game;
 
 
 
-
-
 void client_session(socket_ptr sock, int threadNum)
  {
  	int clientId = playersId[threadNum];
- 	std::cout << "game: " << clientId << endl;
- 	//  SEND MAP
- 	std::string msg;
- 	msg += "20"; // код пакета (можно даже не отправлять)
- 	for (int i = 0; i < CLIENT_COUNT; i++) {
+ 	std::cout << "thread: " << clientId << endl;
+	Event startEvent = START_GAME;
+	std::stringstream line;
+   	line << startEvent << " " << game.GetMap();
+	for (int i = 0; i < CLIENT_COUNT; i++) {
  		std::string nickName = game.GetPlayerNameById(playersId[i]);
- 		msg += ' '; msg += playersId[i] + '0'; msg += ' '; msg += nickName;
+ 		line << " " << playersId[i] << " " << nickName << game.GetPlayerPositionById(playersId[i]);
  	}
+	std::string msg = line.str(); 	
 	try {
 		sock->send(boost::asio::buffer(msg)); 
 	}
@@ -54,40 +53,9 @@ void client_session(socket_ptr sock, int threadNum)
 				std::string packetStr(buff, bytes);
 			    std::stringstream stream(packetStr);
 			    int typeOfPacket = 0;
-			    int coordX = 0;
-			    int coordY = 0;
-
-			    stream >> typeOfPacket;
-			//     switch (typeOfPacket) {
-			//         case IDPACKET: {            //this packet need to get my id
-			//             stream >> myId;
-			//             return IDPACKET;
-			//             break;
-			//         }
-
-			//         case SET_BOMB_EVENT: {          //typeofpacket - map - [id - name - id - position]x4
-			//             std::string _map;
-			//             stream >> _map;         //get map from packet
-			//             makeMapFromString(_map);
-			//             for(int i = 0; i < SET_BOMB_EVENT; i++) {
-			//                 int localId = 0;
-			//                 int posOnVector = 0;
-			//                 stream >> localId >> posOnVector;  //get coordinat's of players, posOnVector = x*MAPWIDTH + y
-			//                 posOfPlayer[localId] = posOnVector;
-			//             }
-			//             for(int i = 0; i < SET_BOMB_EVENT; i++) {
-			//                 int id = 0;
-			//                 std::string name;
-
-			//                 stream >> id;
-			//                 stream >> name;
-			//                 nickname[name] = id;
-			//             }
-			//             return SET_BOMB_EVENT;
-			//             break;
-   //      			}
-
-			// }
+				stream >> typeOfPacket;
+				ClientAction action(clientId, typeOfPacket);
+				game.PushClientAction(action);
 			}
     	}
 
@@ -131,12 +99,15 @@ void server_loop()
 			std::cout << e.code() << std::endl;
 			continue;
 		}
+
 	    std::string nickName(buff, bytes);
 	   	int playerId = game.CreatePlayer(nickName);
 	   	playersId[playersCount] = playerId;
-		std::string idPack;
-		idPack += "00 ";
-		idPack += '0' + playerId;
+
+	   	Event event = SEND_ID;
+		std::stringstream line;
+	   	line << event << " " << playerId;
+		std::string idPack = line.str();	    
 	    try {
 			sock->send(boost::asio::buffer(idPack)); 
 			}
@@ -203,19 +174,9 @@ void SendBoxExplode(int coord, int newType) {
 }
 
 
+
 int main(int argc, char* argv[]) 
 {	
-	// Event event = MOVE_PLAYER;
-	// //char buf[10];
-	// std::stringstream mystream;
-	// mystream << event;
-	// std::string str;
-	// //mystream >> str;
-	// std::cout << str << " " << str.size() << std::endl;
-	// //mystream.seekp(0);
-	// mystream << 458;
-	// mystream >> str;
-	// std::cout << str << " " << str.size() << std::endl;
 	if (argc > 1) {
 		int port = atoi(argv[1]);
 		if(port > 2000){
@@ -223,4 +184,6 @@ int main(int argc, char* argv[])
 		}
 	}
 	server_loop();
+
+	return 0;
 }
