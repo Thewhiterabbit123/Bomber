@@ -10,7 +10,7 @@ class Player : public Object {
         Player(const Field & _field, const std::string _name);
         void MakeMovement(const Coordinate & coordinate, enum Event);
 		void PutBomb();
-		void GetDamage();
+		bool GetDamage();
 		void Heal();
 		int GetHp();
 		int GetBomb();
@@ -18,7 +18,7 @@ class Player : public Object {
 	private:
         Coordinate PositionAfterMovement(const Coordinate & coordinate, enum Event);
         int ToVectorCoordinate(const Coordinate & coordinate);
-
+        bool isActive;
 		std::string name;
 		int bomb;
 		int hp;

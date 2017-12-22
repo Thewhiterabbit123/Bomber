@@ -3,7 +3,6 @@
 #include "Field.h"
 #include <vector>
 #include <string>
-#include <boost/asio.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/bind.hpp>
 using namespace std;
@@ -36,6 +35,50 @@ void Game::KillCharacter() {	//kills player who has 0 hp
 }
 
 void Game::DestroyBomb(const boost::system::error_code& e, Game& game) {
+    Bomb bombToDestroy = game.bomb.front();
+    game.bomb.pop();
+    int bombDamage = bombToDestroy.GetDamage();
+    int bombRadius = bombToDestroy.GetRadius();
+    Coordinate bombPosition = bombToDestroy.GetPosition();
+    const std::vector<Block> currentField = game.field.GetField();
+    for(int k = 0; k < 4; k++) {
+        Coordinate currentPos = bombPosition;
+        bool flag = false;
+        for(int i = 0; i < bombRadius && !flag; i++) {
+            for(std::vector<Player>::iterator j = game.player.begin(); j != game.player.end(); j++) {
+                if(j -> GetPosition() == currentPos) {
+                    if(!j -> GetDamage()) {
+                        //SendPlayerDead (*i.GetId());
+                    } else {
+                        //SendMinusHP(int idPlayer);
+                    }
+                    flag = true;
+                }
+            }
+            if(currentField[currentPos.ToInt()].GetType() == WALL) {
+                flag = true;
+            }
+
+            if(currentField[currentPos.ToInt()].GetType() == BOX) {
+                // SendBoxExplode(int coord, int newType);
+                flag = true;
+            }
+            switch(k) {
+                case 0:
+                    currentPos.x++;
+                    break;
+                case 1:
+                    currentPos.x--;
+                    break;
+                case 2:
+                    currentPos.y++;
+                    break;
+                case 3:
+                    currentPos.y--;
+                    break;
+            }
+        }
+    }
 
 }
 
@@ -58,13 +101,13 @@ void Game::PushClientAction(ClientAction & action) {
 
 void Game::Step() {
     while (true) {
-        ClientAction currentChange = clientAction.front();  //  get Change from queue
-        clientAction.pop();   //  delete Change from queue
+        ClientAction currentChange = clientAction.front(); // get Change from queue
+        clientAction.pop(); // delete Change from queue
         Event currentEvent = currentChange.eventInfo.eventType;
         unsigned int currentId = currentChange.id;
         Coordinate currentCoordinate = currentChange.eventInfo.changePosition;
 
-        //  Player movement
+        // Player movement
         if (currentEvent >= UP_EVENT && currentEvent <= RIGHT_EVENT) {
             Player currentPlayer = FindPlayer(currentId);
             currentPlayer.MakeMovement(currentCoordinate, currentEvent);
@@ -78,7 +121,7 @@ void Game::Step() {
             t.async_wait(boost::bind(&DestroyBomb, e, *this));
             Bomb newBomb(currentCoordinate);
             CreateBomb(newBomb);
-            //io.run();
+            io.run();
 
         }
 

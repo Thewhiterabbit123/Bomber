@@ -3,6 +3,7 @@
 Player::Player(const Field &_field, const std::string _name): field(_field), Object(), name(_name), bomb(BOMB_COUNT_ONE_PLAYER), hp(MAX_PLAYER_HP) {
     static int skinId = 0;
     skin = skinId;
+    isActive = true;
     skinId++;
 }
 
@@ -46,8 +47,14 @@ void Player::PutBomb() {
 	    bomb--;
 }
 
-void Player::GetDamage() {
-	hp--;
+bool Player::GetDamage() {
+	if(hp > 1) {
+        hp--;
+        return true;
+    } else {
+        isActive = false;
+        return false;
+    }
 }
 
 void Player::Heal() {
