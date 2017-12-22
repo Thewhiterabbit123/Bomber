@@ -117,10 +117,9 @@ void Game::Step() {
             Player currentPlayer = FindPlayer(currentId);
             //  Player movement
             if (currentEvent >= UP_EVENT && currentEvent <= RIGHT_EVENT) {
-                Coordinate newPosition;
-                bool IsMovement = currentPlayer.MakeMovement(currentEvent, newPosition);
+                bool IsMovement = currentPlayer.MakeMovement(currentEvent);
                 if (IsMovement)
-                    SendMovePlayer(currentId, newPosition.ToInt());
+                    SendMovePlayer(currentId, currentPlayer.GetPosition().ToInt());
                 continue;
             }
             // Bomb is set

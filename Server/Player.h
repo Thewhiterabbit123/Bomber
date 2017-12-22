@@ -8,7 +8,7 @@
 class Player : public Object {
 	public:
         Player(Field & _field,  std::string _name, Coordinate _coordinate);
-        bool MakeMovement(Event, Coordinate &);
+        bool MakeMovement(Event);
 		void PutBomb();
 		bool GetDamage();
 		void Heal();

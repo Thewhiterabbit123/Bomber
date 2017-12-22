@@ -20,13 +20,13 @@ Coordinate Player::PositionAfterMovement(Event move) {
     }
 }
 
-bool Player::MakeMovement(Event move, Coordinate & coordinate) {
+bool Player::MakeMovement(Event move) {
     Coordinate nextCoordinate = PositionAfterMovement(move);
     int vectCoordinate = nextCoordinate.ToInt();
-    BlockType block = (BlockType)field.GetField()[vectCoordinate].GetType();
+    BlockType block = field.GetField()[vectCoordinate].GetType();
     if (block == BOX || block == WALL)
         return false;
-    position = coordinate = nextCoordinate;
+    position = nextCoordinate;
     return true;
 }
 
