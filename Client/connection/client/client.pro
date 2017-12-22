@@ -16,7 +16,6 @@ LIBS += \
        -lboost_system\
 
 SOURCES += \
-    main.cpp \
     Client.cc \
     Parser.cpp \
     Game.cpp
