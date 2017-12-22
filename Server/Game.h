@@ -26,7 +26,7 @@ class Game {
 		Game();
 		Game(const Game &_game) {};
 		int CreatePlayer(const std::string & name);
-        Player & FindPlayer(const unsigned int id);
+        Player * FindPlayer(const unsigned int id);
         string GetPlayerNameById(const unsigned int id);
         int GetPlayerPositionById(const unsigned int id);
 
