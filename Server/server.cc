@@ -136,7 +136,7 @@ void SendMovePlayer(int idPlayer, int coord) {
 void SendBombPlanted (int coord) {
 	Event event = BOMB_PLANTED;
 	std::stringstream line;
-	line << event << " " << idPlayer << " " << coord;
+	line << event << " " << coord;
 	std::string msg = line.str();
 
 	for (int i = 0; i < CLIENT_COUNT; i++) {
