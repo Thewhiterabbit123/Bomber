@@ -123,10 +123,10 @@ void server_loop()
 		boost::thread(boost::bind(client_session, usersSockPtrs[i], i));
 	}
 
-	//game.
+	game.Step();
 
-	while (true) 
-    	boost::this_thread::sleep_for(boost::chrono::microseconds(250));
+	// while (true) 
+ //    	boost::this_thread::sleep_for(boost::chrono::microseconds(250));
 
 }
 
