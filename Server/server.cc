@@ -54,7 +54,7 @@ void client_session(socket_ptr sock, int threadNum)
 			    std::stringstream stream(packetStr);
 			    int typeOfPacket = 0;
 				stream >> typeOfPacket;
-				ClientAction action(clientId, typeOfPacket);
+				ClientAction action(clientId, (Event)typeOfPacket);
 				game.PushClientAction(action);
 			}
     	}
@@ -122,6 +122,8 @@ void server_loop()
 	for (int i = 0; i < CLIENT_COUNT; i++){
 		boost::thread(boost::bind(client_session, usersSockPtrs[i], i));
 	}
+
+	//game.
 
 	while (true) 
     	boost::this_thread::sleep_for(boost::chrono::microseconds(250));
@@ -199,7 +201,7 @@ void SendBoxExplode(int id, int newType=1) {
 void SendEndGame(int idPlayer) {
 	Event event = END_GAME;
 	std::stringstream line;
-	line << event << " " << id;
+	line << event << " " << idPlayer;
 	std::string msg = line.str();
 
 	for (int i = 0; i < CLIENT_COUNT; i++) {
