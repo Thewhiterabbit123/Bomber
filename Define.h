@@ -2,6 +2,7 @@
 //  Event
 
 enum Event { 
+	SEND_IP,
 	START_GAME,
 	UP_EVENT,
 	DOWN_EVENT,
