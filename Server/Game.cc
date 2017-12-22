@@ -31,7 +31,7 @@ void Game::KillCharacter() {	//kills player who has 0 hp
 	вектора. */
 }
 
-void Game::DestroyBomb() {
+void Game::DestroyBomb(const boost::system::error_code& e, const Game& game) {
 
 }
 
@@ -66,6 +66,18 @@ void Game::Step() {
             currentPlayer.MakeMovement(currentCoordinate, currentEvent);
         }
 
+        // Bomb is set
+        if (currentEvent == SET_BOMB_EVENT ) {
+            boost::asio::io_service io;
+            boost::system::error_code e;
+            boost::asio::deadline_timer t(io, boost::posix_time::seconds(5));
+            t.async_wait(boost::bind(&DestroyBomb, e, *this));
+            Bomb newBomb(currentCoordinate);
+            CreateBomb(newBomb);
+            io.run();
+
+        }
+
     }
 }
 
@@ -73,11 +85,12 @@ std::string Game::GetMap() {
     return field.FieldToString();
 }
 
-void Game::StartMenu() {
-
+int Game::GetPlayerPositionById(const unsigned int id) {
+    Player player = FindPlayer(id);
+    return player.GetIntPosition();
 }
 
-void GetField() {
+void Game::StartMenu() {
 
 }
 

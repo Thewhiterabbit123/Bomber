@@ -19,7 +19,6 @@ class Field {
 		Field(Field & _field);
         Field & operator = (Field & rhs);
 		vector<Block>& GetField();
-        const vector<Block>& GetField() const;
 		string FieldToString();
 };
 
