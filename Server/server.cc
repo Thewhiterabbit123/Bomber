@@ -54,8 +54,16 @@ void client_session(socket_ptr sock, int threadNum)
 			    std::stringstream stream(packetStr);
 			    int typeOfPacket = 0;
 				stream >> typeOfPacket;
-				ClientAction action(clientId, (Event)typeOfPacket);
-				game.PushClientAction(action);
+				if(typeOfPacket == 99) {
+					std::stringstream line;
+					line << "|||" << game.GetPlayerPositionById(clientId) << "|||";
+					std::string msg = line.str();
+					sock->send(boost::asio::buffer(msg)); 
+				}
+				else {
+					ClientAction action(clientId, (Event)typeOfPacket);
+					game.PushClientAction(action);
+				}
 			}
     	}
 
