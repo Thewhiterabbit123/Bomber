@@ -4,6 +4,8 @@
 #include <fstream>
 #include "Parser.h"
 
+#define BUFFSIZE 1024
+
 Client::Client() {
     socket = new boost::asio::ip::tcp::socket(service);
 
@@ -12,7 +14,7 @@ Client::Client() {
         logfile.open("/home/nadia/Technopark/project/Bomber/Client/connection/client/client.log");
         this->getParam();
     } catch (std::ofstream::failure e) {
-        std::cerr << "Exception opening/reading/closing log file\n";
+        std::cerr << "EXEPTION LOGFILE" << std::endl;
     }
 }
 
@@ -29,14 +31,14 @@ void Client::getParam() {
         configFile >> this->_host >> this->_port;
         std::cout << _host << " " << _port << '\n';
     } catch (std::ifstream::failure e) {
-        logfile << " cant open conf configFile";
+        logfile << "EXEPTION CONFIGFILE" << std::endl;
     }
 
     configFile.close();
 }
 
 std::string Client::getMessage() {
-    char msg[1024];
+    char msg[BUFFSIZE];
     int len = socket->receive(boost::asio::buffer(msg));
     std::string inputMessage(msg, len);
     std::cout << inputMessage << std::endl;
@@ -48,16 +50,14 @@ void Client::sendMessage(std::string msg) {
      boost::asio::write(*socket, boost::asio::buffer(msg), error);
 
      if(error) {
-       std::cout << "send failed: " << error.message() << std::endl;
        logfile << "send failed: " << error.message() << std::endl;
-     } else {
-       std::cout << "send correct!" << std::endl;
-       logfile << "send correct!" << std::endl;
      }
 }
 
 
 Client::~Client() {
+    boost::system::error_code err;
+    socket->close(err);
     logfile.close();
     delete socket;
 }

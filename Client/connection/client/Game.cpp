@@ -6,13 +6,19 @@ void Game::play() {
     client->Connect();
     std::string name = "naDYa";
     client->sendMessage(name);
-    std::string messageFromServer = client->getMessage();
-    int happens = parser->parseLine(messageFromServer);
+    while(true) {
+        std::string messageFromServer = client->getMessage();
+        int event = parser->parseLine(messageFromServer);
+        eventSwitcher(event);
+        //тут отправить сообщение серверу
+    }
+}
 
-    switch(happens) {
+void Game::eventSwitcher(int event)  {
+
+    switch(event) {
         case IDPACKET: {
             client->setMyId(parser->getMyId());
-            logfile << "I'VE GOT MY ID. THIS IS IT - " << parser->getMyId() << std::endl;
             break;
         }
         case INITPACKET: {
@@ -24,7 +30,10 @@ void Game::play() {
         }
         case EVENTPACKET: {
             parser->getEvent();
-            logfile << "SOME SHIT HAPPENS" << std::endl;
+            break;
+        }
+        case EVENTBOMBPACKET: {
+            parser->getBombEvent();
             break;
         }
     }

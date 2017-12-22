@@ -17,6 +17,7 @@ class Parser {
         std::vector<int> getMap();
         std::map<int, int> getPosOfPlayer();
         std::pair<int, int> getEvent();
+        std::pair<int, int> getBombEvent();
 
     private:
         int myId;
@@ -24,6 +25,7 @@ class Parser {
         std::vector<int> parseMap;
         std::map<int, int> posOfPlayer;
         std::map<std::string, int> nickname;
+        std::pair<int, int> bombEvent;
 };
 
 #endif // PARSER_H

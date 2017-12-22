@@ -11,8 +11,14 @@ class Game : public QObject {
          Game(QObject* parent = 0): QObject(parent) {};
         ~Game();
         void play();
+        void eventSwitcher(int);
+
     signals:
         void startGame(std::vector<int> map, std::map<int, int> playerPos, std::map<std::string, int> player);
+        void playerMove(std::pair<int, int> event);
+        void playerSetBomb(std::pair<int, int> bombEvent);
+        void playerDie(int idPlayer);
+        void explodeBox(int pos);
 
     public slots:
        // void Ready();

@@ -10,7 +10,7 @@ int Parser::parseLine(std::string line) {
     switch (typeOfPacket) {
         case IDPACKET: {            //this packet need to get my id
             stream >> myId;
-            return 00;
+            return IDPACKET;
             break;
         }
 
@@ -32,7 +32,7 @@ int Parser::parseLine(std::string line) {
                 stream >> name;
                 nickname[name] = id;
             }
-            return 01;
+            return INITPACKET;
             break;
         }
 
@@ -42,7 +42,17 @@ int Parser::parseLine(std::string line) {
             stream >> id;
             stream >> what;
             event = std::make_pair(id, what);
-            return 02;
+            return EVENTPACKET;
+            break;
+        }
+
+        case EVENTBOMBPACKET: {
+            int bombPosition = 0;
+            int event = 0;
+            stream >> bombPosition;
+            stream >> event;
+            bombEvent = std::make_pair(bombPosition, event);
+            return EVENTBOMBPACKET;
             break;
         }
     }
@@ -76,4 +86,8 @@ std::map<int, int> Parser::getPosOfPlayer() {
 
 std::pair<int, int> Parser::getEvent() {
     return event;
+}
+
+std::pair<int, int> Parser::getBombEvent() {
+    return bombEvent;
 }

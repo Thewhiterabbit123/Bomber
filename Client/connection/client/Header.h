@@ -1,12 +1,13 @@
 #ifndef HEADER_H
 #define HEADER_H
 
-#define NUMBEROFPLAYERS 4
+#define NUMBEROFPLAYERS  4
 #define MAPWIDTH        20
 #define MAPHEIGHT       13
 #define IDPACKET        00
 #define INITPACKET      01
 #define EVENTPACKET     02
+#define EVENTBOMBPACKET 03
 
 #define PLAYERMOVEUP    20
 #define PLAYERMOVEDOWN  80

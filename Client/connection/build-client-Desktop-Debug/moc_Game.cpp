@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_Game_t {
-    QByteArrayData data[9];
-    char stringdata0[98];
+    QByteArrayData data[18];
+    char stringdata0[192];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -37,12 +37,24 @@ QT_MOC_LITERAL(4, 33, 3), // "map"
 QT_MOC_LITERAL(5, 37, 17), // "std::map<int,int>"
 QT_MOC_LITERAL(6, 55, 9), // "playerPos"
 QT_MOC_LITERAL(7, 65, 25), // "std::map<std::string,int>"
-QT_MOC_LITERAL(8, 91, 6) // "player"
+QT_MOC_LITERAL(8, 91, 6), // "player"
+QT_MOC_LITERAL(9, 98, 10), // "playerMove"
+QT_MOC_LITERAL(10, 109, 18), // "std::pair<int,int>"
+QT_MOC_LITERAL(11, 128, 5), // "event"
+QT_MOC_LITERAL(12, 134, 13), // "playerSetBomb"
+QT_MOC_LITERAL(13, 148, 9), // "bombEvent"
+QT_MOC_LITERAL(14, 158, 9), // "playerDie"
+QT_MOC_LITERAL(15, 168, 8), // "idPlayer"
+QT_MOC_LITERAL(16, 177, 10), // "explodeBox"
+QT_MOC_LITERAL(17, 188, 3) // "pos"
 
     },
     "Game\0startGame\0\0std::vector<int>\0map\0"
     "std::map<int,int>\0playerPos\0"
-    "std::map<std::string,int>\0player"
+    "std::map<std::string,int>\0player\0"
+    "playerMove\0std::pair<int,int>\0event\0"
+    "playerSetBomb\0bombEvent\0playerDie\0"
+    "idPlayer\0explodeBox\0pos"
 };
 #undef QT_MOC_LITERAL
 
@@ -52,18 +64,26 @@ static const uint qt_meta_data_Game[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       1,       // signalCount
+       5,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    3,   19,    2, 0x06 /* Public */,
+       1,    3,   39,    2, 0x06 /* Public */,
+       9,    1,   46,    2, 0x06 /* Public */,
+      12,    1,   49,    2, 0x06 /* Public */,
+      14,    1,   52,    2, 0x06 /* Public */,
+      16,    1,   55,    2, 0x06 /* Public */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3, 0x80000000 | 5, 0x80000000 | 7,    4,    6,    8,
+    QMetaType::Void, 0x80000000 | 10,   11,
+    QMetaType::Void, 0x80000000 | 10,   13,
+    QMetaType::Void, QMetaType::Int,   15,
+    QMetaType::Void, QMetaType::Int,   17,
 
        0        // eod
 };
@@ -75,6 +95,10 @@ void Game::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void *
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->startGame((*reinterpret_cast< std::vector<int>(*)>(_a[1])),(*reinterpret_cast< std::map<int,int>(*)>(_a[2])),(*reinterpret_cast< std::map<std::string,int>(*)>(_a[3]))); break;
+        case 1: _t->playerMove((*reinterpret_cast< std::pair<int,int>(*)>(_a[1]))); break;
+        case 2: _t->playerSetBomb((*reinterpret_cast< std::pair<int,int>(*)>(_a[1]))); break;
+        case 3: _t->playerDie((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 4: _t->explodeBox((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -84,6 +108,30 @@ void Game::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void *
             typedef void (Game::*_t)(std::vector<int> , std::map<int,int> , std::map<std::string,int> );
             if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&Game::startGame)) {
                 *result = 0;
+            }
+        }
+        {
+            typedef void (Game::*_t)(std::pair<int,int> );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&Game::playerMove)) {
+                *result = 1;
+            }
+        }
+        {
+            typedef void (Game::*_t)(std::pair<int,int> );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&Game::playerSetBomb)) {
+                *result = 2;
+            }
+        }
+        {
+            typedef void (Game::*_t)(int );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&Game::playerDie)) {
+                *result = 3;
+            }
+        }
+        {
+            typedef void (Game::*_t)(int );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&Game::explodeBox)) {
+                *result = 4;
             }
         }
     }
@@ -114,13 +162,13 @@ int Game::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 5;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
+        if (_id < 5)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 1;
+        _id -= 5;
     }
     return _id;
 }
@@ -130,5 +178,33 @@ void Game::startGame(std::vector<int> _t1, std::map<int,int> _t2, std::map<std::
 {
     void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)), const_cast<void*>(reinterpret_cast<const void*>(&_t3)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
+}
+
+// SIGNAL 1
+void Game::playerMove(std::pair<int,int> _t1)
+{
+    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 1, _a);
+}
+
+// SIGNAL 2
+void Game::playerSetBomb(std::pair<int,int> _t1)
+{
+    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 2, _a);
+}
+
+// SIGNAL 3
+void Game::playerDie(int _t1)
+{
+    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 3, _a);
+}
+
+// SIGNAL 4
+void Game::explodeBox(int _t1)
+{
+    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 4, _a);
 }
 QT_END_MOC_NAMESPACE
