@@ -3,6 +3,7 @@
 #include "Field.h"
 #include <vector>
 #include <string>
+#include <boost/asio.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/bind.hpp>
 using namespace std;
@@ -77,7 +78,7 @@ void Game::Step() {
             t.async_wait(boost::bind(&DestroyBomb, e, *this));
             Bomb newBomb(currentCoordinate);
             CreateBomb(newBomb);
-            io.run();
+            //io.run();
 
         }
 
