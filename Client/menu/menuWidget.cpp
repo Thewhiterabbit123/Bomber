@@ -1,21 +1,18 @@
 #include "menuWidget.h"
 
-MenuWidget::MenuWidget(QWidget* parent): QWidget(parent){
-    setFixedSize(800, 600);
-    //setStyleSheet("background-image: url(:/images/mysteryboom2.jpg)");
-    menuLayout = new QVBoxLayout();
-    //menuLayout->SetFixedSize(50, 100);
-    goToGameButton = new QPushButton("Search game");
-    quitButton = new QPushButton("Quit");
-    menuLayout -> addWidget(goToGameButton);
-    menuLayout -> addWidget(quitButton);
-    setLayout(menuLayout);
 
-    connect(goToGameButton, SIGNAL(clicked(bool)), this, SLOT(gameScreen()));
-    connect(quitButton, SIGNAL(clicked(bool)), this, SLOT(quitAll()));
+
+MenuWidget::MenuWidget(QWidget* parent): QWidget(parent), menuUi(new Ui::menu()){
+    //setFixedSize(800, 600);
+    menuUi->setupUi(this);
+
+    connect(menuUi->goToGameButton, SIGNAL(clicked(bool)), this, SLOT(gameScreen()));
+    connect(menuUi->quitButton, SIGNAL(clicked(bool)), this, SLOT(quitAll()));
 }
 
 void MenuWidget::gameScreen(){
+    std::string nickName = menuUi->nickNameLineEdit->text().toStdString();
+    //startServer(nickName);
     emit setScreen(1); // go to game screen
 }
 

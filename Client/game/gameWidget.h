@@ -3,8 +3,10 @@
 
 
 #include <QWidget>
-#include <QVBoxLayout>
-#include <QPushButton>
+#include <vector>
+
+#include "game/box/boxwidget.h"
+#include "ui_gamewidgetui.h"
 
 class GameWidget: public QWidget{
     Q_OBJECT
@@ -12,8 +14,9 @@ public:
     explicit GameWidget(QWidget* parent = NULL);
 
 private:
-    QVBoxLayout* gameLayout;
-    QPushButton* backButton;
+
+    Ui::game* gameUi;
+    std::vector<BoxWidget*> field;
 
 signals:
     void setScreen(int);
