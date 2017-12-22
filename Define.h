@@ -1,6 +1,8 @@
 #pragma once
 
 enum Event {
+	SEND_ID,
+	START_GAME,
 	UP_EVENT,
 	DOWN_EVENT,
 	LEFT_EVENT,
