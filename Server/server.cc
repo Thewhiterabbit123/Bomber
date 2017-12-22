@@ -52,20 +52,57 @@ void client_session(socket_ptr sock, int threadNum)
 			}
 			if (bytes > 0){
 				std::string packetStr(buff, bytes);
-				///
+			    std::stringstream stream(packetStr);
+			    int typeOfPacket = 0;
+			    int coordX = 0;
+			    int coordY = 0;
+
+			    stream >> typeOfPacket;
+			//     switch (typeOfPacket) {
+			//         case IDPACKET: {            //this packet need to get my id
+			//             stream >> myId;
+			//             return IDPACKET;
+			//             break;
+			//         }
+
+			//         case SET_BOMB_EVENT: {          //typeofpacket - map - [id - name - id - position]x4
+			//             std::string _map;
+			//             stream >> _map;         //get map from packet
+			//             makeMapFromString(_map);
+			//             for(int i = 0; i < SET_BOMB_EVENT; i++) {
+			//                 int localId = 0;
+			//                 int posOnVector = 0;
+			//                 stream >> localId >> posOnVector;  //get coordinat's of players, posOnVector = x*MAPWIDTH + y
+			//                 posOfPlayer[localId] = posOnVector;
+			//             }
+			//             for(int i = 0; i < SET_BOMB_EVENT; i++) {
+			//                 int id = 0;
+			//                 std::string name;
+
+			//                 stream >> id;
+			//                 stream >> name;
+			//                 nickname[name] = id;
+			//             }
+			//             return SET_BOMB_EVENT;
+			//             break;
+   //      			}
+
+			// }
 			}
     	}
 
     	if (!sendQueues[threadNum].empty()) {
-    		;//while(!empty ) do send;
-    		/////////
-   //  		try {
-			// 	sock->send(boost::asio::buffer(idPack)); 
-			// }
-			// catch(boost::system::system_error e) {
-			// 	std::cout << e.code() << std::endl;
-			// 	continue;
-			// }
+    		while(!sendQueues[threadNum].empty()) {
+    			std::string msg = sendQueues[threadNum].front();
+    			try {
+					sock->send(boost::asio::buffer(msg)); 
+					}
+				catch(boost::system::system_error e) {
+					std::cout << e.code() << std::endl;
+					continue;
+				}
+				sendQueues[threadNum].pop();
+    		}
     	}
     boost::this_thread::sleep_for(boost::chrono::milliseconds(1));
     }
@@ -110,12 +147,13 @@ void server_loop()
 		std::cout << "player: " << playerId << " conected" <<std::endl;   
 	    playersCount++;
 	}
+
 	for (int i = 0; i < CLIENT_COUNT; i++){
 		boost::thread(boost::bind(client_session, usersSockPtrs[i], i));
 	}
-	while (true) 
-    	boost::this_thread::sleep_for(boost::chrono::milliseconds(1));
 
+	while (true) 
+    	boost::this_thread::sleep_for(boost::chrono::microseconds(250));
 
 }
 
