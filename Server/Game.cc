@@ -19,19 +19,19 @@ int Game::CreatePlayer(const std::string & name) {
     return currentPlayer.GetId();
 }
 
-Player & Game::FindPlayer(const unsigned int id) {
+Player * Game::FindPlayer(const unsigned int id) {
     for (int i = 0; i < PLAYER_COUNT; i++)
         if (player[i].GetId() == id)
-            return player[i];
+            return &player[i];
 }
 
 string Game::GetPlayerNameById(const unsigned int id) {
-    return FindPlayer(id).GetName();
+    return FindPlayer(id) -> GetName();
 }
 
 int Game::GetPlayerPositionById(const unsigned int id) {
-    Player player = FindPlayer(id);
-    return player.GetPosition().ToInt();
+    Player *player = FindPlayer(id);
+    return player->GetPosition().ToInt();
 }
 
 void Game::KillCharacter() {	//kills player who has 0 hp
@@ -114,12 +114,12 @@ void Game::Step() {
             clientAction.pop();   //  delete Change from queue
             Event currentEvent = currentChange.event;
             unsigned int currentId = currentChange.id;
-            Player currentPlayer = FindPlayer(currentId);
+            Player *currentPlayer = FindPlayer(currentId);
             //  Player movement
             if (currentEvent >= UP_EVENT && currentEvent <= RIGHT_EVENT) {
-                bool IsMovement = currentPlayer.MakeMovement(currentEvent);
+                bool IsMovement = currentPlayer -> MakeMovement(currentEvent);
                 if (IsMovement)
-                    SendMovePlayer(currentId, currentPlayer.GetPosition().ToInt());
+                    SendMovePlayer(currentId, currentPlayer -> GetPosition().ToInt());
                 continue;
             }
             // Bomb is set
@@ -128,7 +128,7 @@ void Game::Step() {
                 boost::system::error_code e;
                 boost::asio::deadline_timer t(io, boost::posix_time::seconds(5));
                 t.async_wait(boost::bind(&DestroyBomb, e, *this));
-                Bomb newBomb(currentPlayer.GetPosition());
+                Bomb newBomb(currentPlayer -> GetPosition());
                 CreateBomb(newBomb);
                 io.run();
                 continue;
