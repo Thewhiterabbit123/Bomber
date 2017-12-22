@@ -9,17 +9,13 @@ Player::Player(const Field &_field, const std::string _name): field(_field), Obj
 Coordinate Player::PositionAfterMovement(const Coordinate &coordinate, Event move) {
     switch(move) {
         case UP_EVENT:
-            coordinate.y++;
-            break;
+            return Coordinate(coordinate.x, coordinate.y + 1);
         case DOWN_EVENT:
-            coordinate.y--;
-            break;
+            return Coordinate(coordinate.x, coordinate.y - 1);
         case RIGHT_EVENT:
-            coordinate.x++;
-            break;
+            return Coordinate(coordinate.x + 1, coordinate.y);
         case LEFT_EVENT:
-            coordinate.x--;
-            break;
+            return Coordinate(coordinate.x - 1, coordinate.y);
     }
 }
 
@@ -33,13 +29,13 @@ void Player::MakeMovement(const Coordinate &coordinate, Event move) {
     if (position != coordinate) {
         nextCoordinate = PositionAfterMovement(position, move);
         vectCoordinate = ToVectorCoordinate(nextCoordinate);
-
     }
     else {
         nextCoordinate = PositionAfterMovement(coordinate, move);
         vectCoordinate = ToVectorCoordinate(nextCoordinate);
     }
-    if (field.field[vectCoordinate] == BOX || field.field[vectCoordinate] == WALL)
+    BlockType block = (BlockType)field.GetField()[vectCoordinate].GetType();
+    if (block == BOX || block == WALL)
         return;
     position = nextCoordinate;
     SendMovePlayer(GetId(), vectCoordinate);
