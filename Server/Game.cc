@@ -1,7 +1,10 @@
 #include "Game.h"
 #include "Player.h"
 #include "Field.h"
-
+#include <vector>
+#include <string>
+#include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/bind.hpp>
 using namespace std;
 
 Game::Game() {
@@ -33,7 +36,51 @@ void Game::KillCharacter() {	//kills player who has 0 hp
 	вектора. */
 }
 
-void Game::DestroyBomb(const boost::system::error_code& e, const Game& game) {
+void Game::DestroyBomb(const boost::system::error_code& e, Game& game) {
+    Bomb bombToDestroy = game.bomb.front();
+    game.bomb.pop();
+    int bombDamage = bombToDestroy.GetDamage();
+    int bombRadius = bombToDestroy.GetRadius();
+    Coordinate bombPosition = bombToDestroy.GetPosition();
+    std::vector<Block> currentField = game.field.GetField();
+    for(int k = 0; k < 4; k++) {
+        Coordinate currentPos = bombPosition;
+        bool flag = false;
+        for(int i = 0; i < bombRadius && !flag; i++) {
+            for(std::vector<Player>::iterator j = game.player.begin(); j != game.player.end(); j++) {
+                if(j -> GetPosition() == currentPos) {
+                    if(!j -> GetDamage()) {
+                        SendPlayerDead (j->GetId());
+                    } else {
+                        SendMinusHP(j->GetId());
+                    }
+                    flag = true;
+                }
+            }
+            if(currentField[currentPos.ToInt()].GetType() == WALL) {
+                flag = true;
+            }
+
+            if(currentField[currentPos.ToInt()].GetType() == BOX) {
+                SendBoxExplode(currentField[currentPos.ToInt()].GetId(), (int) EMPTY);
+                flag = true;
+            }
+            switch(k) {
+                case 0:
+                    currentPos.x++;
+                    break;
+                case 1:
+                    currentPos.x--;
+                    break;
+                case 2:
+                    currentPos.y++;
+                    break;
+                case 3:
+                    currentPos.y--;
+                    break;
+            }
+        }
+    }
 
 }
 
@@ -67,11 +114,27 @@ void Game::Step() {
             bool IsMovement = currentPlayer.MakeMovement(currentEvent, newPosition);
             if (IsMovement)
                 SendMovePlayer(currentId, newPosition.ToInt());
-            boost::this_thread::sleep_for(boost::chrono::milliseconds(1));
+            boost::this_thread::sleep_for(boost::chrono::microseconds(250));
             continue;
         }
 
-        boost::this_thread::sleep_for(boost::chrono::milliseconds(1));
+
+
+        // Bomb is set
+        if (currentEvent == SET_BOMB_EVENT ) {
+            boost::asio::io_service io;
+            boost::system::error_code e;
+            boost::asio::deadline_timer t(io, boost::posix_time::seconds(5));
+            t.async_wait(boost::bind(&DestroyBomb, e, *this));
+            Bomb newBomb(currentPlayer.GetPosition());
+            CreateBomb(newBomb);
+            io.run();
+            boost::this_thread::sleep_for(boost::chrono::microseconds(250));
+            continue;
+
+        }
+
+
 
     }
 }
