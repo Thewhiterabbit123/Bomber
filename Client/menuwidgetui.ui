@@ -90,22 +90,6 @@
      <string notr="true">background-image: url(:/images/gameName.png); border: none;</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="settingsButton">
-    <property name="geometry">
-     <rect>
-      <x>614</x>
-      <y>-5</y>
-      <width>191</width>
-      <height>111</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-image: url(:/images/settings.png); border: none; background-repeat: norepeat;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
    <widget class="QPushButton" name="goToGameButton">
     <property name="geometry">
      <rect>

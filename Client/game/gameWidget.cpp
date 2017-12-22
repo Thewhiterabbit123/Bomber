@@ -38,6 +38,8 @@ GameWidget::GameWidget(QWidget* parent): QWidget(parent), gameUi(new Ui::game())
     ACTOR_ANIMATION_POOL.load(ActorActions::Left, ":/resources/hedgehog_left.png", 11, 246, 280);
     ACTOR_ANIMATION_POOL.load(ActorActions::Right, ":/resources/hedgehog_right.png", 11, 246, 280);
     ACTOR_ANIMATION_POOL.load(ActorActions::Stay, ":/resources/hedgehog_stay.png", 31, 246, 280);
+    ACTOR_ANIMATION_POOL.load(ActorActions::BombStay, ":/resources/bomb_sprite.png", 11, 246, 280);
+    ACTOR_ANIMATION_POOL.load(ActorActions::BombExplode, ":/resources/bomb_explosion.png", 11, 246, 280);
 
     View* view;
     view = new View();

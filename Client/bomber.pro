@@ -22,7 +22,8 @@ SOURCES += main.cpp \
     menu/menuWidget.cpp \
     game/person/animatedgraphicsitem.cpp \
     game/person/graphicsactor.cpp \
-    game/view.cpp
+    game/view.cpp \
+    game/person/bombactor.cpp
 
 HEADERS  += \
     bombergame.h \
@@ -36,7 +37,8 @@ HEADERS  += \
     singleton.h \
     game/person/animatedgraphicsitem.h \
     game/person/graphicsactor.h \
-    game/view.h
+    game/view.h \
+    game/person/bombactor.h
 
 FORMS    += \
     menuwidgetui.ui \

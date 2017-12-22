@@ -1,23 +1,22 @@
-#ifndef GRAPHICSACTOR_H
-#define GRAPHICSACTOR_H
+#ifndef BOMBACTOR_H
+#define BOMBACTOR_H
 
 #include "game/person/animatedgraphicsitem.h"
 #include "game/person/animations_enum.h"
 
 class QGraphicsItemAnimation;
 
-class GraphicsActor : public AnimatedGraphicsItem {
+class BombActor: public AnimatedGraphicsItem {
     Q_OBJECT
 public:
-    explicit GraphicsActor(QObject *parent = 0);
+    explicit BombActor(QObject *parent = 0);
 public slots:
-    void processKey(ActorActions key);
+    void explode(int idBomb);
     void setSprites(ActorActions sprites, bool force = false);
 
-    void onAnimationFinished();
+    void hideself();
 protected:
     const int AnimationPeriodMS = 1000;
-    const int SpeedPx = 37;
     ActorActions m_currectAction;
     QGraphicsItemAnimation *m_moveAnimation;
 
@@ -25,4 +24,5 @@ private:
     int id;
 };
 
-#endif // GRAPHICSACTOR_H
+#endif // BOMBACTOR_H
+

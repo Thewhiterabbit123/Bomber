@@ -13,19 +13,27 @@ GraphicsActor::GraphicsActor(QObject *parent)
 
 void GraphicsActor::setSprites(ActorActions sprites, bool force) {
     if (force || sprites != m_currectAction) {
-        animation(sprites, Mode::Loop, true);
+        animation(sprites, Mode::Once, false);
     }
 }
 
 
 void GraphicsActor::processKey(ActorActions action) {
     // sprites:
+    if(m_currectAction == action)
+        return;
+/*
     if ((m_currectAction == ActorActions::Left && action == ActorActions::Right) ||
         (m_currectAction == ActorActions::Right && action == ActorActions::Left) ||
         (m_currectAction == ActorActions::Up && action == ActorActions::Down) ||
         (m_currectAction == ActorActions::Down && action == ActorActions::Up)) {
         action = ActorActions::Stay;
     }
+*/
+    /*
+    if ((m_currectAction != ActorActions::Stay)) {
+        return;
+    }*/
     setSprites(action);
 
     // moving
@@ -63,5 +71,6 @@ void GraphicsActor::processKey(ActorActions action) {
 }
 
 void GraphicsActor::onAnimationFinished() {
-    processKey(m_currectAction);
+    //processKey(m_currectAction);
+    processKey(ActorActions::Stay);
 }

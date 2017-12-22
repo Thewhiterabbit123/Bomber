@@ -154,8 +154,8 @@
    <widget class="QWidget" name="field" native="true">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>100</y>
+      <x>20</x>
+      <y>90</y>
       <width>750</width>
       <height>484</height>
      </rect>
@@ -166,8 +166,8 @@
      <rect>
       <x>30</x>
       <y>100</y>
-      <width>750</width>
-      <height>484</height>
+      <width>740</width>
+      <height>474</height>
      </rect>
     </property>
     <property name="autoFillBackground">

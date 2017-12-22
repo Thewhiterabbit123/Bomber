@@ -16,7 +16,7 @@ public:
 signals:
   void animationFinished();
 protected:
-  void animation(ActorActions animationId, Mode mode, bool randomStartFrame = false, int framerate = DefaultFramerate);
+  void animation(ActorActions animationId, Mode mode, bool randomStartFrame = false, int framerate = DefaultFramerate, int hide = false);
 private slots:
   void on_timerTick();
 private:
@@ -25,7 +25,7 @@ private:
   QVector<QPixmap*> *m_frames;
   int m_nFrames;
   int m_curFrameIndex;
-
+  int hidable;
   Mode m_mode;
 
   const static int DefaultFramerate = 12;

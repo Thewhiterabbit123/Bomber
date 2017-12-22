@@ -6,9 +6,10 @@ AnimatedGraphicsItem::AnimatedGraphicsItem(QObject *parent)
 }
 
 void AnimatedGraphicsItem::animation(ActorActions animationId, Mode mode,
-                                     bool randomStartFrame, int framerate) {
+                                     bool randomStartFrame, int framerate, int hide) {
     m_frames = &ACTOR_ANIMATION_POOL.get(animationId);
     m_mode = mode;
+    hidable = hide;
     m_timer.stop();
     m_nFrames = m_frames->size();
 
@@ -35,7 +36,7 @@ void AnimatedGraphicsItem::on_timerTick() {
     else {
         if (m_curFrameIndex >= m_nFrames) {
             m_timer.stop();
-            hide();
+            if (hidable == true) hide();
             emit animationFinished();
             }
         else
