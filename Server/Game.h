@@ -30,6 +30,6 @@ class Game {
 		void EndGame();
 		void CreateBomb(const Bomb &_bomb);
 		void GetTime();
-		void GetField();
+		void GetMap();
 		void StartMenu();
 };

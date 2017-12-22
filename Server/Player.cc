@@ -6,29 +6,43 @@ Player::Player(const Field &_field, const std::string _name): field(_field), Obj
     skinId++;
 }
 
-void Player::SetPosition(Event move) {
-	switch(move) {
+Coordinate Player::PositionAfterMovement(const Coordinate &coordinate, Event move) {
+    switch(move) {
         case UP_EVENT:
-			position.y++;
-			break;
-		case DOWN_EVENT: 
-			position.y--;
-			break;
-		case RIGHT_EVENT: 
-			position.x++;
-			break;
-		case LEFT_EVENT: 
-			position.x--;
-			break;
-	}
+            coordinate.y++;
+            break;
+        case DOWN_EVENT:
+            coordinate.y--;
+            break;
+        case RIGHT_EVENT:
+            coordinate.x++;
+            break;
+        case LEFT_EVENT:
+            coordinate.x--;
+            break;
+    }
 }
 
-void Player::CheckPosition(const Coordinate &coordinate) {
-    if (position == coordinate)
+int Player::ToVectorCoordinate(const Coordinate &coordinate) {
+    return (MAP_COLUMN_SIZE * coordinate.y + coordinate.x);
+}
+
+void Player::MakeMovement(const Coordinate &coordinate, Event move) {
+    Coordinate nextCoordinate;
+    int vectCoordinate;
+    if (position != coordinate) {
+        nextCoordinate = PositionAfterMovement(position, move);
+        vectCoordinate = ToVectorCoordinate(nextCoordinate);
+
+    }
+    else {
+        nextCoordinate = PositionAfterMovement(coordinate, move);
+        vectCoordinate = ToVectorCoordinate(nextCoordinate);
+    }
+    if (field.field[vectCoordinate] == BOX || field.field[vectCoordinate] == WALL)
         return;
-    // обработать
-    position.x = coordinate.x;
-    position.y = coordinate.y;
+    position = nextCoordinate;
+    SendMovePlayer(GetId(), vectCoordinate);
 }
 
 void Player::PutBomb() {

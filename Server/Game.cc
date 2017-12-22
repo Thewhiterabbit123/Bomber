@@ -61,8 +61,7 @@ void Game::Step() {
         //  Player movement
         if (currentEvent >= UP_EVENT && currentEvent <= RIGHT_EVENT) {
             Player currentPlayer = FindPlayer(currentId);
-            currentPlayer.CheckPosition(currentCoordinate);
-            currentPlayer.SetPosition(currentEvent);
+            currentPlayer.MakeMovement(currentCoordinate, currentEvent);
         }
 
 
@@ -71,8 +70,8 @@ void Game::Step() {
     }
 }
 
-void Game::GetField() {
-
+std::string Game::GetMap() {
+    return field.FieldToString();
 }
 
 void Game::StartMenu() {
