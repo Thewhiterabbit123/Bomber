@@ -42,12 +42,14 @@ void Game::KillCharacter() {	//kills player who has 0 hp
 }
 
 void Game::DestroyBomb(const boost::system::error_code& e, Game& game) {
+    if (game.bomb.empty())
+        return;
     Bomb bombToDestroy = game.bomb.front();
     game.bomb.pop();
     int bombDamage = bombToDestroy.GetDamage();
     int bombRadius = bombToDestroy.GetRadius();
     Coordinate bombPosition = bombToDestroy.GetPosition();
-    std::vector<Block> currentField = game.field.GetField();
+    std::vector<Block> & currentField = game.field.GetField();
     for(int k = 0; k < 4; k++) {
         Coordinate currentPos = bombPosition;
         bool flag = false;

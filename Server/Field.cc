@@ -9,8 +9,8 @@ Field::Field() {
         fieldConfig.open("../fieldConf");
         getline(fieldConfig, line);
         for (int i = 0; i < line.size(); i++) {
-            Coordinate curCoord(i % MAP_ROW_SIZE, (int) i / MAP_ROW_SIZE);
-            Block curBlock(curCoord, (BlockType)line[i]);
+            Coordinate curCoord(i % MAP_COLUMN_SIZE, (int) i / MAP_COLUMN_SIZE);
+            Block curBlock(curCoord, (BlockType)(line[i] - '0'));
             field.push_back(curBlock);
         }
     } catch (std::ifstream::failure e) {
