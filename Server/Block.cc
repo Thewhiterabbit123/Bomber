@@ -5,7 +5,7 @@ Block::Block(const Coordinate &_position, const BlockType &_type):
 	position = _position;
 }
 
-BlockType & Block::GetType()  {
+BlockType Block::GetType()  {
 	return type;
 }
 

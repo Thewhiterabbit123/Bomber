@@ -31,9 +31,10 @@ class Game {
         int GetPlayerPositionById(const unsigned int id);
 
         void PushClientAction(ClientAction & action);
+
 		void Step();
 		void KillCharacter();
-		static void DestroyBomb(const boost::system::error_code&, const Game&);
+		static void DestroyBomb(const boost::system::error_code&, Game&);
 		void EndGame();
 		void CreateBomb(const Bomb &_bomb);
 		void GetTime();
