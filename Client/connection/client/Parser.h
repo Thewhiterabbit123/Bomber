@@ -10,6 +10,7 @@ class Parser {
     public:
         int  parseLine(std::string);
         void makeMapFromString(std::string);
+        std::string getNameById(int);
 
         int  getMyId();
         std::map<std::string, int> getNickname();

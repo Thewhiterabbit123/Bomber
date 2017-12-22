@@ -1,4 +1,4 @@
-#include "Parser.h"
+﻿#include "Parser.h"
 #include <sstream>
 #include <iostream>
 
@@ -8,13 +8,13 @@ int Parser::parseLine(std::string line) {
     stream >> typeOfPacket;
 
     switch (typeOfPacket) {
-        case IDPACKET: {            //this packet need to get my id
+        case SEND_ID: {            //this packet need to get my id
             stream >> myId;
-            return IDPACKET;
+            return SEND_ID;
             break;
         }
 
-        case INITPACKET: {          //typeofpacket - map - [id - name - id - position]x4
+        case START_GAME: {          //typeofpacket - map - [id - name - id - position]x4
             std::string _map;
             stream >> _map;         //get map from packet
             makeMapFromString(_map);
@@ -32,27 +32,46 @@ int Parser::parseLine(std::string line) {
                 stream >> name;
                 nickname[name] = id;
             }
-            return INITPACKET;
+            return START_GAME;
             break;
         }
 
-        case EVENTPACKET: {
+        case MOVE_PLAYER: {
             int id = 0;
-            int what = 0;
+            int position = 0;
             stream >> id;
-            stream >> what;
-            event = std::make_pair(id, what);
-            return EVENTPACKET;
+            stream >> position;
+            event = std::make_pair(id, position);
+            return MOVE_PLAYER;
             break;
         }
 
-        case EVENTBOMBPACKET: {
+        case BOMB_PLANTED: {
+            int bombID = 0;
             int bombPosition = 0;
-            int event = 0;
+            stream >> bombID;
             stream >> bombPosition;
-            stream >> event;
-            bombEvent = std::make_pair(bombPosition, event);
-            return EVENTBOMBPACKET;
+            bombEvent = std::make_pair(bombID, bombPosition);
+            return BOMB_EVENT;
+            break;
+        }
+
+        case BOMB_EXPLODE: {
+            int bombId = 0;
+            stream >> bombId;
+            break;
+        }
+
+        case END_GAME: {
+            int winnerId;
+            stream >> winnerId;
+            std::string winnerName = getNameById(winnerId);
+            return END_GAME;
+            break;
+        }
+        case BOX_EXPLODE: {
+            int boxId = 0;
+            stream >> boxId;
             break;
         }
     }
@@ -91,3 +110,12 @@ std::pair<int, int> Parser::getEvent() {
 std::pair<int, int> Parser::getBombEvent() {
     return bombEvent;
 }
+
+std::string Parser::getNameById(int id) {
+    for (std::map<std::string, int>::iterator  it = nickname.begin(); it != nickname.end(); it++) {
+        if( it->second == id) {
+            return it->first;
+        }
+    }
+}
+

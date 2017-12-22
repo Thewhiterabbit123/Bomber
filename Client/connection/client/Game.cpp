@@ -17,25 +17,25 @@ void Game::play() {
 void Game::eventSwitcher(int event)  {
 
     switch(event) {
-        case IDPACKET: {
-            client->setMyId(parser->getMyId());
-            break;
-        }
-        case INITPACKET: {
-            parser->getMap();
-            parser->getPosOfPlayer();
-            parser->getNickname();
-            break;
-            //call signal for Dima
-        }
-        case EVENTPACKET: {
-            parser->getEvent();
-            break;
-        }
-        case EVENTBOMBPACKET: {
-            parser->getBombEvent();
-            break;
-        }
+//        case IDPACKET: {
+//            client->setMyId(parser->getMyId());
+//            break;
+//        }
+//        case INITPACKET: {
+//            parser->getMap();
+//            parser->getPosOfPlayer();
+//            parser->getNickname();
+//            break;
+//            //call signal for Dima
+//        }
+//        case EVENTPACKET: {
+//            parser->getEvent();
+//            break;
+//        }
+//        case EVENTBOMBPACKET: {
+//            parser->getBombEvent();
+//            break;
+//        }
     }
 }
 
