@@ -142,10 +142,11 @@ void SendMovePlayer(int idPlayer, int coord) {
 	
 }
 
-void SendBombPlanted (int coord) {
-	Event event = BOMB_PLANTED;
+void SendBombPlanted (int id, int coord) {
+	Event event = BOMB_EVENT;
+	Event bombAction = BOMB_PLANTED;
 	std::stringstream line;
-	line << event << " " << coord;
+	line << event << " " << id << " " << bombAction << " " << coord;
 	std::string msg = line.str();
 
 	for (int i = 0; i < CLIENT_COUNT; i++) {
@@ -153,12 +154,27 @@ void SendBombPlanted (int coord) {
 	}
 }
 
-void SendBombExplode (int coord, int radius=1) {
-	;
+void SendBombExplode (int id, int radius=1) {
+	Event event = BOMB_EVENT;
+	Event bombAction = BOMB_EXPLODE;
+	std::stringstream line;
+	line << event << " " << id << " " << bombAction;
+	std::string msg = line.str();
+
+	for (int i = 0; i < CLIENT_COUNT; i++) {
+		sendQueues[i].push(msg);
+	}
 }
 
 void SendPlayerDead (int idPlayer) {
-	;
+	Event event = PLAYER_DEAD;
+	std::stringstream line;
+	line << event << " " << idPlayer;
+	std::string msg = line.str();
+
+	for (int i = 0; i < CLIENT_COUNT; i++) {
+		sendQueues[i].push(msg);
+	}
 }
 
 void SendPlusHP(int idPlayer) {
@@ -169,8 +185,26 @@ void SendMinusHP(int idPlayer) {
 	;
 }
 
-void SendBoxExplode(int coord, int newType) {
-	;
+void SendBoxExplode(int id, int newType=1) {
+	Event event = BOX_EXPLODE;
+	std::stringstream line;
+	line << event << " " << id;
+	std::string msg = line.str();
+
+	for (int i = 0; i < CLIENT_COUNT; i++) {
+		sendQueues[i].push(msg);
+	}
+}
+
+void SendEndGame(int idPlayer) {
+	Event event = END_GAME;
+	std::stringstream line;
+	line << event << " " << id;
+	std::string msg = line.str();
+
+	for (int i = 0; i < CLIENT_COUNT; i++) {
+		sendQueues[i].push(msg);
+	}
 }
 
 
