@@ -3,6 +3,8 @@
 #include "Field.h"
 #include <vector>
 #include <string>
+#include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/bind.hpp>
 using namespace std;
 
 Game::Game() {
@@ -33,8 +35,8 @@ void Game::KillCharacter() {	//kills player who has 0 hp
 	вектора. */
 }
 
-void Game::DestroyBomb() {
-
+void Game::DestroyBomb(const boost::system::error_code& e, Game& game) {
+    
 }
 
 
@@ -65,6 +67,17 @@ void Game::Step() {
             currentPlayer.SetPosition(currentEvent);
         }
 
+        // Bomb is set
+        if (currentEvent == SET_BOMB_EVENT ) {
+            boost::asio::io_service io;
+            boost::system::error_code e;
+            boost::asio::deadline_timer t(io, boost::posix_time::seconds(5));
+            t.async_wait(boost::bind(&DestroyBomb, e, *this));
+            Bomb newBomb(currentCoordinate);
+            CreateBomb(newBomb);
+            io.run();
+
+        }
 
 
 

@@ -4,6 +4,7 @@
 #include "Field.h"
 #include "Player.h"
 #include "Bomb.h"
+#include <boost/asio.hpp>
 
 #include <iostream>
 #include <vector>
@@ -16,7 +17,7 @@ class Game {
 	private:
         Field field;
 		vector<Player> player; 
-		vector<Bomb> bomb;
+		queue<Bomb> bomb;
 		Time time;
 		queue<Change> eventContainer;
 	public:
@@ -26,7 +27,7 @@ class Game {
         string GetPlayerNameById(const unsigned int id);
 		void Step();
 		void KillCharacter();
-		void DestroyBomb();
+		static void DestroyBomb(const boost::system::error_code&, Game&);
 		void EndGame();
 		void CreateBomb(const Bomb &_bomb);
 		void GetTime();
