@@ -11,11 +11,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="57caea7c-0caf-4f41-b72c-96e926f7e140" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/Game.cc" afterPath="$PROJECT_DIR$/Server/Game.cc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/Game.h" afterPath="$PROJECT_DIR$/Server/Game.h" />
-    </list>
+    <list default="true" id="57caea7c-0caf-4f41-b72c-96e926f7e140" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -248,7 +244,7 @@
       <workItem from="1513894586320" duration="615000" />
       <workItem from="1513895226864" duration="929000" />
       <workItem from="1513896193545" duration="4661000" />
-      <workItem from="1513943176868" duration="5005000" />
+      <workItem from="1513943176868" duration="5213000" />
     </task>
     <task id="LOCAL-00001" summary="Add Field constructor, FieldToString">
       <created>1513868935680</created>
@@ -261,13 +257,12 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18562000" />
+    <option name="totallyTimeSpent" value="18770000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="10" y="52" width="1366" height="704" extended-state="7" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24597365" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24597365" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32833335" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
