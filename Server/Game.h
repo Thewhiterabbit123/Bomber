@@ -1,5 +1,4 @@
 #pragma once
-
 #include "../Define.h"
 #include "Field.h"
 #include "Player.h"
@@ -30,6 +29,6 @@ class Game {
 		void EndGame();
 		void CreateBomb(const Bomb &_bomb);
 		void GetTime();
-		void GetMap();
+		std::string GetMap();
 		void StartMenu();
 };

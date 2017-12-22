@@ -1,10 +1,8 @@
 #pragma once
-
 #include "Object.h"
 #include "../Define.h"
 #include "Field.h"
-#include "Server.h"
-
+#include "ServerFuncs.h"
 #include <string>
 
 class Player : public Object {
