@@ -14,7 +14,7 @@ class Block: public Object {
 			   const BlockType & _type = EMPTY
 		);
 		int SetType(const BlockType &_type);
-		int GetType();
+		const BlockType & GetType() const;
 		std::string GetTypeInString();
 		int ExplodeBlock();
 };

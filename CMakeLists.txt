@@ -28,6 +28,6 @@ set(SOURCE_FILES
         define.cc
         Define.h
         struct.cc
-        Struct.h)
+        Struct.h Server/Server_functions.h.h Server/ServerFuncs.h)
 
 add_executable(Bomber ${SOURCE_FILES})

@@ -9,7 +9,6 @@ using namespace std;
 
 Game::Game() {
 	player.reserve(PLAYER_COUNT);
-    bomb.reserve(BOMB_COUNT);
 }
 
 int Game::CreatePlayer(const std::string & name) {
@@ -36,7 +35,7 @@ void Game::KillCharacter() {	//kills player who has 0 hp
 }
 
 void Game::DestroyBomb(const boost::system::error_code& e, Game& game) {
-    
+
 }
 
 
@@ -45,17 +44,21 @@ void Game::EndGame() {
 }
 
 void Game::CreateBomb(const Bomb &_bomb) {
-	bomb.push_back(_bomb);
+	bomb.push(_bomb);
 }
 
 void Game::GetTime() {
 
 }
 
+void Game::PushClientAction(ClientAction & action) {
+    clientAction.push(action);
+}
+
 void Game::Step() {
     while (true) {
-        Change currentChange = eventContainer.front();  //  get Change from queue
-        eventContainer.pop();   //  delete Change from queue
+        ClientAction currentChange = clientAction.front();  //  get Change from queue
+        clientAction.pop();   //  delete Change from queue
         Event currentEvent = currentChange.eventInfo.eventType;
         unsigned int currentId = currentChange.id;
         Coordinate currentCoordinate = currentChange.eventInfo.changePosition;
@@ -63,8 +66,7 @@ void Game::Step() {
         //  Player movement
         if (currentEvent >= UP_EVENT && currentEvent <= RIGHT_EVENT) {
             Player currentPlayer = FindPlayer(currentId);
-            currentPlayer.CheckPosition(currentCoordinate);
-            currentPlayer.SetPosition(currentEvent);
+            currentPlayer.MakeMovement(currentCoordinate, currentEvent);
         }
 
         // Bomb is set
@@ -84,8 +86,8 @@ void Game::Step() {
     }
 }
 
-void Game::GetField() {
-
+std::string Game::GetMap() {
+    return field.FieldToString();
 }
 
 void Game::StartMenu() {
