@@ -37,10 +37,6 @@ vector<Block>& Field::GetField() {
 	return field;
 }
 
-const vector<Block>& Field::GetField() const {
-    return field;
-}
-
 string Field::FieldToString() {
     std::string output;
     for(std::vector<Block>::iterator i = field.begin(); i != field.end(); i++) {

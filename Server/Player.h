@@ -7,8 +7,8 @@
 
 class Player : public Object {
 	public:
-        Player(const Field & _field, const std::string _name);
-        void MakeMovement(const Coordinate & coordinate, enum Event);
+        Player(Field & _field,  std::string _name);
+        void MakeMovement(Coordinate & coordinate, Event);
 		void PutBomb();
 		void GetDamage();
 		void Heal();
@@ -16,12 +16,11 @@ class Player : public Object {
 		int GetBomb();
         std::string GetName();
 	private:
-        Coordinate PositionAfterMovement(const Coordinate & coordinate, enum Event);
-        int ToVectorCoordinate(const Coordinate & coordinate);
-
+        Coordinate PositionAfterMovement(Coordinate & coordinate,  Event);
+		int ToVectorCoordinate(Coordinate &coordinate);
 		std::string name;
 		int bomb;
 		int hp;
 		int skin;
-        const Field & field;
+        Field & field;
 };

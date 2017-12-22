@@ -8,6 +8,9 @@
 #include <vector>
 #include <queue>
 #include <string>
+#include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/bind.hpp>
+#include <boost/asio.hpp>
 
 using namespace std;
 
@@ -20,13 +23,16 @@ class Game {
 		queue<ClientAction> clientAction;
 	public:
 		Game();
+		Game(const Game &_game) {};
 		int CreatePlayer(const std::string & name);
         Player & FindPlayer(const unsigned int id);
         string GetPlayerNameById(const unsigned int id);
+        int GetPlayerPositionById(const unsigned int id);
+
         void PushClientAction(ClientAction & action);
 		void Step();
 		void KillCharacter();
-		void DestroyBomb();
+		static void DestroyBomb(const boost::system::error_code&, const Game&);
 		void EndGame();
 		void CreateBomb(const Bomb &_bomb);
 		void GetTime();

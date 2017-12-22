@@ -1,12 +1,12 @@
 #include "Player.h"
 
-Player::Player(const Field &_field, const std::string _name): field(_field), Object(), name(_name), bomb(BOMB_COUNT_ONE_PLAYER), hp(MAX_PLAYER_HP) {
+Player::Player(Field &_field, std::string _name): field(_field), Object(), name(_name), bomb(BOMB_COUNT_ONE_PLAYER), hp(MAX_PLAYER_HP) {
     static int skinId = 0;
     skin = skinId;
     skinId++;
 }
 
-Coordinate Player::PositionAfterMovement(const Coordinate &coordinate, Event move) {
+Coordinate Player::PositionAfterMovement(Coordinate &coordinate, Event move) {
     switch(move) {
         case UP_EVENT:
             return Coordinate(coordinate.x, coordinate.y + 1);
@@ -19,11 +19,11 @@ Coordinate Player::PositionAfterMovement(const Coordinate &coordinate, Event mov
     }
 }
 
-int Player::ToVectorCoordinate(const Coordinate &coordinate) {
+int Player::ToVectorCoordinate(Coordinate &coordinate) {
     return (MAP_COLUMN_SIZE * coordinate.y + coordinate.x);
 }
 
-void Player::MakeMovement(const Coordinate &coordinate, Event move) {
+void Player::MakeMovement( Coordinate &coordinate, Event move) {
     Coordinate nextCoordinate;
     int vectCoordinate;
     if (position != coordinate) {
