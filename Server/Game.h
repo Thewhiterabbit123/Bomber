@@ -15,14 +15,15 @@ class Game {
 	private:
         Field field;
 		vector<Player> player; 
-		vector<Bomb> bomb;
+		queue<Bomb> bomb;
 		Time time;
-		queue<Change> eventContainer;
+		queue<ClientAction> clientAction;
 	public:
 		Game();
 		int CreatePlayer(const std::string & name);
         Player & FindPlayer(const unsigned int id);
         string GetPlayerNameById(const unsigned int id);
+        void PushClientAction(ClientAction & action);
 		void Step();
 		void KillCharacter();
 		void DestroyBomb();
