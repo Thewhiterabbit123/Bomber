@@ -124,11 +124,24 @@ void server_loop()
 void SendMovePlayer(int idPlayer, int coord) {
 	Event event = MOVE_PLAYER;
 	std::stringstream line;
+	line << event << " " << idPlayer << " " << coord;
+	std::string msg = line.str();
+
+	for (int i = 0; i < CLIENT_COUNT; i++) {
+		sendQueues[i].push(msg);
+	}
 	
 }
 
 void SendBombPlanted (int coord) {
-	;
+	Event event = BOMB_PLANTED;
+	std::stringstream line;
+	line << event << " " << idPlayer << " " << coord;
+	std::string msg = line.str();
+
+	for (int i = 0; i < CLIENT_COUNT; i++) {
+		sendQueues[i].push(msg);
+	}
 }
 
 void SendBombExplode (int coord, int radius=1) {
