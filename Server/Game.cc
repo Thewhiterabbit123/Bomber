@@ -14,7 +14,7 @@ Game::Game() {
 int Game::CreatePlayer(const std::string & name) {
     static int positionNumber = 0;
     static Coordinate positions [4] = {Coordinate(1, 1), Coordinate(MAP_COLUMN_SIZE - 2, 1), Coordinate(1, MAP_ROW_SIZE - 2), Coordinate(MAP_COLUMN_SIZE - 2, MAP_ROW_SIZE - 2)};
-    Player currentPlayer(field, name, positions[positionNumber]);
+    Player currentPlayer(field, name, positions[positionNumber++]);
     player.push_back(currentPlayer);
     return currentPlayer.GetId();
 }
