@@ -1,4 +1,4 @@
-#include "server.h"
+#include "Server.h"
 
 
 #define CLIENT_COUNT 4 
