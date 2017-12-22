@@ -122,7 +122,9 @@ void server_loop()
 
 
 void SendMovePlayer(int idPlayer, int coord) {
-	;
+	Event event = MOVE_PLAYER;
+	std::stringstream line;
+	
 }
 
 void SendBombPlanted (int coord) {
@@ -152,8 +154,17 @@ void SendBoxExplode(int coord, int newType) {
 
 int main(int argc, char* argv[]) 
 {	
-	Event event = NO_EVENT;
-	std::cout << event << std::endl;
+	// Event event = MOVE_PLAYER;
+	// //char buf[10];
+	// std::stringstream mystream;
+	// mystream << event;
+	// std::string str;
+	// //mystream >> str;
+	// std::cout << str << " " << str.size() << std::endl;
+	// //mystream.seekp(0);
+	// mystream << 458;
+	// mystream >> str;
+	// std::cout << str << " " << str.size() << std::endl;
 	if (argc > 1) {
 		int port = atoi(argv[1]);
 		if(port > 2000){
@@ -162,5 +173,3 @@ int main(int argc, char* argv[])
 	}
 	server_loop();
 }
-
-//  sock.available()
