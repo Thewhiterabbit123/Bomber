@@ -8,7 +8,6 @@ class Object {
 			Object(Coordinate startPosition);
 			int GetId();
 			Coordinate GetPosition();
-		    int GetIntPosition();
 		private:
 			int id;
             void SetId();

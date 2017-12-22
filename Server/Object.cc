@@ -21,7 +21,4 @@ Coordinate Object::GetPosition() {
 	return position;
 }
 
-int Object::GetIntPosition() {
-    return (MAP_COLUMN_SIZE * position.y + position.x);
-}
 

@@ -9,7 +9,9 @@ Game::Game() {
 }
 
 int Game::CreatePlayer(const std::string & name) {
-    Player currentPlayer(field, name);
+    static int positionNumber = 0;
+    static Coordinate positions [4] = {Coordinate(0, 0), Coordinate(0, MAP_COLUMN_SIZE - 1), Coordinate(MAP_ROW_SIZE - 1, 0), Coordinate(MAP_ROW_SIZE - 1, MAP_COLUMN_SIZE - 1)};
+    Player currentPlayer(field, name, positions[positionNumber]);
     player.push_back(currentPlayer);
     return currentPlayer.GetId();
 }
@@ -56,27 +58,20 @@ void Game::Step() {
     while (true) {
         ClientAction currentChange = clientAction.front();  //  get Change from queue
         clientAction.pop();   //  delete Change from queue
-        Event currentEvent = currentChange.eventInfo.eventType;
+        Event currentEvent = currentChange.event;
         unsigned int currentId = currentChange.id;
-        Coordinate currentCoordinate = currentChange.eventInfo.changePosition;
-
+        Player currentPlayer = FindPlayer(currentId);
         //  Player movement
         if (currentEvent >= UP_EVENT && currentEvent <= RIGHT_EVENT) {
-            Player currentPlayer = FindPlayer(currentId);
-            currentPlayer.MakeMovement(currentCoordinate, currentEvent);
+            Coordinate newPosition;
+            bool IsMovement = currentPlayer.MakeMovement(currentEvent, newPosition);
+            if (IsMovement)
+                SendMovePlayer(currentId, newPosition.ToInt());
+            boost::this_thread::sleep_for(boost::chrono::milliseconds(1));
+            continue;
         }
 
-        // Bomb is set
-        if (currentEvent == SET_BOMB_EVENT ) {
-            boost::asio::io_service io;
-            boost::system::error_code e;
-            boost::asio::deadline_timer t(io, boost::posix_time::seconds(5));
-            t.async_wait(boost::bind(&DestroyBomb, e, *this));
-            Bomb newBomb(currentCoordinate);
-            CreateBomb(newBomb);
-            io.run();
-
-        }
+        boost::this_thread::sleep_for(boost::chrono::milliseconds(1));
 
     }
 }
@@ -87,7 +82,7 @@ std::string Game::GetMap() {
 
 int Game::GetPlayerPositionById(const unsigned int id) {
     Player player = FindPlayer(id);
-    return player.GetIntPosition();
+    return player.GetPosition().ToInt();
 }
 
 void Game::StartMenu() {

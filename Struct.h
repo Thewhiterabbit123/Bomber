@@ -8,6 +8,7 @@ struct Coordinate {
     Coordinate(): x(0), y(0) {};
 	Coordinate(const int &_x, const int &_y): x(_x), y(_y) {};
 	Coordinate(const Coordinate & coordinate): x(coordinate.x), y(coordinate.y) {};
+    int ToInt() { return (MAP_COLUMN_SIZE * y + x); }
 	const Coordinate& operator = (const Coordinate& rhs) { x = rhs.x; y = rhs.y; return *this; }
     bool operator == (const Coordinate & rhs) { return (x == rhs.x && y ==rhs.y); }
 	bool operator != (const Coordinate & rhs) { return !(x == rhs.x && y ==rhs.y); }
@@ -20,11 +21,12 @@ struct PlayerInfo {
 	short bombCount;
 };
 
-struct EventInfo {
-	Event eventType;
-	Coordinate changePosition;
+//  change on map
+struct ClientAction {
+    unsigned int id;
+    Event event; //сделать структуру event
 
-    EventInfo(Event _event, int _x, int _y): eventType(_event), changePosition(_x, _y) {};
+    ClientAction(unsigned int _id, Event _event): id(_id), event(_event) {};
 };
 
 struct BombInfo {
@@ -83,19 +85,6 @@ struct MapNowAnswer {
 	Medicine medicine[BLOCK_COUNT + 1];
 };
 
-struct PlayerEventRequest {
-	int type;
-	unsigned int clientId;
-	EventInfo event; 
-};
-
-//  change on map
-struct ClientAction {
-	unsigned int id;
-	EventInfo eventInfo; //сделать структуру event
-
-    ClientAction(Event _event, unsigned int _id,  int _x, int _y): eventInfo(_event, _x, _y) {};
-};
 
 struct Time {
 
