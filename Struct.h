@@ -23,6 +23,8 @@ struct PlayerInfo {
 struct EventInfo {
 	Event eventType;
 	Coordinate changePosition;
+
+    EventInfo(Event _event, int _x, int _y): eventType(_event), changePosition(_x, _y) {};
 };
 
 struct BombInfo {
@@ -91,6 +93,8 @@ struct PlayerEventRequest {
 struct ClientAction {
 	unsigned int id;
 	EventInfo eventInfo; //сделать структуру event
+
+    ClientAction(Event _event, unsigned int _id,  int _x, int _y): eventInfo(_event, _x, _y) {};
 };
 
 struct Time {
