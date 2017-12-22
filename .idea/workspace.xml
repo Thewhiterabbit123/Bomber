@@ -32,8 +32,8 @@
       <file leaf-file-name="Game.cc" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Server/Game.cc">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="576">
-              <caret line="32" column="35" lean-forward="true" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
+            <state relative-caret-position="145">
+              <caret line="109" column="25" lean-forward="false" selection-start-line="109" selection-start-column="25" selection-end-line="109" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -128,8 +128,8 @@
       <file leaf-file-name="Player.cc" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Server/Player.cc">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="7" selection-end-column="1" />
+            <state relative-caret-position="-252">
+              <caret line="13" column="24" lean-forward="true" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -427,7 +427,7 @@
       <workItem from="1513895226864" duration="929000" />
       <workItem from="1513896193545" duration="4661000" />
       <workItem from="1513943176868" duration="5213000" />
-      <workItem from="1513958441314" duration="3791000" />
+      <workItem from="1513958441314" duration="4569000" />
     </task>
     <task id="LOCAL-00001" summary="Add Field constructor, FieldToString">
       <created>1513868935680</created>
@@ -450,11 +450,18 @@
       <option name="project" value="LOCAL" />
       <updated>1513959362702</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Fixed Queue">
+      <created>1513966122256</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1513966122256</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22561000" />
+    <option name="totallyTimeSpent" value="23339000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="26" width="1366" height="742" extended-state="6" />
@@ -490,7 +497,8 @@
     <MESSAGE value="Add Field constructor, FieldToString" />
     <MESSAGE value="Merge with KirillDevelop" />
     <MESSAGE value="Change thread sleep" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change thread sleep" />
+    <MESSAGE value="Fixed Queue" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed Queue" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -853,22 +861,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Server/Player.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="7" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/Game.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="26" column="35" lean-forward="true" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Server/Object.cc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
@@ -885,6 +877,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Server/Player.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-252">
+          <caret line="13" column="24" lean-forward="true" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Define.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
@@ -893,10 +893,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Server/Game.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="26" column="35" lean-forward="true" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Server/Game.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="32" column="35" lean-forward="true" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
+        <state relative-caret-position="145">
+          <caret line="109" column="25" lean-forward="false" selection-start-line="109" selection-start-column="25" selection-end-line="109" selection-end-column="25" />
           <folding />
         </state>
       </provider>

@@ -13,7 +13,7 @@ Game::Game() {
 
 int Game::CreatePlayer(const std::string & name) {
     static int positionNumber = 0;
-    static Coordinate positions [4] = {Coordinate(1, 1), Coordinate(1, MAP_COLUMN_SIZE - 2), Coordinate(MAP_ROW_SIZE - 2, 1), Coordinate(MAP_ROW_SIZE - 2, MAP_COLUMN_SIZE - 2)};
+    static Coordinate positions [4] = {Coordinate(1, 1), Coordinate(MAP_COLUMN_SIZE - 2, 1), Coordinate(1, MAP_ROW_SIZE - 2), Coordinate(MAP_COLUMN_SIZE - 2, MAP_ROW_SIZE - 2)};
     Player currentPlayer(field, name, positions[positionNumber]);
     player.push_back(currentPlayer);
     return currentPlayer.GetId();
@@ -107,7 +107,7 @@ void Game::PushClientAction(ClientAction & action) {
 
 void Game::Step() {
     while (true) {
-        if (!currentAction.empty()) {
+        if (!clientAction.empty()) {
             ClientAction currentChange = clientAction.front();  //  get Change from queue
             clientAction.pop();   //  delete Change from queue
             Event currentEvent = currentChange.event;
