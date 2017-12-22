@@ -10,9 +10,9 @@ Player::Player(Field &_field, std::string _name, Coordinate _coordinate): Object
 Coordinate Player::PositionAfterMovement(Event move) {
     switch(move) {
         case UP_EVENT:
-            return Coordinate(position.x, position.y + 1);
-        case DOWN_EVENT:
             return Coordinate(position.x, position.y - 1);
+        case DOWN_EVENT:
+            return Coordinate(position.x, position.y + 1);
         case RIGHT_EVENT:
             return Coordinate(position.x + 1, position.y);
         case LEFT_EVENT:

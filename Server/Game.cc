@@ -14,7 +14,7 @@ Game::Game() {
 int Game::CreatePlayer(const std::string & name) {
     static int positionNumber = 0;
     static Coordinate positions [4] = {Coordinate(1, 1), Coordinate(MAP_COLUMN_SIZE - 2, 1), Coordinate(1, MAP_ROW_SIZE - 2), Coordinate(MAP_COLUMN_SIZE - 2, MAP_ROW_SIZE - 2)};
-    Player currentPlayer(field, name, positions[positionNumber]);
+    Player currentPlayer(field, name, positions[positionNumber++]);
     player.push_back(currentPlayer);
     return currentPlayer.GetId();
 }
@@ -42,12 +42,14 @@ void Game::KillCharacter() {	//kills player who has 0 hp
 }
 
 void Game::DestroyBomb(const boost::system::error_code& e, Game& game) {
+    if (game.bomb.empty())
+        return;
     Bomb bombToDestroy = game.bomb.front();
     game.bomb.pop();
     int bombDamage = bombToDestroy.GetDamage();
     int bombRadius = bombToDestroy.GetRadius();
     Coordinate bombPosition = bombToDestroy.GetPosition();
-    std::vector<Block> currentField = game.field.GetField();
+    std::vector<Block> & currentField = game.field.GetField();
     for(int k = 0; k < 4; k++) {
         Coordinate currentPos = bombPosition;
         bool flag = false;
