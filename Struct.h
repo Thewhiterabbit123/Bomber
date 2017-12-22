@@ -88,7 +88,7 @@ struct PlayerEventRequest {
 };
 
 //  change on map
-struct Change {
+struct ClientAction {
 	unsigned int id;
 	EventInfo eventInfo; //сделать структуру event
 };

@@ -6,7 +6,6 @@ using namespace std;
 
 Game::Game() {
 	player.reserve(PLAYER_COUNT);
-    bomb.reserve(BOMB_COUNT);
 }
 
 int Game::CreatePlayer(const std::string & name) {
@@ -42,17 +41,21 @@ void Game::EndGame() {
 }
 
 void Game::CreateBomb(const Bomb &_bomb) {
-	bomb.push_back(_bomb);
+	bomb.push(_bomb);
 }
 
 void Game::GetTime() {
 
 }
 
+void Game::PushClientAction(ClientAction & action) {
+    clientAction.push(action);
+}
+
 void Game::Step() {
     while (true) {
-        Change currentChange = eventContainer.front();  //  get Change from queue
-        eventContainer.pop();   //  delete Change from queue
+        ClientAction currentChange = clientAction.front();  //  get Change from queue
+        clientAction.pop();   //  delete Change from queue
         Event currentEvent = currentChange.eventInfo.eventType;
         unsigned int currentId = currentChange.id;
         Coordinate currentCoordinate = currentChange.eventInfo.changePosition;
