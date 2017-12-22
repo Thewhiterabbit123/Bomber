@@ -2,6 +2,8 @@
 //  Event
 
 enum Event { 
+	SEND_ID,
+	SEND_MAP,
 	UP_EVENT,
 	DOWN_EVENT,
 	LEFT_EVENT,
