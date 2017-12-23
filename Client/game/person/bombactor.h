@@ -9,19 +9,22 @@ class QGraphicsItemAnimation;
 class BombActor: public AnimatedGraphicsItem {
     Q_OBJECT
 public:
-    explicit BombActor(QObject *parent = 0);
+    explicit BombActor(int idBomb, QObject *parent = 0);
+    //void bombExplode(int idBombGet);
 public slots:
-    void explode(int idBomb);
-    void setSprites(ActorActions sprites, bool force = false);
 
+    void setSprites(ActorActions sprites, bool force = false);
+    void explode(int idBomb);
     void hideself();
+
 protected:
     const int AnimationPeriodMS = 1000;
     ActorActions m_currectAction;
     QGraphicsItemAnimation *m_moveAnimation;
 
 private:
-    int id;
+    int idBomb;
+
 };
 
 #endif // BOMBACTOR_H

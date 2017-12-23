@@ -16,7 +16,7 @@ class Parser {
         int  getMyId();
         std::map<std::string, int> getNickname();
         std::vector<ImageBox> getMap();
-        std::map<int, int> getPosOfPlayer();
+        std::map<int, int>  getPosOfPlayer();
         std::pair<int, int> getEvent();
         std::pair<int, int> getBombEvent();
         std::string getWinnerName();

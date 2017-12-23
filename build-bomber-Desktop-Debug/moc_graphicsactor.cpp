@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_GraphicsActor_t {
-    QByteArrayData data[9];
-    char stringdata0[88];
+    QByteArrayData data[10];
+    char stringdata0[97];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,17 +32,18 @@ static const qt_meta_stringdata_GraphicsActor_t qt_meta_stringdata_GraphicsActor
 QT_MOC_LITERAL(0, 0, 13), // "GraphicsActor"
 QT_MOC_LITERAL(1, 14, 10), // "processKey"
 QT_MOC_LITERAL(2, 25, 0), // ""
-QT_MOC_LITERAL(3, 26, 12), // "ActorActions"
-QT_MOC_LITERAL(4, 39, 3), // "key"
-QT_MOC_LITERAL(5, 43, 10), // "setSprites"
-QT_MOC_LITERAL(6, 54, 7), // "sprites"
-QT_MOC_LITERAL(7, 62, 5), // "force"
-QT_MOC_LITERAL(8, 68, 19) // "onAnimationFinished"
+QT_MOC_LITERAL(3, 26, 8), // "idPlayer"
+QT_MOC_LITERAL(4, 35, 12), // "ActorActions"
+QT_MOC_LITERAL(5, 48, 3), // "key"
+QT_MOC_LITERAL(6, 52, 10), // "setSprites"
+QT_MOC_LITERAL(7, 63, 7), // "sprites"
+QT_MOC_LITERAL(8, 71, 5), // "force"
+QT_MOC_LITERAL(9, 77, 19) // "onAnimationFinished"
 
     },
-    "GraphicsActor\0processKey\0\0ActorActions\0"
-    "key\0setSprites\0sprites\0force\0"
-    "onAnimationFinished"
+    "GraphicsActor\0processKey\0\0idPlayer\0"
+    "ActorActions\0key\0setSprites\0sprites\0"
+    "force\0onAnimationFinished"
 };
 #undef QT_MOC_LITERAL
 
@@ -60,15 +61,15 @@ static const uint qt_meta_data_GraphicsActor[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,   34,    2, 0x0a /* Public */,
-       5,    2,   37,    2, 0x0a /* Public */,
-       5,    1,   42,    2, 0x2a /* Public | MethodCloned */,
-       8,    0,   45,    2, 0x0a /* Public */,
+       1,    2,   34,    2, 0x0a /* Public */,
+       6,    2,   39,    2, 0x0a /* Public */,
+       6,    1,   44,    2, 0x2a /* Public | MethodCloned */,
+       9,    0,   47,    2, 0x0a /* Public */,
 
  // slots: parameters
-    QMetaType::Void, 0x80000000 | 3,    4,
-    QMetaType::Void, 0x80000000 | 3, QMetaType::Bool,    6,    7,
-    QMetaType::Void, 0x80000000 | 3,    6,
+    QMetaType::Void, QMetaType::Int, 0x80000000 | 4,    3,    5,
+    QMetaType::Void, 0x80000000 | 4, QMetaType::Bool,    7,    8,
+    QMetaType::Void, 0x80000000 | 4,    7,
     QMetaType::Void,
 
        0        // eod
@@ -80,7 +81,7 @@ void GraphicsActor::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         GraphicsActor *_t = static_cast<GraphicsActor *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->processKey((*reinterpret_cast< ActorActions(*)>(_a[1]))); break;
+        case 0: _t->processKey((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< ActorActions(*)>(_a[2]))); break;
         case 1: _t->setSprites((*reinterpret_cast< ActorActions(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
         case 2: _t->setSprites((*reinterpret_cast< ActorActions(*)>(_a[1]))); break;
         case 3: _t->onAnimationFinished(); break;

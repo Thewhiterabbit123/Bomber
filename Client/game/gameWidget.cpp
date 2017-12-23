@@ -53,6 +53,7 @@ void GameWidget::setMap(std::vector<ImageBox> map, std::map<int, int> playerPos,
             BoxWidget* box = new BoxWidget(map[i], std::make_shared<ImagePool<ImageBox>>(boxPool));
             field.push_back(box);
             gameLayout->addWidget(box, i/20, i%20);
+            //std::cerr << "got field" << std::endl;
         }
 
     gameUi->field->setLayout(gameLayout);

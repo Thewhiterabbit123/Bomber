@@ -30,18 +30,18 @@ struct qt_meta_stringdata_BombActor_t {
 static const qt_meta_stringdata_BombActor_t qt_meta_stringdata_BombActor = {
     {
 QT_MOC_LITERAL(0, 0, 9), // "BombActor"
-QT_MOC_LITERAL(1, 10, 7), // "explode"
-QT_MOC_LITERAL(2, 18, 0), // ""
-QT_MOC_LITERAL(3, 19, 6), // "idBomb"
-QT_MOC_LITERAL(4, 26, 10), // "setSprites"
-QT_MOC_LITERAL(5, 37, 12), // "ActorActions"
-QT_MOC_LITERAL(6, 50, 7), // "sprites"
-QT_MOC_LITERAL(7, 58, 5), // "force"
+QT_MOC_LITERAL(1, 10, 10), // "setSprites"
+QT_MOC_LITERAL(2, 21, 0), // ""
+QT_MOC_LITERAL(3, 22, 12), // "ActorActions"
+QT_MOC_LITERAL(4, 35, 7), // "sprites"
+QT_MOC_LITERAL(5, 43, 5), // "force"
+QT_MOC_LITERAL(6, 49, 7), // "explode"
+QT_MOC_LITERAL(7, 57, 6), // "idBomb"
 QT_MOC_LITERAL(8, 64, 8) // "hideself"
 
     },
-    "BombActor\0explode\0\0idBomb\0setSprites\0"
-    "ActorActions\0sprites\0force\0hideself"
+    "BombActor\0setSprites\0\0ActorActions\0"
+    "sprites\0force\0explode\0idBomb\0hideself"
 };
 #undef QT_MOC_LITERAL
 
@@ -59,15 +59,15 @@ static const uint qt_meta_data_BombActor[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,   34,    2, 0x0a /* Public */,
-       4,    2,   37,    2, 0x0a /* Public */,
-       4,    1,   42,    2, 0x2a /* Public | MethodCloned */,
+       1,    2,   34,    2, 0x0a /* Public */,
+       1,    1,   39,    2, 0x2a /* Public | MethodCloned */,
+       6,    1,   42,    2, 0x0a /* Public */,
        8,    0,   45,    2, 0x0a /* Public */,
 
  // slots: parameters
-    QMetaType::Void, QMetaType::Int,    3,
-    QMetaType::Void, 0x80000000 | 5, QMetaType::Bool,    6,    7,
-    QMetaType::Void, 0x80000000 | 5,    6,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::Bool,    4,    5,
+    QMetaType::Void, 0x80000000 | 3,    4,
+    QMetaType::Void, QMetaType::Int,    7,
     QMetaType::Void,
 
        0        // eod
@@ -79,9 +79,9 @@ void BombActor::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         BombActor *_t = static_cast<BombActor *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->explode((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 1: _t->setSprites((*reinterpret_cast< ActorActions(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
-        case 2: _t->setSprites((*reinterpret_cast< ActorActions(*)>(_a[1]))); break;
+        case 0: _t->setSprites((*reinterpret_cast< ActorActions(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
+        case 1: _t->setSprites((*reinterpret_cast< ActorActions(*)>(_a[1]))); break;
+        case 2: _t->explode((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 3: _t->hideself(); break;
         default: ;
         }

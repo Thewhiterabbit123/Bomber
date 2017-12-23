@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_View_t {
-    QByteArrayData data[12];
-    char stringdata0[131];
+    QByteArrayData data[21];
+    char stringdata0[221];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -30,23 +30,34 @@ struct qt_meta_stringdata_View_t {
 static const qt_meta_stringdata_View_t qt_meta_stringdata_View = {
     {
 QT_MOC_LITERAL(0, 0, 4), // "View"
-QT_MOC_LITERAL(1, 5, 13), // "keyPressEvent"
-QT_MOC_LITERAL(2, 19, 0), // ""
-QT_MOC_LITERAL(3, 20, 10), // "QKeyEvent*"
-QT_MOC_LITERAL(4, 31, 5), // "event"
-QT_MOC_LITERAL(5, 37, 6), // "setMap"
-QT_MOC_LITERAL(6, 44, 21), // "std::vector<ImageBox>"
-QT_MOC_LITERAL(7, 66, 3), // "map"
-QT_MOC_LITERAL(8, 70, 17), // "std::map<int,int>"
-QT_MOC_LITERAL(9, 88, 9), // "playerPos"
-QT_MOC_LITERAL(10, 98, 25), // "std::map<std::string,int>"
-QT_MOC_LITERAL(11, 124, 6) // "player"
+QT_MOC_LITERAL(1, 5, 12), // "clientAction"
+QT_MOC_LITERAL(2, 18, 0), // ""
+QT_MOC_LITERAL(3, 19, 6), // "action"
+QT_MOC_LITERAL(4, 26, 13), // "keyPressEvent"
+QT_MOC_LITERAL(5, 40, 10), // "QKeyEvent*"
+QT_MOC_LITERAL(6, 51, 5), // "event"
+QT_MOC_LITERAL(7, 57, 6), // "setMap"
+QT_MOC_LITERAL(8, 64, 21), // "std::vector<ImageBox>"
+QT_MOC_LITERAL(9, 86, 3), // "map"
+QT_MOC_LITERAL(10, 90, 17), // "std::map<int,int>"
+QT_MOC_LITERAL(11, 108, 9), // "playerPos"
+QT_MOC_LITERAL(12, 118, 25), // "std::map<std::string,int>"
+QT_MOC_LITERAL(13, 144, 6), // "player"
+QT_MOC_LITERAL(14, 151, 14), // "playerMoveSlot"
+QT_MOC_LITERAL(15, 166, 18), // "std::pair<int,int>"
+QT_MOC_LITERAL(16, 185, 7), // "setBomb"
+QT_MOC_LITERAL(17, 193, 2), // "id"
+QT_MOC_LITERAL(18, 196, 5), // "coord"
+QT_MOC_LITERAL(19, 202, 9), // "playerDie"
+QT_MOC_LITERAL(20, 212, 8) // "idPlayer"
 
     },
-    "View\0keyPressEvent\0\0QKeyEvent*\0event\0"
-    "setMap\0std::vector<ImageBox>\0map\0"
-    "std::map<int,int>\0playerPos\0"
-    "std::map<std::string,int>\0player"
+    "View\0clientAction\0\0action\0keyPressEvent\0"
+    "QKeyEvent*\0event\0setMap\0std::vector<ImageBox>\0"
+    "map\0std::map<int,int>\0playerPos\0"
+    "std::map<std::string,int>\0player\0"
+    "playerMoveSlot\0std::pair<int,int>\0"
+    "setBomb\0id\0coord\0playerDie\0idPlayer"
 };
 #undef QT_MOC_LITERAL
 
@@ -56,20 +67,32 @@ static const uint qt_meta_data_View[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       2,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       0,       // signalCount
+       1,       // signalCount
+
+ // signals: name, argc, parameters, tag, flags
+       1,    1,   44,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,   24,    2, 0x09 /* Protected */,
-       5,    3,   27,    2, 0x0a /* Public */,
+       4,    1,   47,    2, 0x09 /* Protected */,
+       7,    3,   50,    2, 0x0a /* Public */,
+      14,    1,   57,    2, 0x0a /* Public */,
+      16,    2,   60,    2, 0x0a /* Public */,
+      19,    1,   65,    2, 0x0a /* Public */,
+
+ // signals: parameters
+    QMetaType::Void, QMetaType::Int,    3,
 
  // slots: parameters
-    QMetaType::Void, 0x80000000 | 3,    4,
-    QMetaType::Void, 0x80000000 | 6, 0x80000000 | 8, 0x80000000 | 10,    7,    9,   11,
+    QMetaType::Void, 0x80000000 | 5,    6,
+    QMetaType::Void, 0x80000000 | 8, 0x80000000 | 10, 0x80000000 | 12,    9,   11,   13,
+    QMetaType::Void, 0x80000000 | 15,    6,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,   17,   18,
+    QMetaType::Void, QMetaType::Int,   20,
 
        0        // eod
 };
@@ -80,9 +103,22 @@ void View::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void *
         View *_t = static_cast<View *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->keyPressEvent((*reinterpret_cast< QKeyEvent*(*)>(_a[1]))); break;
-        case 1: _t->setMap((*reinterpret_cast< std::vector<ImageBox>(*)>(_a[1])),(*reinterpret_cast< std::map<int,int>(*)>(_a[2])),(*reinterpret_cast< std::map<std::string,int>(*)>(_a[3]))); break;
+        case 0: _t->clientAction((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 1: _t->keyPressEvent((*reinterpret_cast< QKeyEvent*(*)>(_a[1]))); break;
+        case 2: _t->setMap((*reinterpret_cast< std::vector<ImageBox>(*)>(_a[1])),(*reinterpret_cast< std::map<int,int>(*)>(_a[2])),(*reinterpret_cast< std::map<std::string,int>(*)>(_a[3]))); break;
+        case 3: _t->playerMoveSlot((*reinterpret_cast< std::pair<int,int>(*)>(_a[1]))); break;
+        case 4: _t->setBomb((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 5: _t->playerDie((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
+        }
+    } else if (_c == QMetaObject::IndexOfMethod) {
+        int *result = reinterpret_cast<int *>(_a[0]);
+        void **func = reinterpret_cast<void **>(_a[1]);
+        {
+            typedef void (View::*_t)(int );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&View::clientAction)) {
+                *result = 0;
+            }
         }
     }
 }
@@ -112,14 +148,21 @@ int View::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 6;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 2)
+        if (_id < 6)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 2;
+        _id -= 6;
     }
     return _id;
+}
+
+// SIGNAL 0
+void View::clientAction(int _t1)
+{
+    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 QT_END_MOC_NAMESPACE

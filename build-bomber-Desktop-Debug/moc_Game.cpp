@@ -20,7 +20,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_Game_t {
     QByteArrayData data[23];
-    char stringdata0[251];
+    char stringdata0[238];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -41,27 +41,26 @@ QT_MOC_LITERAL(8, 96, 6), // "player"
 QT_MOC_LITERAL(9, 103, 10), // "playerMove"
 QT_MOC_LITERAL(10, 114, 18), // "std::pair<int,int>"
 QT_MOC_LITERAL(11, 133, 5), // "event"
-QT_MOC_LITERAL(12, 139, 13), // "playerSetBomb"
-QT_MOC_LITERAL(13, 153, 9), // "bombEvent"
-QT_MOC_LITERAL(14, 163, 9), // "playerDie"
-QT_MOC_LITERAL(15, 173, 8), // "idPlayer"
-QT_MOC_LITERAL(16, 182, 10), // "explodeBox"
-QT_MOC_LITERAL(17, 193, 3), // "pos"
-QT_MOC_LITERAL(18, 197, 8), // "gameOver"
-QT_MOC_LITERAL(19, 206, 11), // "std::string"
-QT_MOC_LITERAL(20, 218, 8), // "nickname"
-QT_MOC_LITERAL(21, 227, 10), // "getMessage"
-QT_MOC_LITERAL(22, 238, 12) // "buttonAction"
+QT_MOC_LITERAL(12, 139, 7), // "setBomb"
+QT_MOC_LITERAL(13, 147, 2), // "id"
+QT_MOC_LITERAL(14, 150, 3), // "pos"
+QT_MOC_LITERAL(15, 154, 9), // "playerDie"
+QT_MOC_LITERAL(16, 164, 8), // "idPlayer"
+QT_MOC_LITERAL(17, 173, 10), // "explodeBox"
+QT_MOC_LITERAL(18, 184, 8), // "gameOver"
+QT_MOC_LITERAL(19, 193, 11), // "std::string"
+QT_MOC_LITERAL(20, 205, 8), // "nickname"
+QT_MOC_LITERAL(21, 214, 10), // "getMessage"
+QT_MOC_LITERAL(22, 225, 12) // "buttonAction"
 
     },
     "Game\0startGame\0\0std::vector<ImageBox>\0"
     "map\0std::map<int,int>\0playerPos\0"
     "std::map<std::string,int>\0player\0"
     "playerMove\0std::pair<int,int>\0event\0"
-    "playerSetBomb\0bombEvent\0playerDie\0"
-    "idPlayer\0explodeBox\0pos\0gameOver\0"
-    "std::string\0nickname\0getMessage\0"
-    "buttonAction"
+    "setBomb\0id\0pos\0playerDie\0idPlayer\0"
+    "explodeBox\0gameOver\0std::string\0"
+    "nickname\0getMessage\0buttonAction"
 };
 #undef QT_MOC_LITERAL
 
@@ -81,21 +80,21 @@ static const uint qt_meta_data_Game[] = {
  // signals: name, argc, parameters, tag, flags
        1,    3,   54,    2, 0x06 /* Public */,
        9,    1,   61,    2, 0x06 /* Public */,
-      12,    1,   64,    2, 0x06 /* Public */,
-      14,    1,   67,    2, 0x06 /* Public */,
-      16,    1,   70,    2, 0x06 /* Public */,
-      18,    1,   73,    2, 0x06 /* Public */,
+      12,    2,   64,    2, 0x06 /* Public */,
+      15,    1,   69,    2, 0x06 /* Public */,
+      17,    1,   72,    2, 0x06 /* Public */,
+      18,    1,   75,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      21,    0,   76,    2, 0x0a /* Public */,
-      22,    1,   77,    2, 0x0a /* Public */,
+      21,    0,   78,    2, 0x0a /* Public */,
+      22,    1,   79,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3, 0x80000000 | 5, 0x80000000 | 7,    4,    6,    8,
     QMetaType::Void, 0x80000000 | 10,   11,
-    QMetaType::Void, 0x80000000 | 10,   13,
-    QMetaType::Void, QMetaType::Int,   15,
-    QMetaType::Void, QMetaType::Int,   17,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,   13,   14,
+    QMetaType::Void, QMetaType::Int,   16,
+    QMetaType::Void, QMetaType::Int,   14,
     QMetaType::Void, 0x80000000 | 19,   20,
 
  // slots: parameters
@@ -113,7 +112,7 @@ void Game::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void *
         switch (_id) {
         case 0: _t->startGame((*reinterpret_cast< std::vector<ImageBox>(*)>(_a[1])),(*reinterpret_cast< std::map<int,int>(*)>(_a[2])),(*reinterpret_cast< std::map<std::string,int>(*)>(_a[3]))); break;
         case 1: _t->playerMove((*reinterpret_cast< std::pair<int,int>(*)>(_a[1]))); break;
-        case 2: _t->playerSetBomb((*reinterpret_cast< std::pair<int,int>(*)>(_a[1]))); break;
+        case 2: _t->setBomb((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 3: _t->playerDie((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 4: _t->explodeBox((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 5: _t->gameOver((*reinterpret_cast< std::string(*)>(_a[1]))); break;
@@ -137,8 +136,8 @@ void Game::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void *
             }
         }
         {
-            typedef void (Game::*_t)(std::pair<int,int> );
-            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&Game::playerSetBomb)) {
+            typedef void (Game::*_t)(int , int );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&Game::setBomb)) {
                 *result = 2;
             }
         }
@@ -214,9 +213,9 @@ void Game::playerMove(std::pair<int,int> _t1)
 }
 
 // SIGNAL 2
-void Game::playerSetBomb(std::pair<int,int> _t1)
+void Game::setBomb(int _t1, int _t2)
 {
-    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
     QMetaObject::activate(this, &staticMetaObject, 2, _a);
 }
 

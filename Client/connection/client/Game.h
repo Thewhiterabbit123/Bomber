@@ -16,9 +16,10 @@ class Game : public QObject {
     signals:
         void startGame(std::vector<ImageBox> map, std::map<int, int> playerPos, std::map<std::string, int> player);
         void playerMove(std::pair<int, int> event);
-        void playerSetBomb(std::pair<int, int> bombEvent);
+        void setBomb(int id, int pos);
         void playerDie(int idPlayer);
         void explodeBox(int pos);
+        //void bombExplode(int idBomb);
         void gameOver(std::string nickname);
 
     public slots:

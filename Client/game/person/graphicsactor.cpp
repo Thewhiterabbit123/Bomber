@@ -18,8 +18,11 @@ void GraphicsActor::setSprites(ActorActions sprites, bool force) {
 }
 
 
-void GraphicsActor::processKey(ActorActions action) {
+void GraphicsActor::processKey(int idPlayer, ActorActions action) {
     // sprites:
+    if(idPlayer != idActor)
+        return;
+
     if(m_currectAction == action)
         return;
 /*
@@ -72,5 +75,11 @@ void GraphicsActor::processKey(ActorActions action) {
 
 void GraphicsActor::onAnimationFinished() {
     //processKey(m_currectAction);
-    processKey(ActorActions::Stay);
+    processKey(idActor, ActorActions::Stay);
+}
+
+void GraphicsActor::playerDie(int idPlayer) {
+    if (idPlayer != idActor)
+        return;
+    hide();
 }

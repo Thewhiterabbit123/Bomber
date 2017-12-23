@@ -30,4 +30,9 @@ void BomberGame::startNetworking(){
             game, SLOT(setMap(std::vector<ImageBox>,std::map<int,int>,std::map<std::string,int>)));
     connect(gameNetwork, SIGNAL(startGame(std::vector<ImageBox>,std::map<int,int>,std::map<std::string,int>)),
             game->view, SLOT(setMap(std::vector<ImageBox>,std::map<int,int>,std::map<std::string,int>)));
+    connect(game->view, SIGNAL(clientAction(int)), gameNetwork, SLOT(buttonAction(int)));
+    connect(gameNetwork, SIGNAL(playerMove(std::pair<int,int>)), game->view, SLOT(playerMoveSlot(std::pair<int,int>)));
+    connect(gameNetwork, SIGNAL(setBomb(int,int)), game->view, SLOT(setBomb(int,int)));
+    connect(gameNetwork, SIGNAL(playerDie(int)), game->view, SLOT(playerDie(int)));
+    //connect(gameNetwork, SIGNAL(bombExplode(int)), game->view, SLOT(bombExplode(int)));
 }

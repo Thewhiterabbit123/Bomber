@@ -27,6 +27,7 @@ int Parser::parseLine(std::string line) {
                 posOfPlayer[localId] = posOnVector;
                 nickname[name] = localId;
             }
+            std::cout << "im in parser start game" << std::endl;
             return START_GAME;
             break;
         }
@@ -47,7 +48,7 @@ int Parser::parseLine(std::string line) {
             stream >> bombID;
             stream >> bombPosition;
             bombEvent = std::make_pair(bombID, bombPosition);
-            return BOMB_EVENT;
+            return BOMB_PLANTED;
             break;
         }
 

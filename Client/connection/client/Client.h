@@ -37,8 +37,6 @@ class Client: public QObject {
         std::string inputMessage;
 
         QTcpSocket *socket;
-        //boost::asio::io_service service;
-        //boost::asio::ip::tcp::socket *socket;
 
         void getParam();
 };

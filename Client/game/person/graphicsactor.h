@@ -14,19 +14,23 @@ public:
     void setPosById(int pos, int idPlayer){
         if (idPlayer != idActor)
             return;
-        setPos(pos/20*38, pos%20*38);
+        setPos((pos%20)*37, (pos/20)*37);
     }
 
+    void playerDie(int idPlayer);
+
 public slots:
-    void processKey(ActorActions key);
+    void processKey(int idPlayer, ActorActions key);
     void setSprites(ActorActions sprites, bool force = false);
     void onAnimationFinished();
 
+
 protected:
     const int AnimationPeriodMS = 1000;
-    const int SpeedPx = 38;
+    const int SpeedPx = 37;
     ActorActions m_currectAction;
     QGraphicsItemAnimation *m_moveAnimation;
+
 
 private:
     int idActor;

@@ -4,6 +4,7 @@
 #include <fstream>
 #include <QDebug>
 #include "Parser.h"
+#include <sstream>
 
 #define BUFFSIZE 1024
 
@@ -75,13 +76,37 @@ void Client::setMyId(int id) {
 }
 
 std::string Client::prepareMessageToServer(int event) {
-    std::string msg ;
-    msg += (myId + '0') + ' ' + (event + '0') + ' ';
-    return msg;
+    std::stringstream stream;
+    switch(event) {
+        case 2: {
+            stream << DOWN_EVENT;
+            break;
+        }
+        case 8: {
+            stream << UP_EVENT;
+            break;
+        }
+        case 4: {
+            stream << LEFT_EVENT;
+            break;
+        }
+        case 6: {
+            stream << RIGHT_EVENT;
+            break;
+        }
+        case 5: {
+            stream << SET_BOMB_EVENT;
+            break;
+        }
+    }
+    return stream.str();
 }
 
 void Client::connected() {
     std::cerr << "connected" << std::endl;
+    if(myName.size() == 0) {
+        myName = "USER!";
+    }
     sendMessage(myName);
 }
 

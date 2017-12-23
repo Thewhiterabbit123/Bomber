@@ -7,7 +7,7 @@ void Game::play(std::string name) {
 }
 
 void Game::eventSwitcher(int event)  {
-    std::cerr << START_GAME << std::endl;
+
     switch(event) {
 
         case SEND_ID: {            //this packet need to get my id
@@ -23,17 +23,22 @@ void Game::eventSwitcher(int event)  {
         }
 
         case MOVE_PLAYER: {
-            parser->getEvent();
+            std::cerr << "I GET MOVE EVENT" << std::endl;
+            emit playerMove(parser->getEvent());
+            std::cout << "PrisheL" << std::endl;
             break;
         }
 
         case BOMB_PLANTED: {
-            parser->getBombEvent();
+            std::pair<int, int> event = parser->getBombEvent();
+            std::cerr << "BOMBPLANTED 1" << std::endl;
+            emit setBomb(event.first, event.second);
+            std::cerr << "BOMBPLANTED 2" << std::endl;
             break;
         }
 
         case BOMB_EXPLODE: {
-            parser->getBombId();
+            //emit bombExplode(parser->getBombId());
             break;
         }
 
@@ -46,7 +51,7 @@ void Game::eventSwitcher(int event)  {
             break;
         }
         case PLAYER_DEAD: {
-            parser->getDeadId();
+            emit playerDie(parser->getDeadId());
             break;
         }
     }
