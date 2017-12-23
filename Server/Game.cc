@@ -7,14 +7,13 @@
 #include <boost/bind.hpp>
 using namespace std;
 
-Game::Game() {
+Game::Game(): clientCount(0) {
 	player.reserve(PLAYER_COUNT);
 }
 
 int Game::CreatePlayer(const std::string & name) {
-    static int positionNumber = 0;
     static Coordinate positions [4] = {Coordinate(1, 1), Coordinate(MAP_COLUMN_SIZE - 2, 1), Coordinate(1, MAP_ROW_SIZE - 2), Coordinate(MAP_COLUMN_SIZE - 2, MAP_ROW_SIZE - 2)};
-    Player currentPlayer(field, name, positions[positionNumber++]);
+    Player currentPlayer(field, name, positions[clientCount++]);
     player.push_back(currentPlayer);
     return currentPlayer.GetId();
 }
@@ -34,27 +33,41 @@ int Game::GetPlayerPositionById(const unsigned int id) {
     return player->GetPosition().ToInt();
 }
 
-void Game::KillCharacter() {	//kills player who has 0 hp
-	/* Передача всем игрокам
-	сигнала о том, что персонаж
-	умер. Удаление игрока из
-	вектора. */
-}
-
-void Game::DestroyBomb(const boost::system::error_code& e, Game& game) {
-    if (game.bomb.empty())
+void Game::DestroyBomb(Game *game) {
+    boost::this_thread::sleep_for(boost::chrono::seconds(BOMB_TIMER));
+    if (game->bomb.empty())
         return;
-    Bomb bombToDestroy = game.bomb.front();
-    game.bomb.pop();
+    Bomb bombToDestroy = game->bomb.front();
+    game->bomb.pop_front();
     int bombDamage = bombToDestroy.GetDamage();
     int bombRadius = bombToDestroy.GetRadius();
     Coordinate bombPosition = bombToDestroy.GetPosition();
-    std::vector<Block> & currentField = game.field.GetField();
+    std::vector<Block> & currentField = game->field.GetField();
+    //  check player on bomb
+    Coordinate currentPos = bombPosition;
+    for (std::vector<Player>::iterator i = game->player.begin(); i != game->player.end(); i++)
+        if (currentPos == i -> GetPosition()) {
+            if (!i -> GetDamage() ) {
+                game->clientCount--;
+                SendPlayerDead(i -> GetId());
+            } else {
+                SendMinusHP(i -> GetId());
+            }
+        }
     for(int k = 0; k < 4; k++) {
-        Coordinate currentPos = bombPosition;
         bool flag = false;
-        for(int i = 0; i < bombRadius && !flag; i++) {
-            for(std::vector<Player>::iterator j = game.player.begin(); j != game.player.end(); j++) {
+        switch (k) {
+            case 0: currentPos.x++;
+                    break;
+            case 1: currentPos.x--;
+                    break;
+            case 2: currentPos.y++;
+                    break;
+            case 3: currentPos.y--;
+                    break;
+        }
+        for(int i = 1; i < bombRadius && !flag; i++) {
+            for(std::vector<Player>::iterator j = game->player.begin(); j != game->player.end(); j++) {
                 if(j -> GetPosition() == currentPos) {
                     if(!j -> GetDamage()) {
                         SendPlayerDead (j->GetId());
@@ -67,7 +80,6 @@ void Game::DestroyBomb(const boost::system::error_code& e, Game& game) {
             if(currentField[currentPos.ToInt()].GetType() == WALL) {
                 flag = true;
             }
-
             if(currentField[currentPos.ToInt()].GetType() == BOX) {
                 SendBoxExplode(currentField[currentPos.ToInt()].GetId(), (int) EMPTY);
                 flag = true;
@@ -87,16 +99,13 @@ void Game::DestroyBomb(const boost::system::error_code& e, Game& game) {
                     break;
             }
         }
+        currentPos = bombPosition;
     }
 
 }
 
-void Game::EndGame() {
-
-}
-
 void Game::CreateBomb(const Bomb &_bomb) {
-	bomb.push(_bomb);
+	bomb.push_back(_bomb);
 }
 
 void Game::GetTime() {
@@ -107,8 +116,33 @@ void Game::PushClientAction(ClientAction & action) {
     clientAction.push(action);
 }
 
+Coordinate Game::GetNextPosition(Coordinate coordinate, Event event) {
+    switch(event) {
+        case UP_EVENT: return Coordinate(coordinate.x, coordinate.y--);
+        case DOWN_EVENT: return Coordinate(coordinate.x, coordinate.y++);
+        case RIGHT_EVENT: return Coordinate(coordinate.x++, coordinate.y);
+        case LEFT_EVENT: return Coordinate(coordinate.x--, coordinate.y);
+    }
+}
+
+void Game::MakeMovement(Coordinate nextCoordinate, Player *currentPlayer) {
+    BlockType block = field.GetField()[nextCoordinate.ToInt()].GetType();
+    if (block == WALL || block == BOX)
+        return;
+    for (std::vector<Player>::iterator i = player.begin(); i != player.end(); i++) {
+        if (i -> GetPosition() == nextCoordinate)
+            return;
+    }
+    for (std::list<Bomb>::iterator i = bomb.begin(); i != bomb.end(); i++) {
+        if (i -> GetPosition() == nextCoordinate)
+            return;
+    }
+    currentPlayer->SetPosition(nextCoordinate);
+    SendMovePlayer(currentPlayer->GetId(), nextCoordinate.ToInt());
+}
+
 void Game::Step() {
-    while (true) {
+    while (clientCount > 1) {
         if (!clientAction.empty()) {
             ClientAction currentChange = clientAction.front();  //  get Change from queue
             clientAction.pop();   //  delete Change from queue
@@ -117,48 +151,30 @@ void Game::Step() {
             Player *currentPlayer = FindPlayer(currentId);
             //  Player movement
             if (currentEvent >= UP_EVENT && currentEvent <= RIGHT_EVENT) {
-                bool IsMovement = currentPlayer -> MakeMovement(currentEvent);
-                if (IsMovement)
-                    SendMovePlayer(currentId, currentPlayer -> GetPosition().ToInt());
-                continue;
+                Coordinate currentCoordinate = currentPlayer->GetPosition();
+                Coordinate nextCoordinate = GetNextPosition(currentCoordinate, currentEvent);
+                MakeMovement(nextCoordinate, currentPlayer);
             }
             // Bomb is set
             if (currentEvent == SET_BOMB_EVENT) {
-                boost::asio::io_service io;
-                boost::system::error_code e;
-                boost::asio::deadline_timer t(io, boost::posix_time::seconds(5));
-                t.async_wait(boost::bind(&DestroyBomb, e, *this));
                 Bomb newBomb(currentPlayer -> GetPosition());
                 CreateBomb(newBomb);
-                io.run();
+                SendBombPlanted (newBomb.GetId(), newBomb.GetPosition().ToInt());
+                boost::thread(boost::bind(DestroyBomb, this));
                 continue;
             }
         }
         boost::this_thread::sleep_for(boost::chrono::microseconds(250));
     }
+    for(std::vector<Player>::iterator it = player.begin(); it != player.end(); it++) {
+        if (it->IsActive()) {
+            SendEndGame(it->GetId());
+            break;
+        }
+    }
 }
 
 std::string Game::GetMap() {
     return field.FieldToString();
-}
-
-void Game::StartMenu() {
-
-}
-
-void ParsePacket() {
-
-}
-
-void Pause() {
-
-}
-
-void StartMenu() {
-
-}
-
-void Update() {
-
 }
 

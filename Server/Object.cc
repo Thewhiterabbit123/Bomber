@@ -21,4 +21,6 @@ Coordinate Object::GetPosition() {
 	return position;
 }
 
-
+void Object::SetPosition(Coordinate _position) {
+    position = _position;
+}
