@@ -19,7 +19,7 @@ class Game : public QObject {
         void setBomb(int id, int pos);
         void playerDie(int idPlayer);
         void explodeBox(int pos);
-        //void bombExplode(int idBomb);
+        void bombExplode(int idBomb);
         void gameOver(std::string nickname);
 
     public slots:

@@ -80,11 +80,12 @@ void View::playerDie(int idPlayer){
         (*v_actorIt)->playerDie(idPlayer);
 }
 
-/*
+
 void View::bombExplode(int idBomb){
     for(auto l_bombIt = l_bomb.begin(); l_bombIt != l_bomb.end(); l_bombIt++)
         (*l_bombIt)->bombExplode(idBomb);
-}*/
+}
+
 
 /*
 void View::keyPressEvent(QKeyEvent *event) {

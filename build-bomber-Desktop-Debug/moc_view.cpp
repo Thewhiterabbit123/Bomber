@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_View_t {
-    QByteArrayData data[21];
-    char stringdata0[221];
+    QByteArrayData data[23];
+    char stringdata0[240];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -49,7 +49,9 @@ QT_MOC_LITERAL(16, 185, 7), // "setBomb"
 QT_MOC_LITERAL(17, 193, 2), // "id"
 QT_MOC_LITERAL(18, 196, 5), // "coord"
 QT_MOC_LITERAL(19, 202, 9), // "playerDie"
-QT_MOC_LITERAL(20, 212, 8) // "idPlayer"
+QT_MOC_LITERAL(20, 212, 8), // "idPlayer"
+QT_MOC_LITERAL(21, 221, 11), // "bombExplode"
+QT_MOC_LITERAL(22, 233, 6) // "idBomb"
 
     },
     "View\0clientAction\0\0action\0keyPressEvent\0"
@@ -57,7 +59,8 @@ QT_MOC_LITERAL(20, 212, 8) // "idPlayer"
     "map\0std::map<int,int>\0playerPos\0"
     "std::map<std::string,int>\0player\0"
     "playerMoveSlot\0std::pair<int,int>\0"
-    "setBomb\0id\0coord\0playerDie\0idPlayer"
+    "setBomb\0id\0coord\0playerDie\0idPlayer\0"
+    "bombExplode\0idBomb"
 };
 #undef QT_MOC_LITERAL
 
@@ -67,7 +70,7 @@ static const uint qt_meta_data_View[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -75,14 +78,15 @@ static const uint qt_meta_data_View[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   44,    2, 0x06 /* Public */,
+       1,    1,   49,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       4,    1,   47,    2, 0x09 /* Protected */,
-       7,    3,   50,    2, 0x0a /* Public */,
-      14,    1,   57,    2, 0x0a /* Public */,
-      16,    2,   60,    2, 0x0a /* Public */,
-      19,    1,   65,    2, 0x0a /* Public */,
+       4,    1,   52,    2, 0x09 /* Protected */,
+       7,    3,   55,    2, 0x0a /* Public */,
+      14,    1,   62,    2, 0x0a /* Public */,
+      16,    2,   65,    2, 0x0a /* Public */,
+      19,    1,   70,    2, 0x0a /* Public */,
+      21,    1,   73,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int,    3,
@@ -93,6 +97,7 @@ static const uint qt_meta_data_View[] = {
     QMetaType::Void, 0x80000000 | 15,    6,
     QMetaType::Void, QMetaType::Int, QMetaType::Int,   17,   18,
     QMetaType::Void, QMetaType::Int,   20,
+    QMetaType::Void, QMetaType::Int,   22,
 
        0        // eod
 };
@@ -109,6 +114,7 @@ void View::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void *
         case 3: _t->playerMoveSlot((*reinterpret_cast< std::pair<int,int>(*)>(_a[1]))); break;
         case 4: _t->setBomb((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 5: _t->playerDie((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 6: _t->bombExplode((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -148,13 +154,13 @@ int View::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 7;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 6)
+        if (_id < 7)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 6;
+        _id -= 7;
     }
     return _id;
 }

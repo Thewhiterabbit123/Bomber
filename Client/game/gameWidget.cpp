@@ -58,3 +58,8 @@ void GameWidget::setMap(std::vector<ImageBox> map, std::map<int, int> playerPos,
 
     gameUi->field->setLayout(gameLayout);
 }
+
+void GameWidget::explodeBox(int coord){
+    std::cerr << "coord = " << coord <<std::endl;
+    field[coord]->setImage(ImageBox::Ground);
+}

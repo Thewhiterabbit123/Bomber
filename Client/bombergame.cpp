@@ -34,5 +34,6 @@ void BomberGame::startNetworking(){
     connect(gameNetwork, SIGNAL(playerMove(std::pair<int,int>)), game->view, SLOT(playerMoveSlot(std::pair<int,int>)));
     connect(gameNetwork, SIGNAL(setBomb(int,int)), game->view, SLOT(setBomb(int,int)));
     connect(gameNetwork, SIGNAL(playerDie(int)), game->view, SLOT(playerDie(int)));
-    //connect(gameNetwork, SIGNAL(bombExplode(int)), game->view, SLOT(bombExplode(int)));
+    connect(gameNetwork, SIGNAL(bombExplode(int)), game->view, SLOT(bombExplode(int)));
+    connect(gameNetwork, SIGNAL(explodeBox(int)), game, SLOT(explodeBox(int)));
 }

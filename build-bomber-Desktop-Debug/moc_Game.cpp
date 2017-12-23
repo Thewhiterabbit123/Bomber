@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_Game_t {
-    QByteArrayData data[23];
-    char stringdata0[238];
+    QByteArrayData data[25];
+    char stringdata0[257];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -47,11 +47,13 @@ QT_MOC_LITERAL(14, 150, 3), // "pos"
 QT_MOC_LITERAL(15, 154, 9), // "playerDie"
 QT_MOC_LITERAL(16, 164, 8), // "idPlayer"
 QT_MOC_LITERAL(17, 173, 10), // "explodeBox"
-QT_MOC_LITERAL(18, 184, 8), // "gameOver"
-QT_MOC_LITERAL(19, 193, 11), // "std::string"
-QT_MOC_LITERAL(20, 205, 8), // "nickname"
-QT_MOC_LITERAL(21, 214, 10), // "getMessage"
-QT_MOC_LITERAL(22, 225, 12) // "buttonAction"
+QT_MOC_LITERAL(18, 184, 11), // "bombExplode"
+QT_MOC_LITERAL(19, 196, 6), // "idBomb"
+QT_MOC_LITERAL(20, 203, 8), // "gameOver"
+QT_MOC_LITERAL(21, 212, 11), // "std::string"
+QT_MOC_LITERAL(22, 224, 8), // "nickname"
+QT_MOC_LITERAL(23, 233, 10), // "getMessage"
+QT_MOC_LITERAL(24, 244, 12) // "buttonAction"
 
     },
     "Game\0startGame\0\0std::vector<ImageBox>\0"
@@ -59,8 +61,9 @@ QT_MOC_LITERAL(22, 225, 12) // "buttonAction"
     "std::map<std::string,int>\0player\0"
     "playerMove\0std::pair<int,int>\0event\0"
     "setBomb\0id\0pos\0playerDie\0idPlayer\0"
-    "explodeBox\0gameOver\0std::string\0"
-    "nickname\0getMessage\0buttonAction"
+    "explodeBox\0bombExplode\0idBomb\0gameOver\0"
+    "std::string\0nickname\0getMessage\0"
+    "buttonAction"
 };
 #undef QT_MOC_LITERAL
 
@@ -70,24 +73,25 @@ static const uint qt_meta_data_Game[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       8,   14, // methods
+       9,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       6,       // signalCount
+       7,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    3,   54,    2, 0x06 /* Public */,
-       9,    1,   61,    2, 0x06 /* Public */,
-      12,    2,   64,    2, 0x06 /* Public */,
-      15,    1,   69,    2, 0x06 /* Public */,
-      17,    1,   72,    2, 0x06 /* Public */,
-      18,    1,   75,    2, 0x06 /* Public */,
+       1,    3,   59,    2, 0x06 /* Public */,
+       9,    1,   66,    2, 0x06 /* Public */,
+      12,    2,   69,    2, 0x06 /* Public */,
+      15,    1,   74,    2, 0x06 /* Public */,
+      17,    1,   77,    2, 0x06 /* Public */,
+      18,    1,   80,    2, 0x06 /* Public */,
+      20,    1,   83,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      21,    0,   78,    2, 0x0a /* Public */,
-      22,    1,   79,    2, 0x0a /* Public */,
+      23,    0,   86,    2, 0x0a /* Public */,
+      24,    1,   87,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3, 0x80000000 | 5, 0x80000000 | 7,    4,    6,    8,
@@ -95,7 +99,8 @@ static const uint qt_meta_data_Game[] = {
     QMetaType::Void, QMetaType::Int, QMetaType::Int,   13,   14,
     QMetaType::Void, QMetaType::Int,   16,
     QMetaType::Void, QMetaType::Int,   14,
-    QMetaType::Void, 0x80000000 | 19,   20,
+    QMetaType::Void, QMetaType::Int,   19,
+    QMetaType::Void, 0x80000000 | 21,   22,
 
  // slots: parameters
     QMetaType::Void,
@@ -115,9 +120,10 @@ void Game::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void *
         case 2: _t->setBomb((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 3: _t->playerDie((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 4: _t->explodeBox((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 5: _t->gameOver((*reinterpret_cast< std::string(*)>(_a[1]))); break;
-        case 6: _t->getMessage(); break;
-        case 7: _t->buttonAction((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 5: _t->bombExplode((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 6: _t->gameOver((*reinterpret_cast< std::string(*)>(_a[1]))); break;
+        case 7: _t->getMessage(); break;
+        case 8: _t->buttonAction((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -154,9 +160,15 @@ void Game::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void *
             }
         }
         {
+            typedef void (Game::*_t)(int );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&Game::bombExplode)) {
+                *result = 5;
+            }
+        }
+        {
             typedef void (Game::*_t)(std::string );
             if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&Game::gameOver)) {
-                *result = 5;
+                *result = 6;
             }
         }
     }
@@ -187,13 +199,13 @@ int Game::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 8)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 9;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 8)
+        if (_id < 9)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 8;
+        _id -= 9;
     }
     return _id;
 }
@@ -234,9 +246,16 @@ void Game::explodeBox(int _t1)
 }
 
 // SIGNAL 5
-void Game::gameOver(std::string _t1)
+void Game::bombExplode(int _t1)
 {
     void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 5, _a);
+}
+
+// SIGNAL 6
+void Game::gameOver(std::string _t1)
+{
+    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 6, _a);
 }
 QT_END_MOC_NAMESPACE

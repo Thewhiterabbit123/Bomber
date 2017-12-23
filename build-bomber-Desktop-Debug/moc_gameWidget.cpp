@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_GameWidget_t {
-    QByteArrayData data[11];
-    char stringdata0[127];
+    QByteArrayData data[13];
+    char stringdata0[144];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -39,13 +39,15 @@ QT_MOC_LITERAL(6, 55, 17), // "std::map<int,int>"
 QT_MOC_LITERAL(7, 73, 9), // "playerPos"
 QT_MOC_LITERAL(8, 83, 25), // "std::map<std::string,int>"
 QT_MOC_LITERAL(9, 109, 6), // "player"
-QT_MOC_LITERAL(10, 116, 10) // "menuScreen"
+QT_MOC_LITERAL(10, 116, 10), // "menuScreen"
+QT_MOC_LITERAL(11, 127, 10), // "explodeBox"
+QT_MOC_LITERAL(12, 138, 5) // "coord"
 
     },
     "GameWidget\0setScreen\0\0setMap\0"
     "std::vector<ImageBox>\0map\0std::map<int,int>\0"
     "playerPos\0std::map<std::string,int>\0"
-    "player\0menuScreen"
+    "player\0menuScreen\0explodeBox\0coord"
 };
 #undef QT_MOC_LITERAL
 
@@ -55,7 +57,7 @@ static const uint qt_meta_data_GameWidget[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       3,   14, // methods
+       4,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -63,11 +65,12 @@ static const uint qt_meta_data_GameWidget[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   29,    2, 0x06 /* Public */,
+       1,    1,   34,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       3,    3,   32,    2, 0x0a /* Public */,
-      10,    0,   39,    2, 0x0a /* Public */,
+       3,    3,   37,    2, 0x0a /* Public */,
+      10,    0,   44,    2, 0x0a /* Public */,
+      11,    1,   45,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int,    2,
@@ -75,6 +78,7 @@ static const uint qt_meta_data_GameWidget[] = {
  // slots: parameters
     QMetaType::Void, 0x80000000 | 4, 0x80000000 | 6, 0x80000000 | 8,    5,    7,    9,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   12,
 
        0        // eod
 };
@@ -88,6 +92,7 @@ void GameWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 0: _t->setScreen((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 1: _t->setMap((*reinterpret_cast< std::vector<ImageBox>(*)>(_a[1])),(*reinterpret_cast< std::map<int,int>(*)>(_a[2])),(*reinterpret_cast< std::map<std::string,int>(*)>(_a[3]))); break;
         case 2: _t->menuScreen(); break;
+        case 3: _t->explodeBox((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -127,13 +132,13 @@ int GameWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 3)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 4;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 3)
+        if (_id < 4)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 3;
+        _id -= 4;
     }
     return _id;
 }

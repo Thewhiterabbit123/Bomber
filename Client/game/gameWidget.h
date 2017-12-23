@@ -29,6 +29,7 @@ signals:
 public slots:
     void setMap(std::vector<ImageBox> map, std::map<int, int> playerPos, std::map<std::string, int> player);
     void menuScreen();
+    void explodeBox(int coord);
 };
 
 

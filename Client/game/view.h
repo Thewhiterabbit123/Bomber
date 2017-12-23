@@ -25,7 +25,8 @@ public slots:
     void playerMoveSlot(std::pair<int, int> event);
     void setBomb(int id, int coord);
     void playerDie(int idPlayer);
-    //void bombExplode(int idBomb);
+    void bombExplode(int idBomb);
+
 
 signals:
     void clientAction(int action);

@@ -38,7 +38,7 @@ void Game::eventSwitcher(int event)  {
         }
 
         case BOMB_EXPLODE: {
-            //emit bombExplode(parser->getBombId());
+            emit bombExplode(parser->getBombId());
             break;
         }
 
@@ -47,7 +47,7 @@ void Game::eventSwitcher(int event)  {
             break;
         }
         case BOX_EXPLODE: {
-            parser->getBoxId();
+            emit explodeBox(parser->getBoxId());
             break;
         }
         case PLAYER_DEAD: {

@@ -31,9 +31,9 @@ void BombActor::hideself(){
     deleteLater();
 }
 
-/*
+
 void BombActor::bombExplode(int idBombGet){
     explode(idBombGet);
-}*/
+}
 
 
