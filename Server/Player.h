@@ -7,7 +7,7 @@
 
 class Player : public Object {
 	public:
-        Player(Field & _field,  std::string _name, Coordinate _coordinate);
+        Player(std::string _name, Coordinate _coordinate);
 		void PutBomb();
 		bool GetDamage();
 		void Heal();
@@ -21,5 +21,4 @@ class Player : public Object {
 		int bomb;
 		int hp;
 		int skin;
-        Field & field;
 };

@@ -49,6 +49,8 @@ enum BlockType {
 #define BOMB_COUNT_ONE_PLAYER_MAX 5
 #define BOMB_COUNT BOMB_COUNT_ONE_PLAYER_MAX*PLAYER_COUNT
 #define BOMB_TIMER 4
+#define BOMB_DAMAGE 1
+#define BOMB_RADIUS
 
 //  block
 

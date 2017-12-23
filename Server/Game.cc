@@ -13,7 +13,7 @@ Game::Game(): clientCount(0) {
 
 int Game::CreatePlayer(const std::string & name) {
     static Coordinate positions [4] = {Coordinate(1, 1), Coordinate(MAP_COLUMN_SIZE - 2, 1), Coordinate(1, MAP_ROW_SIZE - 2), Coordinate(MAP_COLUMN_SIZE - 2, MAP_ROW_SIZE - 2)};
-    Player currentPlayer(field, name, positions[clientCount++]);
+    Player currentPlayer(name, positions[clientCount++]);
     player.push_back(currentPlayer);
     return currentPlayer.GetId();
 }
@@ -173,6 +173,7 @@ void Game::Step() {
         }
         boost::this_thread::sleep_for(boost::chrono::microseconds(250));
     }
+    boost::this_thread::sleep_for(boost::chrono::seconds(5));
     for(std::vector<Player>::iterator it = player.begin(); it != player.end(); it++) {
         if (it->IsActive()) {
             SendEndGame(it->GetId());
