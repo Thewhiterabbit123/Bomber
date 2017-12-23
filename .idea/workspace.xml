@@ -13,6 +13,7 @@
   <component name="ChangeListManager">
     <list default="true" id="57caea7c-0caf-4f41-b72c-96e926f7e140" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Define.h" afterPath="$PROJECT_DIR$/Define.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/Game.cc" afterPath="$PROJECT_DIR$/Server/Game.cc" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -53,7 +54,7 @@
         <entry file="file://$PROJECT_DIR$/Server/Game.cc">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="415">
-              <caret line="109" column="43" lean-forward="false" selection-start-line="109" selection-start-column="43" selection-end-line="109" selection-end-column="43" />
+              <caret line="109" column="54" lean-forward="false" selection-start-line="109" selection-start-column="54" selection-end-line="109" selection-end-column="54" />
               <folding />
             </state>
           </provider>
@@ -62,8 +63,8 @@
       <file leaf-file-name="ServerFuncs.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Server/ServerFuncs.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="7" column="24" lean-forward="false" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
+            <state relative-caret-position="36">
+              <caret line="2" column="39" lean-forward="true" selection-start-line="2" selection-start-column="39" selection-end-line="2" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -82,8 +83,8 @@
       <file leaf-file-name="Define.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Define.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="918">
-              <caret line="51" column="21" lean-forward="false" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
+            <state relative-caret-position="432">
+              <caret line="51" column="21" lean-forward="true" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -156,11 +157,11 @@
         <option value="$PROJECT_DIR$/Server/Object.cc" />
         <option value="$PROJECT_DIR$/Server/Object.h" />
         <option value="$PROJECT_DIR$/Server/Game.h" />
-        <option value="$PROJECT_DIR$/Define.h" />
         <option value="$PROJECT_DIR$/Server/Bomb.h" />
         <option value="$PROJECT_DIR$/Server/Bomb.cc" />
         <option value="$PROJECT_DIR$/Server/Player.h" />
         <option value="$PROJECT_DIR$/Server/Player.cc" />
+        <option value="$PROJECT_DIR$/Define.h" />
         <option value="$PROJECT_DIR$/Server/Game.cc" />
       </list>
     </option>
@@ -415,7 +416,7 @@
       <workItem from="1513895226864" duration="929000" />
       <workItem from="1513896193545" duration="4661000" />
       <workItem from="1513943176868" duration="5213000" />
-      <workItem from="1513958441314" duration="29597000" />
+      <workItem from="1513958441314" duration="30152000" />
     </task>
     <task id="LOCAL-00001" summary="Add Field constructor, FieldToString">
       <created>1513868935680</created>
@@ -522,17 +523,24 @@
       <option name="project" value="LOCAL" />
       <updated>1513994868272</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Fixed Bomb and Movement.&#10;">
+      <created>1513995020030</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1513995020030</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48367000" />
+    <option name="totallyTimeSpent" value="48922000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="26" width="1366" height="742" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1801936" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1801936" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23510467" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
@@ -920,14 +928,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Define.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="918">
-          <caret line="51" column="21" lean-forward="false" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Server/Bomb.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
@@ -964,8 +964,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Server/ServerFuncs.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="24" lean-forward="false" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
+        <state relative-caret-position="36">
+          <caret line="2" column="39" lean-forward="true" selection-start-line="2" selection-start-column="39" selection-end-line="2" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Define.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="51" column="21" lean-forward="true" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
           <folding />
         </state>
       </provider>
@@ -973,7 +981,7 @@
     <entry file="file://$PROJECT_DIR$/Server/Game.cc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="415">
-          <caret line="109" column="43" lean-forward="false" selection-start-line="109" selection-start-column="43" selection-end-line="109" selection-end-column="43" />
+          <caret line="109" column="54" lean-forward="false" selection-start-line="109" selection-start-column="54" selection-end-line="109" selection-end-column="54" />
           <folding />
         </state>
       </provider>
