@@ -166,15 +166,20 @@ void Game::Step() {
                 // Bomb is set
                 if (currentEvent == SET_BOMB_EVENT) {
                     if (currentPlayer->GetBomb() > 0) {
-                        currentPlayer->PutBomb();
+                        bool flag = true;
                         Bomb newBomb(currentPlayer->GetPosition(), currentId);
                         for (std::list<Bomb>::iterator i = bomb.begin(); i != bomb.end(); i++)
-                            if (i -> GetPosition() == newBomb.GetPosition())
-                                continue;
-                        CreateBomb(newBomb);
-                        SendBombPlanted(newBomb.GetId(), newBomb.GetPosition().ToInt());
-                        boost::thread(boost::bind(DestroyBomb, this));
-                        continue;
+                            if (i -> GetPosition() == newBomb.GetPosition()) {
+                                flag = false;
+                                break;
+                            }
+                        if (flag) {
+                            currentPlayer->PutBomb();
+                            CreateBomb(newBomb);
+                            SendBombPlanted(newBomb.GetId(), newBomb.GetPosition().ToInt());
+                            boost::thread(boost::bind(DestroyBomb, this));
+                            continue;
+                        }
                     }
                 }
             }

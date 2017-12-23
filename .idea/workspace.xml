@@ -13,11 +13,7 @@
   <component name="ChangeListManager">
     <list default="true" id="57caea7c-0caf-4f41-b72c-96e926f7e140" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/Bomb.cc" afterPath="$PROJECT_DIR$/Server/Bomb.cc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/Bomb.h" afterPath="$PROJECT_DIR$/Server/Bomb.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/Game.cc" afterPath="$PROJECT_DIR$/Server/Game.cc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/Player.cc" afterPath="$PROJECT_DIR$/Server/Player.cc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/Player.h" afterPath="$PROJECT_DIR$/Server/Player.h" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -56,8 +52,8 @@
       <file leaf-file-name="Game.cc" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Server/Game.cc">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="541">
-              <caret line="182" column="5" lean-forward="true" selection-start-line="182" selection-start-column="5" selection-end-line="182" selection-end-column="5" />
+            <state relative-caret-position="523">
+              <caret line="184" column="13" lean-forward="true" selection-start-line="184" selection-start-column="13" selection-end-line="184" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -419,7 +415,7 @@
       <workItem from="1513895226864" duration="929000" />
       <workItem from="1513896193545" duration="4661000" />
       <workItem from="1513943176868" duration="5213000" />
-      <workItem from="1513958441314" duration="28845000" />
+      <workItem from="1513958441314" duration="29445000" />
     </task>
     <task id="LOCAL-00001" summary="Add Field constructor, FieldToString">
       <created>1513868935680</created>
@@ -512,11 +508,18 @@
       <option name="project" value="LOCAL" />
       <updated>1513992915207</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Fixed Bomb and Movement.&#10;">
+      <created>1513994268366</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1513994268366</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47615000" />
+    <option name="totallyTimeSpent" value="48215000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="26" width="1366" height="742" extended-state="6" />
@@ -962,8 +965,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Server/Game.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="541">
-          <caret line="182" column="5" lean-forward="true" selection-start-line="182" selection-start-column="5" selection-end-line="182" selection-end-column="5" />
+        <state relative-caret-position="523">
+          <caret line="184" column="13" lean-forward="true" selection-start-line="184" selection-start-column="13" selection-end-line="184" selection-end-column="13" />
           <folding />
         </state>
       </provider>
