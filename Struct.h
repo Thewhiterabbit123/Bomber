@@ -1,11 +1,17 @@
-#ifndef STRUCT_H
-#define STRUCT_H
+#pragma once
+
+#include "Define.h"
 
 struct Coordinate {
 	int x;
 	int y;
-	Coordinate(int _x, int _y): x(_x), y(_y) {};
-	Coordinate& operator = (Coordinate& rhs) { return Coordinate(this->x = rhs.x, this->y = rhs.y); };
+    Coordinate(): x(0), y(0) {};
+	Coordinate(const int &_x, const int &_y): x(_x), y(_y) {};
+	Coordinate(const Coordinate & coordinate): x(coordinate.x), y(coordinate.y) {};
+    int ToInt() { return (MAP_COLUMN_SIZE * y + x); }
+	const Coordinate& operator = (const Coordinate& rhs) { x = rhs.x; y = rhs.y; return *this; }
+    bool operator == (const Coordinate & rhs) { return (x == rhs.x && y ==rhs.y); }
+	bool operator != (const Coordinate & rhs) { return !(x == rhs.x && y ==rhs.y); }
 };
 
 struct PlayerInfo {
@@ -13,6 +19,14 @@ struct PlayerInfo {
 	Coordinate place;
 	short hp;
 	short bombCount;
+};
+
+//  change on map
+struct ClientAction {
+    unsigned int id;
+    Event event; //сделать структуру event
+
+    ClientAction(unsigned int _id, Event _event): id(_id), event(_event) {};
 };
 
 struct BombInfo {
@@ -27,16 +41,16 @@ struct BlockInfo {
 
 struct NewBomb {
 	int newBombId;
-	s_coordinate place;
+	Coordinate place;
 };
 
 struct Medicine {
 	int medicineId;
-	s_coordinate place; 
+	Coordinate place;
 };
 
 //Запрос от клиента к серверу
-struct initRequest {
+struct InitRequest {
 	int type;
 	char nickName[NICK_SIZE];
 };
@@ -71,21 +85,7 @@ struct MapNowAnswer {
 	Medicine medicine[BLOCK_COUNT + 1];
 };
 
-struct PlayerEventRequest {
-	int type;
-	unsigned int clientId;
-	unsigned int event; 
+
+struct Time {
+
 };
-
-//  change on map
-struct Change {
-	unsigned int id;
-	struct EventInfo; //сделать структуру event
-}
-
-struct EventInfo {
-	int eventType;
-	Coordinate place;
-};
-
-#endif STRUCT_H

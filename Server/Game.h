@@ -1,48 +1,44 @@
-#ifndef GAME_H
-#define GAME_H
+#pragma once
+#include "../Define.h"
+#include "Field.h"
+#include "Player.h"
+#include "Bomb.h"
 
 #include <iostream>
 #include <vector>
-#include "Define.h"
+#include <list>
+#include <queue>
+#include <string>
+#include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/bind.hpp>
+#include <boost/asio.hpp>
+#include <boost/thread/thread.hpp>
+
+using namespace std;
 
 class Game {
-private:
-	vector<Player> player(PLAYER_COUNT); 
-	vector<Bomb> bomb(BOMB_COUNT);
-	Field field;
-	Time time;
-	EventManager *eventManager;
-	StateManager *stateManager;
-	ResolveManager *resolveManager;
-public:
-	Game(Field &_field,
-		 Time &_time,
-		 EventManager *_eventManager, 
-		 StateManager *_stateManager,
-		 ResolveManager *_resolveManager):
+	private:
+        int clientCount;
+        Field field;
+		vector<Player> player; 
+		list<Bomb> bomb;
+		Time time;
+		queue<ClientAction> clientAction;
+	public:
+		Game();
+		Game(const Game &_game) {};
 
-		field(_field),
-		time(_time),
-		eventManager(_eventManager),
-		stateManager(_stateManager),
-		resolveManager(_resolveManager) {};
+        static void DestroyBomb(Game *game);
+        void Step();
+        void PushClientAction(ClientAction & action);
+        void CreateBomb(const Bomb &_bomb);
+        void GetTime();
+        void MakeMovement(Coordinate, Player *, Event);
 
-	void KillCharacter();
-	void DestroyBomb();
-	void StartGame();
-	void EndGame();
-	void CreateCharacter();
-	void CreateBomb();
-	void GetTime();
-	void GetField();
-	void ParsePacket();
-	void Pause();
-	void StartMenu();
-	void Update();
+		int CreatePlayer(const std::string & name);
+        int GetPlayerPositionById(const unsigned int id);
+        Player * FindPlayer(const unsigned int id);
+        string GetPlayerNameById(const unsigned int id);
+        std::string GetMap();
+        Coordinate GetNextPosition(Coordinate, Event);
 };
-
-#endif
-
-
-
-
