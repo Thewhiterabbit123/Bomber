@@ -1,5 +1,6 @@
 #pragma once
 #include "Object.h"
+#include "../Define.h"
 
 class Bomb : public Object {
 	public:

@@ -45,15 +45,18 @@ void Game::DestroyBomb(Game *game) {
     std::vector<Block> & currentField = game->field.GetField();
     //  check player on bomb
     Coordinate currentPos = bombPosition;
-    for (std::vector<Player>::iterator i = game->player.begin(); i != game->player.end(); i++)
-        if (currentPos == i -> GetPosition()) {
-            if (!i -> GetDamage() ) {
+
+    for (std::vector<Player>::iterator i = game->player.begin(); i != game->player.end(); i++) {
+        if ((currentPos == i->GetPosition()) && i->IsActive()) {
+            if (!i->GetDamage()) {
                 game->clientCount--;
-                SendPlayerDead(i -> GetId());
+                SendPlayerDead(i->GetId());
             } else {
-                SendMinusHP(i -> GetId());
+                SendMinusHP(i->GetId());
             }
         }
+    }
+
     for(int k = 0; k < 4; k++) {
         bool flag = false;
         switch (k) {
@@ -68,7 +71,7 @@ void Game::DestroyBomb(Game *game) {
         }
         for(int i = 1; i < bombRadius && !flag; i++) {
             for(std::vector<Player>::iterator j = game->player.begin(); j != game->player.end(); j++) {
-                if(j -> GetPosition() == currentPos) {
+                if ( (currentPos == j -> GetPosition()) && j -> IsActive()) {
                     if(!j -> GetDamage()) {
                         SendPlayerDead (j->GetId());
                     } else {
@@ -131,7 +134,7 @@ void Game::MakeMovement(Coordinate nextCoordinate, Player *currentPlayer) {
     if (block == WALL || block == BOX)
         return;
     for (std::vector<Player>::iterator i = player.begin(); i != player.end(); i++) {
-        if (i -> GetPosition() == nextCoordinate)
+        if ((i -> GetPosition() == nextCoordinate) && (i -> IsActive()))
             return;
     }
     for (std::list<Bomb>::iterator i = bomb.begin(); i != bomb.end(); i++) {
@@ -150,19 +153,22 @@ void Game::Step() {
             Event currentEvent = currentChange.event;
             unsigned int currentId = currentChange.id;
             Player *currentPlayer = FindPlayer(currentId);
-            //  Player movement
-            if (currentEvent >= UP_EVENT && currentEvent <= RIGHT_EVENT) {
-                Coordinate currentCoordinate = currentPlayer->GetPosition();
-                Coordinate nextCoordinate = GetNextPosition(currentCoordinate, currentEvent);
-                MakeMovement(nextCoordinate, currentPlayer);
-            }
-            // Bomb is set
-            if (currentEvent == SET_BOMB_EVENT) {
-                Bomb newBomb(currentPlayer -> GetPosition());
-                CreateBomb(newBomb);
-                SendBombPlanted (newBomb.GetId(), newBomb.GetPosition().ToInt());
-                boost::thread(boost::bind(DestroyBomb, this));
-                continue;
+
+            if (currentPlayer->IsActive()) {
+                //  Player movement
+                if (currentEvent >= UP_EVENT && currentEvent <= RIGHT_EVENT) {
+                    Coordinate currentCoordinate = currentPlayer->GetPosition();
+                    Coordinate nextCoordinate = GetNextPosition(currentCoordinate, currentEvent);
+                    MakeMovement(nextCoordinate, currentPlayer);
+                }
+                // Bomb is set
+                if (currentEvent == SET_BOMB_EVENT) {
+                    Bomb newBomb(currentPlayer->GetPosition());
+                    CreateBomb(newBomb);
+                    SendBombPlanted(newBomb.GetId(), newBomb.GetPosition().ToInt());
+                    boost::thread(boost::bind(DestroyBomb, this));
+                    continue;
+                }
             }
         }
         boost::this_thread::sleep_for(boost::chrono::microseconds(250));
