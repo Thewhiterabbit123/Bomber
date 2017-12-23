@@ -12,6 +12,10 @@ void Player::PutBomb() {
 	    bomb--;
 }
 
+void Player::RespawnBomb() {
+    bomb++;
+}
+
 bool Player::GetDamage() {
 	if(hp > 1) {
         hp--;
