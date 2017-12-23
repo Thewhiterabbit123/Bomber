@@ -5,8 +5,27 @@ Field::Field() {
     std::string line;
     std::ifstream fieldConfig;
     fieldConfig.exceptions (std::ifstream::failbit | std::ifstream::badbit);
+    std::string mapName;
+    switch(time(NULL) % 2) {
+        case 0: {
+            mapName = "../map0.mp";
+    std::cout << "Map1" << std::endl;
+            break;
+        }
+        case 1: {
+            mapName = "../map1.mp";
+    std::cout << "Map2" << std::endl;
+            break;
+        }
+        default : {
+            mapName = "../map0.mp";
+    std::cout << "Map0" << std::endl;
+            break;
+        }
+    }
+
     try {
-        fieldConfig.open("../fieldConf");
+        fieldConfig.open(mapName);
         getline(fieldConfig, line);
         for (int i = 0; i < line.size(); i++) {
             Coordinate curCoord(i % MAP_COLUMN_SIZE, (int) i / MAP_COLUMN_SIZE);

@@ -132,7 +132,7 @@ Coordinate Game::GetNextPosition(Coordinate coordinate, Event event) {
     }
 }
 
-void Game::MakeMovement(Coordinate nextCoordinate, Player *currentPlayer) {
+void Game::MakeMovement(Coordinate nextCoordinate, Player *currentPlayer, Event event) {
     BlockType block = field.GetField()[nextCoordinate.ToInt()].GetType();
     if (block == WALL || block == BOX)
         return;
@@ -145,7 +145,7 @@ void Game::MakeMovement(Coordinate nextCoordinate, Player *currentPlayer) {
             return;
     }
     currentPlayer->SetPosition(nextCoordinate);
-    SendMovePlayer(currentPlayer->GetId(), nextCoordinate.ToInt());
+    SendMovePlayer(currentPlayer->GetId(), event);
 }
 
 void Game::Step() {
@@ -162,7 +162,7 @@ void Game::Step() {
                 if (currentEvent >= UP_EVENT && currentEvent <= RIGHT_EVENT) {
                     Coordinate currentCoordinate = currentPlayer->GetPosition();
                     Coordinate nextCoordinate = GetNextPosition(currentCoordinate, currentEvent);
-                    MakeMovement(nextCoordinate, currentPlayer);
+                    MakeMovement(nextCoordinate, currentPlayer, currentEvent);
                 }
                 // Bomb is set
                 if (currentEvent == SET_BOMB_EVENT) {

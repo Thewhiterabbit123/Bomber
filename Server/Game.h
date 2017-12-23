@@ -33,7 +33,7 @@ class Game {
         void PushClientAction(ClientAction & action);
         void CreateBomb(const Bomb &_bomb);
         void GetTime();
-        void MakeMovement(Coordinate, Player *);
+        void MakeMovement(Coordinate, Player *, Event);
 
 		int CreatePlayer(const std::string & name);
         int GetPlayerPositionById(const unsigned int id);

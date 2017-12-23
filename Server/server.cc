@@ -23,7 +23,7 @@ void client_session(socket_ptr sock, int threadNum)
    	line << startEvent << " " << game.GetMap();
 	for (int i = 0; i < PLAYER_COUNT; i++) {
  		std::string nickName = game.GetPlayerNameById(playersId[i]);
- 		line << " " << playersId[i] << " " << nickName << game.GetPlayerPositionById(playersId[i]);
+ 		line << " " << playersId[i] << " " << nickName << " " << game.GetPlayerPositionById(playersId[i]);
  	}
 	std::string msg = line.str(); 	
 	try {
@@ -49,6 +49,7 @@ void client_session(socket_ptr sock, int threadNum)
 			}
 			if (bytes > 0){
 				std::string packetStr(buff, bytes);
+			std::cerr << packetStr << std::endl;
 			    std::stringstream stream(packetStr);
 			    int typeOfPacket = 0;
 				stream >> typeOfPacket;
@@ -107,6 +108,10 @@ void server_loop()
 		}
 
 	    std::string nickName(buff, bytes);
+	    if (nickName.size() < 1) {
+	    	nickName = std::string("User");
+	    	nickName += playersCount + '1';
+	    }
 	   	int playerId = game.CreatePlayer(nickName);
 	   	playersId[playersCount] = playerId;
 
@@ -138,10 +143,10 @@ void server_loop()
 
 
 
-void SendMovePlayer(int idPlayer, int coord) {
+void SendMovePlayer(int idPlayer, Event moveType) {
 	Event event = MOVE_PLAYER;
 	std::stringstream line;
-	line << event << " " << idPlayer << " " << coord;
+	line << event << " " << idPlayer << " " << moveType;
 	std::string msg = line.str();
 
 	for (int i = 0; i < PLAYER_COUNT; i++) {
