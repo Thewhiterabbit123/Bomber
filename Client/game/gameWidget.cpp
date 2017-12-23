@@ -2,7 +2,7 @@
 #include "game/box/boxwidget.h"
 #include "game/box/imagebox.h"
 #include "shared/imagePool/imagepool.h"
-#include "view.h"
+
 #include <memory>
 #include <QTextEdit>
 #include <QGridLayout>
@@ -27,7 +27,7 @@ GameWidget::GameWidget(QWidget* parent): QWidget(parent), gameUi(new Ui::game())
     ACTOR_ANIMATION_POOL.load(ActorActions::BombStay, ":/resources/bomb_sprite.png", 11, 246, 280);
     ACTOR_ANIMATION_POOL.load(ActorActions::BombExplode, ":/resources/bomb_explosion.png", 11, 246, 280);
 
-    View* view;
+
     view = new View();
     view->setStyleSheet("border: 0; background: rgba(255, 255, 255, 0);");
     view->setParent(gameUi->widgetPlayer);

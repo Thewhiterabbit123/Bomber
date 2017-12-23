@@ -4,8 +4,8 @@
 #include <QGraphicsItemAnimation>
 #include <QDebug>
 
-GraphicsActor::GraphicsActor(QObject *parent)
-    : AnimatedGraphicsItem(parent),
+GraphicsActor::GraphicsActor(int idPlayer, QObject *parent)
+    : idActor(idPlayer), AnimatedGraphicsItem(parent),
       m_moveAnimation(nullptr), m_currectAction(ActorActions::Stay) {
     setScale(0.13);
     setSprites(m_currectAction, true);

@@ -7,6 +7,7 @@
 #include <vector>
 #include "game/person/graphicsactor.h"
 #include "game/person/bombactor.h"
+#include "game/box/imagebox.h"
 
 class View : public QGraphicsView {
     Q_OBJECT
@@ -17,6 +18,8 @@ protected slots:
 private:
     QGraphicsScene m_scene;
     std::vector<GraphicsActor*> v_actor;
+public slots:
+    void setMap(std::vector<ImageBox> map, std::map<int, int> playerPos, std::map<std::string, int> player);
 };
 
 #endif // VIEW_H

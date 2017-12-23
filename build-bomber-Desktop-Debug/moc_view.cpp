@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_View_t {
-    QByteArrayData data[5];
-    char stringdata0[37];
+    QByteArrayData data[12];
+    char stringdata0[131];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -33,10 +33,20 @@ QT_MOC_LITERAL(0, 0, 4), // "View"
 QT_MOC_LITERAL(1, 5, 13), // "keyPressEvent"
 QT_MOC_LITERAL(2, 19, 0), // ""
 QT_MOC_LITERAL(3, 20, 10), // "QKeyEvent*"
-QT_MOC_LITERAL(4, 31, 5) // "event"
+QT_MOC_LITERAL(4, 31, 5), // "event"
+QT_MOC_LITERAL(5, 37, 6), // "setMap"
+QT_MOC_LITERAL(6, 44, 21), // "std::vector<ImageBox>"
+QT_MOC_LITERAL(7, 66, 3), // "map"
+QT_MOC_LITERAL(8, 70, 17), // "std::map<int,int>"
+QT_MOC_LITERAL(9, 88, 9), // "playerPos"
+QT_MOC_LITERAL(10, 98, 25), // "std::map<std::string,int>"
+QT_MOC_LITERAL(11, 124, 6) // "player"
 
     },
-    "View\0keyPressEvent\0\0QKeyEvent*\0event"
+    "View\0keyPressEvent\0\0QKeyEvent*\0event\0"
+    "setMap\0std::vector<ImageBox>\0map\0"
+    "std::map<int,int>\0playerPos\0"
+    "std::map<std::string,int>\0player"
 };
 #undef QT_MOC_LITERAL
 
@@ -46,7 +56,7 @@ static const uint qt_meta_data_View[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
+       2,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -54,10 +64,12 @@ static const uint qt_meta_data_View[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,   19,    2, 0x09 /* Protected */,
+       1,    1,   24,    2, 0x09 /* Protected */,
+       5,    3,   27,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
+    QMetaType::Void, 0x80000000 | 6, 0x80000000 | 8, 0x80000000 | 10,    7,    9,   11,
 
        0        // eod
 };
@@ -69,6 +81,7 @@ void View::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void *
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->keyPressEvent((*reinterpret_cast< QKeyEvent*(*)>(_a[1]))); break;
+        case 1: _t->setMap((*reinterpret_cast< std::vector<ImageBox>(*)>(_a[1])),(*reinterpret_cast< std::map<int,int>(*)>(_a[2])),(*reinterpret_cast< std::map<std::string,int>(*)>(_a[3]))); break;
         default: ;
         }
     }
@@ -99,13 +112,13 @@ int View::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 2)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 2;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
+        if (_id < 2)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 1;
+        _id -= 2;
     }
     return _id;
 }

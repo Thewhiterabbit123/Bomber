@@ -7,6 +7,7 @@
 
 #include "game/box/boxwidget.h"
 #include "ui_gamewidgetui.h"
+#include "view.h"
 
 class GameWidget: public QWidget{
     Q_OBJECT
@@ -18,6 +19,9 @@ private:
     Ui::game* gameUi;
     std::vector<BoxWidget*> field;
     QGridLayout* gameLayout;
+
+public:
+    View* view;
 
 signals:
     void setScreen(int);

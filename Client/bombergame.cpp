@@ -28,4 +28,6 @@ void BomberGame::startNetworking(){
     gameNetwork->play(nickName);
     connect(gameNetwork, SIGNAL(startGame(std::vector<ImageBox>,std::map<int,int>,std::map<std::string,int>)),
             game, SLOT(setMap(std::vector<ImageBox>,std::map<int,int>,std::map<std::string,int>)));
+    connect(gameNetwork, SIGNAL(startGame(std::vector<ImageBox>,std::map<int,int>,std::map<std::string,int>)),
+            game->view, SLOT(setMap(std::vector<ImageBox>,std::map<int,int>,std::map<std::string,int>)));
 }
