@@ -81,6 +81,7 @@ void Game::DestroyBomb(Game *game) {
                 flag = true;
             }
             if(currentField[currentPos.ToInt()].GetType() == BOX) {
+                currentField[currentPos.ToInt()].SetType(EMPTY);
                 SendBoxExplode(currentField[currentPos.ToInt()].GetId(), (int) EMPTY);
                 flag = true;
             }
@@ -118,10 +119,10 @@ void Game::PushClientAction(ClientAction & action) {
 
 Coordinate Game::GetNextPosition(Coordinate coordinate, Event event) {
     switch(event) {
-        case UP_EVENT: return Coordinate(coordinate.x, coordinate.y--);
-        case DOWN_EVENT: return Coordinate(coordinate.x, coordinate.y++);
-        case RIGHT_EVENT: return Coordinate(coordinate.x++, coordinate.y);
-        case LEFT_EVENT: return Coordinate(coordinate.x--, coordinate.y);
+        case UP_EVENT: return Coordinate(coordinate.x, --(coordinate.y));
+        case DOWN_EVENT: return Coordinate(coordinate.x, ++(coordinate.y));
+        case RIGHT_EVENT: return Coordinate(++(coordinate.x), coordinate.y);
+        case LEFT_EVENT: return Coordinate(--(coordinate.x), coordinate.y);
     }
 }
 
