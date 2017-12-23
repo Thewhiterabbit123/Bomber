@@ -1,19 +1,17 @@
 #include "Server.h"
 
 
-#define CLIENT_COUNT 4 
+#define PLAYER_COUNT 4 
 
 int portNum = 8001;
 typedef boost::shared_ptr<boost::asio::ip::tcp::socket> socket_ptr;
 boost::asio::io_service service;
-socket_ptr usersSockPtrs[CLIENT_COUNT];
-int playersId [CLIENT_COUNT];
+socket_ptr usersSockPtrs[PLAYER_COUNT];
+int playersId [PLAYER_COUNT];
 
-std::queue<std::string> sendQueues[CLIENT_COUNT];
+std::queue<std::string> sendQueues[PLAYER_COUNT];
 
 Game game;
-
-
 
 
 void client_session(socket_ptr sock, int threadNum)
@@ -23,7 +21,7 @@ void client_session(socket_ptr sock, int threadNum)
 	Event startEvent = START_GAME;
 	std::stringstream line;
    	line << startEvent << " " << game.GetMap();
-	for (int i = 0; i < CLIENT_COUNT; i++) {
+	for (int i = 0; i < PLAYER_COUNT; i++) {
  		std::string nickName = game.GetPlayerNameById(playersId[i]);
  		line << " " << playersId[i] << " " << nickName << game.GetPlayerPositionById(playersId[i]);
  	}
@@ -93,7 +91,7 @@ void server_loop()
 	int playersCount = 0;
 	boost::asio::ip::tcp::acceptor acceptor(service, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(),portNum));
 	std::cout << "Server run on port: " << portNum << std::endl;
-	while ( playersCount < CLIENT_COUNT) 
+	while ( playersCount < PLAYER_COUNT) 
 	{	
 		char buff[512];
     	socket_ptr sock(new boost::asio::ip::tcp::socket(service));
@@ -127,7 +125,7 @@ void server_loop()
 	    playersCount++;
 	}
 
-	for (int i = 0; i < CLIENT_COUNT; i++){
+	for (int i = 0; i < PLAYER_COUNT; i++){
 		boost::thread(boost::bind(client_session, usersSockPtrs[i], i));
 	}
 
@@ -146,32 +144,30 @@ void SendMovePlayer(int idPlayer, int coord) {
 	line << event << " " << idPlayer << " " << coord;
 	std::string msg = line.str();
 
-	for (int i = 0; i < CLIENT_COUNT; i++) {
+	for (int i = 0; i < PLAYER_COUNT; i++) {
 		sendQueues[i].push(msg);
 	}
 	
 }
 
 void SendBombPlanted (int id, int coord) {
-	Event event = BOMB_EVENT;
-	Event bombAction = BOMB_PLANTED;
+	Event event = BOMB_PLANTED;
 	std::stringstream line;
-	line << event << " " << id << " " << bombAction << " " << coord;
+	line << event << " " << id << " " << coord;
 	std::string msg = line.str();
 
-	for (int i = 0; i < CLIENT_COUNT; i++) {
+	for (int i = 0; i < PLAYER_COUNT; i++) {
 		sendQueues[i].push(msg);
 	}
 }
 
 void SendBombExplode (int id, int radius=1) {
-	Event event = BOMB_EVENT;
-	Event bombAction = BOMB_EXPLODE;
+	Event event = BOMB_EXPLODE;
 	std::stringstream line;
-	line << event << " " << id << " " << bombAction;
+	line << event << " " << id;
 	std::string msg = line.str();
 
-	for (int i = 0; i < CLIENT_COUNT; i++) {
+	for (int i = 0; i < PLAYER_COUNT; i++) {
 		sendQueues[i].push(msg);
 	}
 }
@@ -182,17 +178,31 @@ void SendPlayerDead (int idPlayer) {
 	line << event << " " << idPlayer;
 	std::string msg = line.str();
 
-	for (int i = 0; i < CLIENT_COUNT; i++) {
+	for (int i = 0; i < PLAYER_COUNT; i++) {
 		sendQueues[i].push(msg);
 	}
 }
 
 void SendPlusHP(int idPlayer) {
-	;
+	Event event = PLUS_HP;
+	std::stringstream line;
+	line << event << " " << idPlayer;
+	std::string msg = line.str();
+
+	for (int i = 0; i < PLAYER_COUNT; i++) {
+		sendQueues[i].push(msg);
+	}
 }
 
 void SendMinusHP(int idPlayer) {
-	;
+	Event event = MINUS_HP;
+	std::stringstream line;
+	line << event << " " << idPlayer;
+	std::string msg = line.str();
+
+	for (int i = 0; i < PLAYER_COUNT; i++) {
+		sendQueues[i].push(msg);
+	}
 }
 
 void SendBoxExplode(int id, int newType=1) {
@@ -201,7 +211,7 @@ void SendBoxExplode(int id, int newType=1) {
 	line << event << " " << id;
 	std::string msg = line.str();
 
-	for (int i = 0; i < CLIENT_COUNT; i++) {
+	for (int i = 0; i < PLAYER_COUNT; i++) {
 		sendQueues[i].push(msg);
 	}
 }
@@ -212,7 +222,7 @@ void SendEndGame(int idPlayer) {
 	line << event << " " << idPlayer;
 	std::string msg = line.str();
 
-	for (int i = 0; i < CLIENT_COUNT; i++) {
+	for (int i = 0; i < PLAYER_COUNT; i++) {
 		sendQueues[i].push(msg);
 	}
 }
