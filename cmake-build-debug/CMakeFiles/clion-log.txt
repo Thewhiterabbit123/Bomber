@@ -1,0 +1,15 @@
+/home/kirill/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/172.4343.16/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/kirill/Desktop/Bomber
+-- Configuring done
+CMake Error at CMakeLists.txt:33 (add_executable):
+  Cannot find source file:
+
+    Server/Game_d.cc
+
+  Tried extensions .c .C .c++ .cc .cpp .cxx .m .M .mm .h .hh .h++ .hm .hpp
+  .hxx .in .txx
+
+
+CMake Error: CMake can not determine linker language for target: Bomber
+CMake Error: Cannot determine link language for target "Bomber".
+-- Generating done
+-- Build files have been written to: /home/kirill/Desktop/Bomber/cmake-build-debug

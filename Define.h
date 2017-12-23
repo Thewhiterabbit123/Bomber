@@ -1,54 +1,38 @@
-#ifndef DEFINE_H
-#define DEFINE_H
+#pragma once
 
+enum Event {
+	SEND_ID, // 0
+	START_GAME, //  1
+	UP_EVENT, //  2
+	DOWN_EVENT,  //  3
+	LEFT_EVENT, //  4
+	RIGHT_EVENT, //  5
+	SET_BOMB_EVENT, // 6
+	BOMB_EVENT, // 7
+	MOVE_PLAYER, // 8
+	BOMB_PLANTED, // 9
+	BOMB_EXPLODE, // 10
+	PLAYER_DEAD, //  11
+	PLUS_HP, //  12
+	MINUS_HP,  //  13
+	BOX_EXPLODE, //  14
+	END_GAME  //  15
+};
 
-enum Event { 
-	NO_EVENT,
-	UP_EVENT,
-	DOWN_EVENT,
-	LEFT_EVENT,
-	RIGHT_EVENT,
-	SET_BOMB_EVENT,
-	EXPLODE_BOMB_EVENT,
-	SET_NEWBOMB_EVENT,
-	PICK_NEWBOMB_EVENT,
-	SET_MEDICINE_EVENT,
-	PICK_MEDICINE_EVENT,
-	KILL_BOMBER
+//  BlockType
+
+enum BlockType {
+	EMPTY, //пустой игровой блок
+	BOX, //взрываемый бокс
+	WALL //невзрываемая стена
 };
 
 ////
 //  map
 
-#define MAP_ROW_SIZE 20
+#define MAP_ROW_SIZE 13
 #define MAP_COLUMN_SIZE 20
 #define MAP_SIZE MAP_ROW_SIZE*MAP_COLUMN_SIZE
-
-//  event
-
-#define NO_EVENT 0
-#define UP_EVENT 1
-#define DOWN_EVENT 2
-#define LEFT_EVENT 3
-#define RIGHT_EVENT 4
-#define SET_BOMB_EVENT 5
-#define EXPLODE_BOMB_EVENT 6
-#define SET_NEWBOMB_EVENT 7
-#define PICK_NEWBOMB_EVENT 8
-#define SET_MEDICINE_EVENT 9
-#define PICK_MEDICINE_EVENT 10
-#define KILL_BOMBER 11
-
-//  event masks сделать структуру event
-
-#define EVENT_MASK(Z) ((Z)&65535)
-#define X_MASK(Z) ((Z)>>24)
-#define Y_MASK(Z) (((Z)>>16)&255)
-
-//  s_block type
-
-#define BOX 0
-#define WALL 1
 
 //  nickSize
 
@@ -57,15 +41,20 @@ enum Event {
 //  player
 
 #define PLAYER_COUNT 4
+#define MAX_PLAYER_HP 3
 
-// bomb
+//  bomb
 
 #define BOMB_COUNT_ONE_PLAYER 3
 #define BOMB_COUNT_ONE_PLAYER_MAX 5
 #define BOMB_COUNT BOMB_COUNT_ONE_PLAYER_MAX*PLAYER_COUNT
+#define BOMB_TIMER 4
+#define BOMB_DAMAGE 1
+#define BOMB_RADIUS 3
 
 //  block
 
 #define BLOCK_COUNT MAP_SIZE-PLAYER_COUNT
 
-#endif
+
+

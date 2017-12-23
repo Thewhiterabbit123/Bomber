@@ -1,14 +1,17 @@
 #include "Bomb.h"
 
-void Bomb::Explode() {
-
+int Bomb::GetRadius() {
+	return radius;
 }
+
 int Bomb::GetDamage() {
 	return damage;
 }
-int Bomb::GetTimeToLive() {
-	return time;
+
+double Bomb::GetTimeToLive() {
+	return timeToLive;
 }
-Coordinate Bomb::GetPosition() {
-	return position;
-}	
+
+int Bomb::GetPlayerId() {
+	return playerId;
+}
