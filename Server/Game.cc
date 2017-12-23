@@ -186,13 +186,13 @@ void Game::Step() {
         }
         boost::this_thread::sleep_for(boost::chrono::microseconds(250));
     }
-    boost::this_thread::sleep_for(boost::chrono::seconds(5));
     for(std::vector<Player>::iterator it = player.begin(); it != player.end(); it++) {
         if (it->IsActive()) {
             SendEndGame(it->GetId());
             break;
         }
     }
+    boost::this_thread::sleep_for(boost::chrono::seconds(5));
 }
 
 std::string Game::GetMap() {
