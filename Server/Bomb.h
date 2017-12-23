@@ -1,20 +1,17 @@
-#ifndef BOMB_H
-#define BOMB_H
-#include "struct.h"
+#pragma once
+#include "Object.h"
+#include "../Define.h"
 
-class Bomb {
-	private:
-		int id;
-		int damage;
-		int timeToLive;
-		int radius;
-		Coordinate position;
+class Bomb : public Object {
 	public:
-		Bomb(): id(0), damage(0), timeToLive(0), position(0, 0), radius(0) {};
-		void Explode();
+		Bomb(Coordinate startPosition, int _playerId): Object(startPosition), playerId(_playerId), damage(BOMB_DAMAGE), timeToLive(BOMB_TIMER), radius(BOMB_RADIUS) {};
+		int GetRadius();
 		int GetDamage();
-		int GetTimeToLive();
-		Coordinate GetPosition();	
+        int GetPlayerId();
+		double GetTimeToLive();
+	private:
+		int damage;
+		int radius;
+		double timeToLive;
+		int playerId;
 };
-
-#endif BOMB_H
