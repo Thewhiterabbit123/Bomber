@@ -16,7 +16,7 @@ void Game::eventSwitcher(int event)  {
         }
 
         case START_GAME: {          //typeofpacket - map - [id - name - id - position]x4
-
+            std::cerr << "mapsize on parser" << parser->getMap().size();
             emit startGame(parser->getMap(), parser->getPosOfPlayer(), parser->getNickname());
             std::cerr << "emit startgame";
             break;

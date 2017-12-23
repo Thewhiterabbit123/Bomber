@@ -50,13 +50,9 @@ void GameWidget::setMap(std::vector<ImageBox> map, std::map<int, int> playerPos,
     boxPool->load(ImageBox::Ground, ":/images/pass.png", 38, 38);
     boxPool->load(ImageBox::Wall, ":/images/notPass.png", 38, 38);
     for(int i = 0; i < 13*20; i++){
-            std::cerr << map.size() << ' ' << std::endl;
-            BoxWidget* box = new BoxWidget(ImageBox::Ground, std::make_shared<ImagePool<ImageBox>>(boxPool));
-            std::cerr << i << ' ' << std::endl;
+            BoxWidget* box = new BoxWidget(map[i], std::make_shared<ImagePool<ImageBox>>(boxPool));
             field.push_back(box);
-            std::cerr << i << ' ' << std::endl;
             gameLayout->addWidget(box, i/20, i%20);
-            std::cerr << i << ' ' << std::endl;
         }
 
     gameUi->field->setLayout(gameLayout);

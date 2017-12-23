@@ -80,15 +80,15 @@ int Parser::parseLine(std::string line) {
 void Parser::makeMapFromString(std::string _map) {
     for(int i = 0; i < MAPHEIGHT*MAPWIDTH; i++) {
         switch (_map[i]) {
-            case 0: {
+            case '0': {
                 parseMap.push_back(ImageBox::Ground);
                 break;
             }
-            case 1: {
+            case '1': {
                 parseMap.push_back(ImageBox::Box);
                 break;
             }
-            case 2: {
+            case '2': {
                 parseMap.push_back(ImageBox::Wall);
                 break;
             }
