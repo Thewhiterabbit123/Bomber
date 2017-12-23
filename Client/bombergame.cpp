@@ -1,7 +1,10 @@
 #include "bombergame.h"
 #include "iostream"
 
-BomberGame::BomberGame(QWidget* parent): QGraphicsView(parent){}
+BomberGame::BomberGame(QWidget* parent): QGraphicsView(parent){
+    gameNetwork = new Game;
+    initGame();
+}
 
 void BomberGame::initGame(){
     allScreens = new QStackedLayout();
@@ -16,4 +19,13 @@ void BomberGame::initGame(){
 
     connect(menu, SIGNAL(setScreen(int)), allScreens, SLOT(setCurrentIndex(int)));
     connect(game, SIGNAL(setScreen(int)), allScreens, SLOT(setCurrentIndex(int)));
+    connect(menu, SIGNAL(setScreen(int)), this, SLOT(startNetworking()));
+
+}
+
+void BomberGame::startNetworking(){
+    std::string nickName = menu->menuUi->nickNameLineEdit->text().toStdString();
+    gameNetwork->play(nickName);
+    connect(gameNetwork, SIGNAL(startGame(std::vector<int>,std::map<int,int>,std::map<std::string,int>)),
+            game, SLOT(setMap(std::vector<int>,std::map<int,int>,std::map<std::string,int>)));
 }

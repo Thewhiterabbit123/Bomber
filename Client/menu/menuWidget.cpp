@@ -11,8 +11,6 @@ MenuWidget::MenuWidget(QWidget* parent): QWidget(parent), menuUi(new Ui::menu())
 }
 
 void MenuWidget::gameScreen(){
-    std::string nickName = menuUi->nickNameLineEdit->text().toStdString();
-    //startServer(nickName);
     emit setScreen(1); // go to game screen
 }
 

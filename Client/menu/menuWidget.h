@@ -19,6 +19,8 @@ private:
     QPushButton* goToGameButton;
     QPushButton* quitButton;
     QComboBox* pageComboBox;
+
+public:
     Ui::menu* menuUi;
 
 signals:

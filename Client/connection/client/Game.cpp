@@ -3,10 +3,11 @@
 void Game::play(std::string name) {
     client = new Client(name);
     parser = new Parser();
+    connect(client, SIGNAL(socketGetMessage()), this, SLOT(getMessage()));
 }
 
 void Game::eventSwitcher(int event)  {
-
+    std::cerr << START_GAME << std::endl;
     switch(event) {
 
         case SEND_ID: {            //this packet need to get my id
@@ -15,9 +16,9 @@ void Game::eventSwitcher(int event)  {
         }
 
         case START_GAME: {          //typeofpacket - map - [id - name - id - position]x4
-            parser->getMap();
-            parser->getPosOfPlayer();
-            parser->getNickname();
+
+            emit startGame(parser->getMap(), parser->getPosOfPlayer(), parser->getNickname());
+            std::cerr << "emit startgame";
             break;
         }
 
@@ -59,4 +60,9 @@ Game::~Game() {
 void Game::buttonAction(int event) {
     std::string msg = client->prepareMessageToServer(event);
     client->sendMessage(msg);
+}
+
+void Game::getMessage() {
+    int event = parser->parseLine(client->getInputMessage());
+    eventSwitcher(event);
 }

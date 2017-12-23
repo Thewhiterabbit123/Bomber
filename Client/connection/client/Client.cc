@@ -52,6 +52,7 @@ void Client::readyRead() {
         inputMessage = QString::fromUtf8(socket->readLine()).trimmed().toStdString();
         std::cout << inputMessage << std::endl;
     }
+    emit socketGetMessage();
 }
 
 void Client::sendMessage(std::string msg) {
@@ -74,7 +75,8 @@ void Client::setMyId(int id) {
 }
 
 std::string Client::prepareMessageToServer(int event) {
-    std::string msg = (myId + '0') + ' ' + (event + '0') + ' ';
+    std::string msg ;
+    msg += (myId + '0') + ' ' + (event + '0') + ' ';
     return msg;
 }
 

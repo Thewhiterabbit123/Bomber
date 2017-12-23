@@ -23,6 +23,8 @@ class Client: public QObject {
         void readyRead();
         void connected();
         void CloseClientConnection();
+    signals:
+        void socketGetMessage();
 
 	private: 
         std::ofstream logfile;

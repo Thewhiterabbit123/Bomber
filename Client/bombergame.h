@@ -10,6 +10,7 @@
 #include <QComboBox>
 #include "menu/menuWidget.h"
 #include "game/gameWidget.h"
+#include "connection/client/Game.h"
 
 class BomberGame: public QGraphicsView
 {
@@ -23,6 +24,11 @@ private:
     MenuWidget* menu;
     GameWidget* game;
     QComboBox* pageComboBox;
+
+    Game* gameNetwork;
+
+public slots:
+    void startNetworking();
 };
 
 #endif // MENUGAME_H

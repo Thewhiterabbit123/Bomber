@@ -173,7 +173,6 @@ DIST          = ../Client/connection/client/client.pro.user \
 		../Client/game/person/graphicsactor.h \
 		../Client/game/view.h \
 		../Client/game/person/bombactor.h \
-		../Client/appthread.h \
 		../Client/connection/client/Client.h \
 		../Client/connection/client/Game.h \
 		../Client/connection/client/Header.h \
@@ -380,7 +379,7 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../Client/qgameres.qrc ../Client/resources.qrc $(DISTDIR)/
-	$(COPY_FILE) --parents ../Client/bombergame.h ../Client/game/gameWidget.h ../Client/menu/menuWidget.h ../Client/game/box/boxwidget.h ../Client/shared/imagePool/imagepool.h ../Client/game/box/imagebox.h ../Client/game/person/animations_enum.h ../Client/shared/animationPool/animationpool.h ../Client/singleton.h ../Client/game/person/animatedgraphicsitem.h ../Client/game/person/graphicsactor.h ../Client/game/view.h ../Client/game/person/bombactor.h ../Client/appthread.h ../Client/connection/client/Client.h ../Client/connection/client/Game.h ../Client/connection/client/Header.h ../Client/connection/client/Parser.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Client/bombergame.h ../Client/game/gameWidget.h ../Client/menu/menuWidget.h ../Client/game/box/boxwidget.h ../Client/shared/imagePool/imagepool.h ../Client/game/box/imagebox.h ../Client/game/person/animations_enum.h ../Client/shared/animationPool/animationpool.h ../Client/singleton.h ../Client/game/person/animatedgraphicsitem.h ../Client/game/person/graphicsactor.h ../Client/game/view.h ../Client/game/person/bombactor.h ../Client/connection/client/Client.h ../Client/connection/client/Game.h ../Client/connection/client/Header.h ../Client/connection/client/Parser.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../Client/main.cpp ../Client/bombergame.cpp ../Client/game/gameWidget.cpp ../Client/menu/menuWidget.cpp ../Client/game/person/animatedgraphicsitem.cpp ../Client/game/person/graphicsactor.cpp ../Client/game/view.cpp ../Client/game/person/bombactor.cpp ../Client/connection/client/Client.cc ../Client/connection/client/Parser.cpp ../Client/connection/client/Game.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../Client/menuwidgetui.ui ../Client/gamewidgetui.ui $(DISTDIR)/
 
@@ -529,7 +528,6 @@ main.o: ../Client/main.cpp ../Client/connection/client/Game.h \
 		../Client/connection/client/Client.h \
 		../Client/connection/client/Parser.h \
 		../Client/connection/client/Header.h \
-		../Client/appthread.h \
 		../Client/bombergame.h \
 		../Client/menu/menuWidget.h \
 		ui_menuwidgetui.h \

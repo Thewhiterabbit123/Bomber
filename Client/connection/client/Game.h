@@ -22,7 +22,9 @@ class Game : public QObject {
         void gameOver(std::string nickname);
 
     public slots:
-        void allReady();
+        void getMessage();
+        //void allReady();
+        void buttonAction(int);
 
     private:
         Client *client;

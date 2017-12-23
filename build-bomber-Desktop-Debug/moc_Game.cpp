@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_Game_t {
-    QByteArrayData data[21];
-    char stringdata0[222];
+    QByteArrayData data[23];
+    char stringdata0[246];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -49,7 +49,9 @@ QT_MOC_LITERAL(16, 177, 10), // "explodeBox"
 QT_MOC_LITERAL(17, 188, 3), // "pos"
 QT_MOC_LITERAL(18, 192, 8), // "gameOver"
 QT_MOC_LITERAL(19, 201, 11), // "std::string"
-QT_MOC_LITERAL(20, 213, 8) // "nickname"
+QT_MOC_LITERAL(20, 213, 8), // "nickname"
+QT_MOC_LITERAL(21, 222, 10), // "getMessage"
+QT_MOC_LITERAL(22, 233, 12) // "buttonAction"
 
     },
     "Game\0startGame\0\0std::vector<int>\0map\0"
@@ -58,7 +60,8 @@ QT_MOC_LITERAL(20, 213, 8) // "nickname"
     "playerMove\0std::pair<int,int>\0event\0"
     "playerSetBomb\0bombEvent\0playerDie\0"
     "idPlayer\0explodeBox\0pos\0gameOver\0"
-    "std::string\0nickname"
+    "std::string\0nickname\0getMessage\0"
+    "buttonAction"
 };
 #undef QT_MOC_LITERAL
 
@@ -68,7 +71,7 @@ static const uint qt_meta_data_Game[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
+       8,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -76,12 +79,16 @@ static const uint qt_meta_data_Game[] = {
        6,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    3,   44,    2, 0x06 /* Public */,
-       9,    1,   51,    2, 0x06 /* Public */,
-      12,    1,   54,    2, 0x06 /* Public */,
-      14,    1,   57,    2, 0x06 /* Public */,
-      16,    1,   60,    2, 0x06 /* Public */,
-      18,    1,   63,    2, 0x06 /* Public */,
+       1,    3,   54,    2, 0x06 /* Public */,
+       9,    1,   61,    2, 0x06 /* Public */,
+      12,    1,   64,    2, 0x06 /* Public */,
+      14,    1,   67,    2, 0x06 /* Public */,
+      16,    1,   70,    2, 0x06 /* Public */,
+      18,    1,   73,    2, 0x06 /* Public */,
+
+ // slots: name, argc, parameters, tag, flags
+      21,    0,   76,    2, 0x0a /* Public */,
+      22,    1,   77,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3, 0x80000000 | 5, 0x80000000 | 7,    4,    6,    8,
@@ -90,6 +97,10 @@ static const uint qt_meta_data_Game[] = {
     QMetaType::Void, QMetaType::Int,   15,
     QMetaType::Void, QMetaType::Int,   17,
     QMetaType::Void, 0x80000000 | 19,   20,
+
+ // slots: parameters
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,    2,
 
        0        // eod
 };
@@ -106,6 +117,8 @@ void Game::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void *
         case 3: _t->playerDie((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 4: _t->explodeBox((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 5: _t->gameOver((*reinterpret_cast< std::string(*)>(_a[1]))); break;
+        case 6: _t->getMessage(); break;
+        case 7: _t->buttonAction((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -175,13 +188,13 @@ int Game::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 8;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 6)
+        if (_id < 8)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 6;
+        _id -= 8;
     }
     return _id;
 }

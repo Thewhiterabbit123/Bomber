@@ -38,8 +38,7 @@ HEADERS  += \
     game/person/animatedgraphicsitem.h \
     game/person/graphicsactor.h \
     game/view.h \
-    game/person/bombactor.h \
-    appthread.h
+    game/person/bombactor.h
 
 FORMS    += \
     menuwidgetui.ui \
