@@ -11,7 +11,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="57caea7c-0caf-4f41-b72c-96e926f7e140" name="Default" comment="" />
+    <list default="true" id="57caea7c-0caf-4f41-b72c-96e926f7e140" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fieldConf1" afterPath="$PROJECT_DIR$/fieldConf1" />
+    </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -25,33 +28,29 @@
       <file leaf-file-name="Field.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Server/Field.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
+            <state relative-caret-position="0">
               <caret line="21" column="27" lean-forward="false" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Game.cc" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Game.cc" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Server/Game.cc">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="46" column="23" lean-forward="false" selection-start-line="46" selection-start-column="23" selection-end-line="46" selection-end-column="23" />
+            <state relative-caret-position="-264">
+              <caret line="62" column="23" lean-forward="false" selection-start-line="62" selection-start-column="23" selection-end-line="62" selection-end-column="23" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Block.cc" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Server/Block.cc">
+      <file leaf-file-name="fieldConf1" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/fieldConf1">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="4" column="24" lean-forward="false" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
-              <folding>
-                <marker date="1513959206758" expanded="true" signature="223:291" ph="{...}" />
-                <marker date="1513959206758" expanded="true" signature="319:356" ph="{...}" />
-                <marker date="1513959206758" expanded="true" signature="401:419" ph="{...}" />
-              </folding>
+            <state relative-caret-position="0">
+              <caret line="0" column="240" lean-forward="false" selection-start-line="0" selection-start-column="240" selection-end-line="0" selection-end-column="240" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -69,8 +68,8 @@
       <file leaf-file-name="Bomb.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Server/Bomb.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="5" column="60" lean-forward="false" selection-start-line="5" selection-start-column="60" selection-end-line="5" selection-end-column="60" />
+            <state relative-caret-position="108">
+              <caret line="6" column="60" lean-forward="false" selection-start-line="6" selection-start-column="60" selection-end-line="6" selection-end-column="60" />
               <folding />
             </state>
           </provider>
@@ -79,10 +78,10 @@
       <file leaf-file-name="Game.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Server/Game.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
+            <state relative-caret-position="18">
               <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
               <folding>
-                <marker date="1513959206762" expanded="true" signature="786:1013" ph="{...}" />
+                <marker date="1514017762168" expanded="true" signature="1092:1096" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -93,7 +92,9 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="216">
               <caret line="12" column="12" lean-forward="false" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
-              <folding />
+              <folding>
+                <marker date="1514017762168" expanded="true" signature="148:469" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -101,9 +102,11 @@
       <file leaf-file-name="Player.cc" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Server/Player.cc">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="666">
-              <caret line="37" column="10" lean-forward="false" selection-start-line="37" selection-start-column="10" selection-end-line="37" selection-end-column="10" />
-              <folding />
+            <state relative-caret-position="324">
+              <caret line="18" column="10" lean-forward="false" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
+              <folding>
+                <marker date="1514017762168" expanded="true" signature="732:736" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -111,7 +114,7 @@
       <file leaf-file-name="Define.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Define.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
+            <state relative-caret-position="54">
               <caret line="9" column="18" lean-forward="false" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
               <folding />
             </state>
@@ -156,6 +159,7 @@
         <option value="$PROJECT_DIR$/Server/Bomb.h" />
         <option value="$PROJECT_DIR$/Server/Game.h" />
         <option value="$PROJECT_DIR$/Server/Game.cc" />
+        <option value="$PROJECT_DIR$/fieldConf1" />
       </list>
     </option>
   </component>
@@ -258,7 +262,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19015000" />
+    <option name="totallyTimeSpent" value="21425000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="10" y="52" width="1366" height="704" extended-state="7" />
@@ -310,16 +314,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Server/Game.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1513959206762" expanded="true" signature="786:1013" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Server/Bomb.cc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -340,7 +334,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
           <caret line="24" column="17" lean-forward="true" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="17" />
-          <folding />
+          <folding>
+            <marker date="1514017762168" expanded="true" signature="148:469" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -348,7 +344,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1514017762168" expanded="true" signature="732:736" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -401,7 +399,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1513959206762" expanded="true" signature="786:1013" ph="{...}" />
+            <marker date="1514017762168" expanded="true" signature="1092:1096" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -480,7 +478,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1513959206762" expanded="true" signature="786:1013" ph="{...}" />
+            <marker date="1514017762168" expanded="true" signature="1092:1096" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -614,7 +612,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Server/Field.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
+        <state relative-caret-position="0">
           <caret line="21" column="27" lean-forward="false" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
           <folding />
         </state>
@@ -645,15 +643,19 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="12" column="12" lean-forward="false" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
-          <folding />
+          <folding>
+            <marker date="1514017762168" expanded="true" signature="148:469" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Server/Player.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="666">
-          <caret line="37" column="10" lean-forward="false" selection-start-line="37" selection-start-column="10" selection-end-line="37" selection-end-column="10" />
-          <folding />
+        <state relative-caret-position="324">
+          <caret line="18" column="10" lean-forward="false" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
+          <folding>
+            <marker date="1514017762168" expanded="true" signature="732:736" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -674,6 +676,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Server/Bomb.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="60" lean-forward="false" selection-start-line="6" selection-start-column="60" selection-end-line="6" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Define.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="9" column="18" lean-forward="false" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/Game.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding>
+            <marker date="1514017762168" expanded="true" signature="1092:1096" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/Game.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-264">
+          <caret line="62" column="23" lean-forward="false" selection-start-line="62" selection-start-column="23" selection-end-line="62" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Server/Bomb.cc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -682,36 +718,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Server/Bomb.h">
+    <entry file="file://$PROJECT_DIR$/fieldConf1">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="60" lean-forward="false" selection-start-line="5" selection-start-column="60" selection-end-line="5" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Define.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="18" lean-forward="false" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/Game.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding>
-            <marker date="1513959206762" expanded="true" signature="786:1013" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/Game.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="46" column="23" lean-forward="false" selection-start-line="46" selection-start-column="23" selection-end-line="46" selection-end-column="23" />
+        <state relative-caret-position="0">
+          <caret line="0" column="240" lean-forward="false" selection-start-line="0" selection-start-column="240" selection-end-line="0" selection-end-column="240" />
           <folding />
         </state>
       </provider>
