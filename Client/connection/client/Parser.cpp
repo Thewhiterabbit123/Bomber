@@ -79,12 +79,21 @@ int Parser::parseLine(std::string line) {
 
 void Parser::makeMapFromString(std::string _map) {
     for(int i = 0; i < MAPHEIGHT*MAPWIDTH; i++) {
-            parseMap.push_back(_map[i]);
+        switch (_map[i]) {
+            case 0: {
+                parseMap.push_back(ImageBox::Ground);
+                break;
+            }
+            case 1: {
+                parseMap.push_back(ImageBox::Box);
+                break;
+            }
+            case 2: {
+                parseMap.push_back(ImageBox::Wall);
+                break;
+            }
+        }
     }
-}
-
-std::vector<int> Parser::getParseMap() {
-    return parseMap;
 }
 
 int Parser::getMyId() {
@@ -95,7 +104,7 @@ std::map<std::string, int> Parser::getNickname() {
     return nickname;
 }
 
-std::vector<int> Parser::getMap() {
+std::vector<ImageBox> Parser::getMap() {
     return parseMap;
 }
 

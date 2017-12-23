@@ -20,7 +20,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_GameWidget_t {
     QByteArrayData data[11];
-    char stringdata0[122];
+    char stringdata0[127];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -33,17 +33,17 @@ QT_MOC_LITERAL(0, 0, 10), // "GameWidget"
 QT_MOC_LITERAL(1, 11, 9), // "setScreen"
 QT_MOC_LITERAL(2, 21, 0), // ""
 QT_MOC_LITERAL(3, 22, 6), // "setMap"
-QT_MOC_LITERAL(4, 29, 16), // "std::vector<int>"
-QT_MOC_LITERAL(5, 46, 3), // "map"
-QT_MOC_LITERAL(6, 50, 17), // "std::map<int,int>"
-QT_MOC_LITERAL(7, 68, 9), // "playerPos"
-QT_MOC_LITERAL(8, 78, 25), // "std::map<std::string,int>"
-QT_MOC_LITERAL(9, 104, 6), // "player"
-QT_MOC_LITERAL(10, 111, 10) // "menuScreen"
+QT_MOC_LITERAL(4, 29, 21), // "std::vector<ImageBox>"
+QT_MOC_LITERAL(5, 51, 3), // "map"
+QT_MOC_LITERAL(6, 55, 17), // "std::map<int,int>"
+QT_MOC_LITERAL(7, 73, 9), // "playerPos"
+QT_MOC_LITERAL(8, 83, 25), // "std::map<std::string,int>"
+QT_MOC_LITERAL(9, 109, 6), // "player"
+QT_MOC_LITERAL(10, 116, 10) // "menuScreen"
 
     },
     "GameWidget\0setScreen\0\0setMap\0"
-    "std::vector<int>\0map\0std::map<int,int>\0"
+    "std::vector<ImageBox>\0map\0std::map<int,int>\0"
     "playerPos\0std::map<std::string,int>\0"
     "player\0menuScreen"
 };
@@ -86,7 +86,7 @@ void GameWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->setScreen((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 1: _t->setMap((*reinterpret_cast< std::vector<int>(*)>(_a[1])),(*reinterpret_cast< std::map<int,int>(*)>(_a[2])),(*reinterpret_cast< std::map<std::string,int>(*)>(_a[3]))); break;
+        case 1: _t->setMap((*reinterpret_cast< std::vector<ImageBox>(*)>(_a[1])),(*reinterpret_cast< std::map<int,int>(*)>(_a[2])),(*reinterpret_cast< std::map<std::string,int>(*)>(_a[3]))); break;
         case 2: _t->menuScreen(); break;
         default: ;
         }

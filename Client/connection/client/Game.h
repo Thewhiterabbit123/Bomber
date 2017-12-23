@@ -14,7 +14,7 @@ class Game : public QObject {
         void eventSwitcher(int);
 
     signals:
-        void startGame(std::vector<int> map, std::map<int, int> playerPos, std::map<std::string, int> player);
+        void startGame(std::vector<ImageBox> map, std::map<int, int> playerPos, std::map<std::string, int> player);
         void playerMove(std::pair<int, int> event);
         void playerSetBomb(std::pair<int, int> bombEvent);
         void playerDie(int idPlayer);

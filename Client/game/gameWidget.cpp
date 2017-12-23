@@ -41,7 +41,7 @@ void GameWidget::menuScreen(){
     emit setScreen(0); // go to menu screen
 }
 
-void GameWidget::setMap(std::vector<int> map, std::map<int, int> playerPos, std::map<std::string, int> player){
+void GameWidget::setMap(std::vector<ImageBox> map, std::map<int, int> playerPos, std::map<std::string, int> player){
     std::cerr << "setMap" << std::endl;
     gameLayout = new QGridLayout();
 
@@ -49,11 +49,14 @@ void GameWidget::setMap(std::vector<int> map, std::map<int, int> playerPos, std:
     boxPool->load(ImageBox::Box, ":/images/box.png", 38, 38);
     boxPool->load(ImageBox::Ground, ":/images/pass.png", 38, 38);
     boxPool->load(ImageBox::Wall, ":/images/notPass.png", 38, 38);
-    for(int i = 0; i < 13; i++)
-        for(int j = 0; j < 20; j++){
+    for(int i = 0; i < 13*20; i++){
+            std::cerr << map.size() << ' ' << std::endl;
             BoxWidget* box = new BoxWidget(ImageBox::Ground, std::make_shared<ImagePool<ImageBox>>(boxPool));
+            std::cerr << i << ' ' << std::endl;
             field.push_back(box);
-            gameLayout->addWidget(box, i, j);
+            std::cerr << i << ' ' << std::endl;
+            gameLayout->addWidget(box, i/20, i%20);
+            std::cerr << i << ' ' << std::endl;
         }
 
     gameUi->field->setLayout(gameLayout);

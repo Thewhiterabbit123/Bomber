@@ -20,7 +20,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_Game_t {
     QByteArrayData data[23];
-    char stringdata0[246];
+    char stringdata0[251];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,30 +32,30 @@ static const qt_meta_stringdata_Game_t qt_meta_stringdata_Game = {
 QT_MOC_LITERAL(0, 0, 4), // "Game"
 QT_MOC_LITERAL(1, 5, 9), // "startGame"
 QT_MOC_LITERAL(2, 15, 0), // ""
-QT_MOC_LITERAL(3, 16, 16), // "std::vector<int>"
-QT_MOC_LITERAL(4, 33, 3), // "map"
-QT_MOC_LITERAL(5, 37, 17), // "std::map<int,int>"
-QT_MOC_LITERAL(6, 55, 9), // "playerPos"
-QT_MOC_LITERAL(7, 65, 25), // "std::map<std::string,int>"
-QT_MOC_LITERAL(8, 91, 6), // "player"
-QT_MOC_LITERAL(9, 98, 10), // "playerMove"
-QT_MOC_LITERAL(10, 109, 18), // "std::pair<int,int>"
-QT_MOC_LITERAL(11, 128, 5), // "event"
-QT_MOC_LITERAL(12, 134, 13), // "playerSetBomb"
-QT_MOC_LITERAL(13, 148, 9), // "bombEvent"
-QT_MOC_LITERAL(14, 158, 9), // "playerDie"
-QT_MOC_LITERAL(15, 168, 8), // "idPlayer"
-QT_MOC_LITERAL(16, 177, 10), // "explodeBox"
-QT_MOC_LITERAL(17, 188, 3), // "pos"
-QT_MOC_LITERAL(18, 192, 8), // "gameOver"
-QT_MOC_LITERAL(19, 201, 11), // "std::string"
-QT_MOC_LITERAL(20, 213, 8), // "nickname"
-QT_MOC_LITERAL(21, 222, 10), // "getMessage"
-QT_MOC_LITERAL(22, 233, 12) // "buttonAction"
+QT_MOC_LITERAL(3, 16, 21), // "std::vector<ImageBox>"
+QT_MOC_LITERAL(4, 38, 3), // "map"
+QT_MOC_LITERAL(5, 42, 17), // "std::map<int,int>"
+QT_MOC_LITERAL(6, 60, 9), // "playerPos"
+QT_MOC_LITERAL(7, 70, 25), // "std::map<std::string,int>"
+QT_MOC_LITERAL(8, 96, 6), // "player"
+QT_MOC_LITERAL(9, 103, 10), // "playerMove"
+QT_MOC_LITERAL(10, 114, 18), // "std::pair<int,int>"
+QT_MOC_LITERAL(11, 133, 5), // "event"
+QT_MOC_LITERAL(12, 139, 13), // "playerSetBomb"
+QT_MOC_LITERAL(13, 153, 9), // "bombEvent"
+QT_MOC_LITERAL(14, 163, 9), // "playerDie"
+QT_MOC_LITERAL(15, 173, 8), // "idPlayer"
+QT_MOC_LITERAL(16, 182, 10), // "explodeBox"
+QT_MOC_LITERAL(17, 193, 3), // "pos"
+QT_MOC_LITERAL(18, 197, 8), // "gameOver"
+QT_MOC_LITERAL(19, 206, 11), // "std::string"
+QT_MOC_LITERAL(20, 218, 8), // "nickname"
+QT_MOC_LITERAL(21, 227, 10), // "getMessage"
+QT_MOC_LITERAL(22, 238, 12) // "buttonAction"
 
     },
-    "Game\0startGame\0\0std::vector<int>\0map\0"
-    "std::map<int,int>\0playerPos\0"
+    "Game\0startGame\0\0std::vector<ImageBox>\0"
+    "map\0std::map<int,int>\0playerPos\0"
     "std::map<std::string,int>\0player\0"
     "playerMove\0std::pair<int,int>\0event\0"
     "playerSetBomb\0bombEvent\0playerDie\0"
@@ -111,7 +111,7 @@ void Game::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void *
         Game *_t = static_cast<Game *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->startGame((*reinterpret_cast< std::vector<int>(*)>(_a[1])),(*reinterpret_cast< std::map<int,int>(*)>(_a[2])),(*reinterpret_cast< std::map<std::string,int>(*)>(_a[3]))); break;
+        case 0: _t->startGame((*reinterpret_cast< std::vector<ImageBox>(*)>(_a[1])),(*reinterpret_cast< std::map<int,int>(*)>(_a[2])),(*reinterpret_cast< std::map<std::string,int>(*)>(_a[3]))); break;
         case 1: _t->playerMove((*reinterpret_cast< std::pair<int,int>(*)>(_a[1]))); break;
         case 2: _t->playerSetBomb((*reinterpret_cast< std::pair<int,int>(*)>(_a[1]))); break;
         case 3: _t->playerDie((*reinterpret_cast< int(*)>(_a[1]))); break;
@@ -125,7 +125,7 @@ void Game::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void *
         int *result = reinterpret_cast<int *>(_a[0]);
         void **func = reinterpret_cast<void **>(_a[1]);
         {
-            typedef void (Game::*_t)(std::vector<int> , std::map<int,int> , std::map<std::string,int> );
+            typedef void (Game::*_t)(std::vector<ImageBox> , std::map<int,int> , std::map<std::string,int> );
             if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&Game::startGame)) {
                 *result = 0;
             }
@@ -200,7 +200,7 @@ int Game::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void Game::startGame(std::vector<int> _t1, std::map<int,int> _t2, std::map<std::string,int> _t3)
+void Game::startGame(std::vector<ImageBox> _t1, std::map<int,int> _t2, std::map<std::string,int> _t3)
 {
     void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)), const_cast<void*>(reinterpret_cast<const void*>(&_t3)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);

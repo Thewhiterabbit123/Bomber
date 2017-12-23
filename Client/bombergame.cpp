@@ -26,6 +26,6 @@ void BomberGame::initGame(){
 void BomberGame::startNetworking(){
     std::string nickName = menu->menuUi->nickNameLineEdit->text().toStdString();
     gameNetwork->play(nickName);
-    connect(gameNetwork, SIGNAL(startGame(std::vector<int>,std::map<int,int>,std::map<std::string,int>)),
-            game, SLOT(setMap(std::vector<int>,std::map<int,int>,std::map<std::string,int>)));
+    connect(gameNetwork, SIGNAL(startGame(std::vector<ImageBox>,std::map<int,int>,std::map<std::string,int>)),
+            game, SLOT(setMap(std::vector<ImageBox>,std::map<int,int>,std::map<std::string,int>)));
 }
