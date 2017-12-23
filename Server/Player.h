@@ -9,6 +9,7 @@ class Player : public Object {
 	public:
         Player(std::string _name, Coordinate _coordinate);
 		void PutBomb();
+        void RespawnBomb();
 		bool GetDamage();
 		void Heal();
 		int GetHp();

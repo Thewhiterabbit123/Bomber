@@ -11,3 +11,7 @@ int Bomb::GetDamage() {
 double Bomb::GetTimeToLive() {
 	return timeToLive;
 }
+
+int Bomb::GetPlayerId() {
+	return playerId;
+}

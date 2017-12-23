@@ -39,6 +39,8 @@ void Game::DestroyBomb(Game *game) {
         return;
     Bomb bombToDestroy = game->bomb.front();
     game->bomb.pop_front();
+    Player *currentPlayer = game->FindPlayer(bombToDestroy.GetPlayerId());
+    currentPlayer->RespawnBomb();
     int bombDamage = bombToDestroy.GetDamage();
     int bombRadius = bombToDestroy.GetRadius();
     Coordinate bombPosition = bombToDestroy.GetPosition();
@@ -163,11 +165,17 @@ void Game::Step() {
                 }
                 // Bomb is set
                 if (currentEvent == SET_BOMB_EVENT) {
-                    Bomb newBomb(currentPlayer->GetPosition());
-                    CreateBomb(newBomb);
-                    SendBombPlanted(newBomb.GetId(), newBomb.GetPosition().ToInt());
-                    boost::thread(boost::bind(DestroyBomb, this));
-                    continue;
+                    if (currentPlayer->GetBomb() > 0) {
+                        currentPlayer->PutBomb();
+                        Bomb newBomb(currentPlayer->GetPosition(), currentId);
+                        for (std::list<Bomb>::iterator i = bomb.begin(); i != bomb.end(); i++)
+                            if (i -> GetPosition() == newBomb.GetPosition())
+                                continue;
+                        CreateBomb(newBomb);
+                        SendBombPlanted(newBomb.GetId(), newBomb.GetPosition().ToInt());
+                        boost::thread(boost::bind(DestroyBomb, this));
+                        continue;
+                    }
                 }
             }
         }
