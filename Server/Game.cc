@@ -75,6 +75,7 @@ void Game::DestroyBomb(Game *game) {
             for(std::vector<Player>::iterator j = game->player.begin(); j != game->player.end(); j++) {
                 if ( (currentPos == j -> GetPosition()) && j -> IsActive()) {
                     if(!j -> GetDamage()) {
+                        game->clientCount--;
                         SendPlayerDead (j->GetId());
                     } else {
                         SendMinusHP(j->GetId());
@@ -166,7 +167,7 @@ void Game::Step() {
                 // Bomb is set
                 if (currentEvent == SET_BOMB_EVENT) {
                     if (currentPlayer->GetBomb() > 0) {
-                        bool flag = true;
+                        bool flag = true;boost::this_thread::sleep_for(boost::chrono::seconds(5));
                         Bomb newBomb(currentPlayer->GetPosition(), currentId);
                         for (std::list<Bomb>::iterator i = bomb.begin(); i != bomb.end(); i++)
                             if (i -> GetPosition() == newBomb.GetPosition()) {
