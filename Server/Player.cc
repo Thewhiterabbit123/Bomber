@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(Field &_field, std::string _name, Coordinate _coordinate): Object(_coordinate), field(_field), name(_name), bomb(BOMB_COUNT_ONE_PLAYER), hp(MAX_PLAYER_HP) {
+Player::Player(std::string _name, Coordinate _coordinate): Object(_coordinate), name(_name), bomb(BOMB_COUNT_ONE_PLAYER), hp(MAX_PLAYER_HP) {
     static int skinId = 0;
     skin = skinId;
     isActive = true;
