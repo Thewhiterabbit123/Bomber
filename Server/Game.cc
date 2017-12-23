@@ -107,7 +107,7 @@ void Game::DestroyBomb(Game *game) {
         }
         currentPos = bombPosition;
     }
-    SendBombExplode(bombToDestroy.GetId());
+    SendBombExplode(bombToDestroy.GetId(), BOMB_RADIUS);
 }
 
 void Game::CreateBomb(const Bomb &_bomb) {
