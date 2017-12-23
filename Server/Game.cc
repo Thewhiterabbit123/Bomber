@@ -167,7 +167,7 @@ void Game::Step() {
                 // Bomb is set
                 if (currentEvent == SET_BOMB_EVENT) {
                     if (currentPlayer->GetBomb() > 0) {
-                        bool flag = true;boost::this_thread::sleep_for(boost::chrono::seconds(5));
+                        bool flag = true;
                         Bomb newBomb(currentPlayer->GetPosition(), currentId);
                         for (std::list<Bomb>::iterator i = bomb.begin(); i != bomb.end(); i++)
                             if (i -> GetPosition() == newBomb.GetPosition()) {
