@@ -1,9 +1,9 @@
-#include "Client.h"
-#include <fstream>
-#include "Parse.h"
+#include <QApplication>
+#include "Game.h"
 
-int main() {
-    Client client;
-    client.Connect();
+int main(int argc, char** argv) {
+    QApplication a(argc, argv);
+    Game game;
+    game.play("NADYA");
+    return a.exec();
 }
-

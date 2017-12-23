@@ -1,47 +1,39 @@
 #include "bombergame.h"
+#include "iostream"
 
-BomberGame::BomberGame(QWidget* parent): QGraphicsView(parent)
-{
+BomberGame::BomberGame(QWidget* parent): QGraphicsView(parent){
+    gameNetwork = new Game;
+    initGame();
+}
+
+void BomberGame::initGame(){
     allScreens = new QStackedLayout();
+    std::cerr<< "menu widget" << std::endl;
     menu = new MenuWidget();
+    std::cerr<< "game widget" << std::endl;
     game = new GameWidget();
-    //pageComboBox = new QComboBox();
     allScreens -> addWidget(menu);
-    //pageComboBox->addItem(tr("menu"));
     allScreens -> addWidget(game);
-    //pageComboBox->addItem(tr("game"));
     setLayout(allScreens);
 
-    //connect(pageComboBox, SIGNAL(activated(int)), allScreens, SLOT(setCurrentIndex(int));
 
     connect(menu, SIGNAL(setScreen(int)), allScreens, SLOT(setCurrentIndex(int)));
     connect(game, SIGNAL(setScreen(int)), allScreens, SLOT(setCurrentIndex(int)));
-    /*
-    QStackedLayout* qslo;
-    QWidget* mainMenu, * game;
-    QVBoxLayout* pbly;
-    QPushButton* gth, * myc;
-    QComboBox* pageComboBox = new QComboBox();
-    qslo = new QStackedLayout();
-    mainMenu = new QWidget();
-    game = new QWidget();
-    pbly = new QVBoxLayout();
-    gth = new QPushButton("GO TO HELL");
-    myc = new QPushButton("Make you cry!");
-    pbly->addWidget(gth);
-    pbly->addWidget(myc);
-    mainMenu->setLayout(pbly);
-    qslo->setObjectName(tr("currentLayout"));
-    qslo->addWidget(mainMenu);
-    qslo->addWidget(game);
-    pageComboBox->addItem(tr("Page 1"));
-    pageComboBox->addItem(tr("Page 2"));
-    connect(pageComboBox, SIGNAL(activated(int)), qslo, SLOT(setCurrentIndex(int)));
-    //emit pageComboBox->activated(0);
-    //qslo->setCurrentIndex(0);
-    setLayout(qslo);
-    emit pageComboBox->activated(1);
-    //qslo->setCurrentIndex(0);
-    */
+    connect(menu, SIGNAL(setScreen(int)), this, SLOT(startNetworking()));
 
+}
+
+void BomberGame::startNetworking(){
+    std::string nickName = menu->menuUi->nickNameLineEdit->text().toStdString();
+    gameNetwork->play(nickName);
+    connect(gameNetwork, SIGNAL(startGame(std::vector<ImageBox>,std::map<int,int>,std::map<std::string,int>)),
+            game, SLOT(setMap(std::vector<ImageBox>,std::map<int,int>,std::map<std::string,int>)));
+    connect(gameNetwork, SIGNAL(startGame(std::vector<ImageBox>,std::map<int,int>,std::map<std::string,int>)),
+            game->view, SLOT(setMap(std::vector<ImageBox>,std::map<int,int>,std::map<std::string,int>)));
+    connect(game->view, SIGNAL(clientAction(int)), gameNetwork, SLOT(buttonAction(int)));
+    connect(gameNetwork, SIGNAL(playerMove(std::pair<int,int>)), game->view, SLOT(playerMoveSlot(std::pair<int,int>)));
+    connect(gameNetwork, SIGNAL(setBomb(int,int)), game->view, SLOT(setBomb(int,int)));
+    connect(gameNetwork, SIGNAL(playerDie(int)), game->view, SLOT(playerDie(int)));
+    connect(gameNetwork, SIGNAL(bombExplode(int)), game->view, SLOT(bombExplode(int)));
+    connect(gameNetwork, SIGNAL(explodeBox(int)), game, SLOT(explodeBox(int)));
 }

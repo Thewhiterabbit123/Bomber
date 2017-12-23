@@ -3,9 +3,11 @@
 
 
 #include <QWidget>
-#include <QVBoxLayout>
+#include <QGridLayout>
 #include <QPushButton>
 #include <QComboBox>
+
+#include "ui_menuwidgetui.h"
 
 class MenuWidget: public QWidget{
     Q_OBJECT
@@ -13,10 +15,13 @@ public:
     explicit MenuWidget(QWidget* parent = NULL);
 
 private:
-    QVBoxLayout* menuLayout;
+    QGridLayout* menuLayout;
     QPushButton* goToGameButton;
     QPushButton* quitButton;
     QComboBox* pageComboBox;
+
+public:
+    Ui::menu* menuUi;
 
 signals:
     void setScreen(int);

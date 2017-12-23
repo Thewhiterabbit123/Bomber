@@ -12,10 +12,10 @@ MAKEFILE      = Makefile
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DQT_CORE_LIB
+DEFINES       = -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -m64 -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -m64 -pipe -g -std=c++0x -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I../client -I. -isystem /usr/include -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64
+INCPATH       = -I../client -I. -isystem /usr/include -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64
 QMAKE         = /usr/lib/x86_64-linux-gnu/qt5/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -36,7 +36,7 @@ DISTNAME      = client1.0.0
 DISTDIR = /home/nadia/Technopark/project/Bomber/Client/connection/build-client-Desktop-Debug/.tmp/client1.0.0
 LINK          = g++
 LFLAGS        = -m64
-LIBS          = $(SUBLIBS) -lboost_system -lQt5Core -lpthread 
+LIBS          = $(SUBLIBS) -L/usr/X11R6/lib64 -lboost_system -lQt5Widgets -lQt5Gui -lQt5Network -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -48,12 +48,17 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../client/main.cpp \
-		../client/Client.cc \
-		../client/Parser.cpp 
-OBJECTS       = main.o \
-		Client.o \
-		Parser.o
+SOURCES       = ../client/Client.cc \
+		../client/Parser.cpp \
+		../client/Game.cpp \
+		../client/main.cpp moc_Client.cpp \
+		moc_Game.cpp
+OBJECTS       = Client.o \
+		Parser.o \
+		Game.o \
+		main.o \
+		moc_Client.o \
+		moc_Game.o
 DIST          = ../client/client.pro.user \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
@@ -114,16 +119,20 @@ DIST          = ../client/client.pro.user \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/resources.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/moc.prf \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/unix/opengl.prf \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/uic.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/unix/thread.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/testcase_targets.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		../client/client.pro ../client/Client.h \
-		../client/Parse.h \
-		../client/Position.h ../client/main.cpp \
-		../client/Client.cc \
-		../client/Parser.cpp
+		../client/Game.h \
+		../client/Header.h \
+		../client/Parser.h ../client/Client.cc \
+		../client/Parser.cpp \
+		../client/Game.cpp \
+		../client/main.cpp
 QMAKE_TARGET  = client
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = client
@@ -213,12 +222,17 @@ Makefile: ../client/client.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-6
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/resources.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/moc.prf \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/unix/opengl.prf \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/uic.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/unix/thread.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/testcase_targets.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		../client/client.pro \
+		/usr/lib/x86_64-linux-gnu/libQt5Widgets.prl \
+		/usr/lib/x86_64-linux-gnu/libQt5Gui.prl \
+		/usr/lib/x86_64-linux-gnu/libQt5Network.prl \
 		/usr/lib/x86_64-linux-gnu/libQt5Core.prl
 	$(QMAKE) -spec linux-g++-64 CONFIG+=debug -o Makefile ../client/client.pro
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf:
@@ -280,12 +294,17 @@ Makefile: ../client/client.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-6
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/resources.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/moc.prf:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/unix/opengl.prf:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/uic.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/unix/thread.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/testcase_targets.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf:
 ../client/client.pro:
+/usr/lib/x86_64-linux-gnu/libQt5Widgets.prl:
+/usr/lib/x86_64-linux-gnu/libQt5Gui.prl:
+/usr/lib/x86_64-linux-gnu/libQt5Network.prl:
 /usr/lib/x86_64-linux-gnu/libQt5Core.prl:
 qmake: FORCE
 	@$(QMAKE) -spec linux-g++-64 CONFIG+=debug -o Makefile ../client/client.pro
@@ -301,8 +320,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../client/Client.h ../client/Parse.h ../client/Position.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../client/main.cpp ../client/Client.cc ../client/Parser.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../client/Client.h ../client/Game.h ../client/Header.h ../client/Parser.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../client/Client.cc ../client/Parser.cpp ../client/Game.cpp ../client/main.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -325,33 +344,59 @@ check: first
 
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all:
+compiler_moc_header_make_all: moc_Client.cpp moc_Game.cpp
 compiler_moc_header_clean:
+	-$(DEL_FILE) moc_Client.cpp moc_Game.cpp
+moc_Client.cpp: ../client/Parser.h \
+		../client/Header.h \
+		../client/Client.h
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/nadia/Technopark/project/Bomber/Client/connection/client -I/usr/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../client/Client.h -o moc_Client.cpp
+
+moc_Game.cpp: ../client/Client.h \
+		../client/Parser.h \
+		../client/Header.h \
+		../client/Game.h
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/nadia/Technopark/project/Bomber/Client/connection/client -I/usr/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../client/Game.h -o moc_Game.cpp
+
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
+compiler_uic_make_all:
+compiler_uic_clean:
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
 compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: 
+compiler_clean: compiler_moc_header_clean 
 
 ####### Compile
 
-main.o: ../client/main.cpp ../client/Client.h \
-		../client/Parse.h \
-		../client/Position.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../client/main.cpp
-
 Client.o: ../client/Client.cc ../client/Client.h \
-		../client/Parse.h \
-		../client/Position.h
+		../client/Parser.h \
+		../client/Header.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Client.o ../client/Client.cc
 
-Parser.o: ../client/Parser.cpp ../client/Parse.h \
-		../client/Position.h
+Parser.o: ../client/Parser.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Parser.o ../client/Parser.cpp
+
+Game.o: ../client/Game.cpp ../client/Game.h \
+		../client/Client.h \
+		../client/Parser.h \
+		../client/Header.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Game.o ../client/Game.cpp
+
+main.o: ../client/main.cpp ../client/Game.h \
+		../client/Client.h \
+		../client/Parser.h \
+		../client/Header.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../client/main.cpp
+
+moc_Client.o: moc_Client.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_Client.o moc_Client.cpp
+
+moc_Game.o: moc_Game.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_Game.o moc_Game.cpp
 
 ####### Install
 

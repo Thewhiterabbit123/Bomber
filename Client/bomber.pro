@@ -4,7 +4,11 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui widgets network
+
+
+CONFIG += c++11
+QMAKE_CXXFLAGS += -std=c++11
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -15,15 +19,53 @@ TEMPLATE = app
 SOURCES += main.cpp \
     bombergame.cpp \
     game/gameWidget.cpp \
-    menu/menuWidget.cpp
+    menu/menuWidget.cpp \
+    game/person/animatedgraphicsitem.cpp \
+    game/person/graphicsactor.cpp \
+    game/view.cpp \
+    game/person/bombactor.cpp
 
 HEADERS  += \
     bombergame.h \
     game/gameWidget.h \
-    menu/menuWidget.h
+    menu/menuWidget.h \
+    game/box/boxwidget.h \
+    shared/imagePool/imagepool.h \
+    game/box/imagebox.h \
+    game/person/animations_enum.h \
+    shared/animationPool/animationpool.h \
+    singleton.h \
+    game/person/animatedgraphicsitem.h \
+    game/person/graphicsactor.h \
+    game/view.h \
+    game/person/bombactor.h
 
-FORMS    +=
+FORMS    += \
+    menuwidgetui.ui \
+    gamewidgetui.ui
 
 #unix|win32: LIBS += -lshell32
 
-RESOURCES +=
+RESOURCES += \
+    qgameres.qrc \
+    resources.qrc
+
+
+INCLUDEPATH += "/usr/include"
+
+LIBS += \
+       -lboost_system\
+
+SOURCES += \
+    connection/client/Client.cc \
+    connection/client/Parser.cpp \
+    connection/client/Game.cpp
+
+HEADERS += \
+    connection/client/Client.h \
+    connection/client/Game.h \
+    connection/client/Header.h \
+    connection/client/Parser.h
+
+DISTFILES += \
+    connection/client/client.pro.user

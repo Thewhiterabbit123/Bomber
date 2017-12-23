@@ -1,6 +1,7 @@
-QT -= network
+QT += network
 QT += core
-QT -= gui
+QT += gui
+QT += widgets
 
 TARGET = client
 CONFIG += console
@@ -16,14 +17,16 @@ LIBS += \
        -lboost_system\
 
 SOURCES += \
-    main.cpp \
     Client.cc \
-    Parser.cpp
+    Parser.cpp \
+    Game.cpp \
+    main.cpp
 
 HEADERS += \
     Client.h \
-    Parse.h \
-    Position.h
+    Game.h \
+    Header.h \
+    Parser.h
 
 DISTFILES += \
     client.pro.user
