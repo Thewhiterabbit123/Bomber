@@ -6,6 +6,7 @@
 #include <vector>
 #include "Header.h"
 #include "../../game/box/imagebox.h"
+#include <sstream>
 
 class Parser {
     public:

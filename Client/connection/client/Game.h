@@ -8,7 +8,7 @@ class Game : public QObject {
     Q_OBJECT
 
     public:
-         Game(QObject* parent = 0): QObject(parent) {};
+        Game(QObject* parent = 0): QObject(parent) {};
         ~Game();
         void play(std::string name);
         void eventSwitcher(int);
@@ -24,7 +24,6 @@ class Game : public QObject {
 
     public slots:
         void getMessage();
-        //void allReady();
         void buttonAction(int);
 
     private:

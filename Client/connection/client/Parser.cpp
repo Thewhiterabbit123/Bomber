@@ -1,6 +1,4 @@
 ﻿#include "Parser.h"
-#include <sstream>
-#include <iostream>
 
 int Parser::parseLine(std::string line) {
     std::stringstream stream(line);
