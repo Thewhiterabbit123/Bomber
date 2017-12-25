@@ -68,6 +68,9 @@ void Game::buttonAction(int event) {
 }
 
 void Game::getMessage() {
-    int event = parser->parseLine(client->getInputMessage());
-    eventSwitcher(event);
+    while(!(client->getMessageQueue()).empty()) {
+        std::string message = client->getOneMessageFromQueue();
+        int event = parser->parseLine(message);
+        eventSwitcher(event);
+    }
 }

@@ -1,24 +1,10 @@
 #include "Client.h"
-#include <iostream>
-#include <map>
-#include <fstream>
-#include <QDebug>
 #include "Parser.h"
-#include <sstream>
 
 #define BUFFSIZE 1024
 
-Client::Client( std::string name, QObject* parent): QObject(parent) {
+Client::Client(std::string name, QObject* parent): QObject(parent) {
     myName = name;
-    logfile.exceptions (std::ofstream::failbit | std::ofstream::badbit);
-    try {
-        logfile.open("/home/nadia/Technopark/project/Bomber/Client/connection/client/client.log");
-        this->getParam();
-    } catch (std::ofstream::failure e) {
-        std::cerr << "EXEPTION LOGFILE" << std::endl;
-    }
-
-    logfile << "I'VE BEEN CONNECTED TO " << _host << " ON PORT " << _port << std::endl;
 
     socket = new QTcpSocket(this);
     connect(socket, SIGNAL(readyRead()), this, SLOT(readyRead()));
@@ -38,7 +24,7 @@ void Client::getParam() {
         configFile >> this->_host >> this->_port;
         std::cout << _host << " " << _port << '\n';
     } catch (std::ifstream::failure e) {
-        logfile << "EXEPTION CONFIGFILE" << std::endl;
+        std::cerr << "EXEPTION CONFIGFILE" << std::endl;
     }
 
     configFile.close();
@@ -53,11 +39,14 @@ void Client::readyRead() {
         inputMessage = QString::fromUtf8(socket->readLine()).trimmed().toStdString();
         std::cout << inputMessage << std::endl;
     }
+    std::string message;
+    std::stringstream stream(inputMessage);
+    std::getline(stream, message, '|');
+    messageQueue.push(message);
     emit socketGetMessage();
 }
 
 void Client::sendMessage(std::string msg) {
-     std::cout << "send message" << std::endl;
      socket->write(QString::fromStdString(msg).toUtf8());
      socket->flush();
      socket->waitForBytesWritten();
@@ -67,7 +56,6 @@ void Client::sendMessage(std::string msg) {
 Client::~Client() {
     socket->disconnectFromHost();
     delete socket;
-    logfile.close();
 }
 
 
@@ -112,4 +100,14 @@ void Client::connected() {
 
 void Client::CloseClientConnection() {
     std::cout << "DISCONNECTED" << std::endl;
+}
+
+std::queue<std::string> Client::getMessageQueue() {
+    return messageQueue;
+}
+
+std::string Client::getOneMessageFromQueue() {
+    std::string message = messageQueue.front();
+    messageQueue.pop();
+    return message;
 }
