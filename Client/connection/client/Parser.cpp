@@ -1,6 +1,7 @@
 ﻿#include "Parser.h"
 
 int Parser::parseLine(std::string line) {
+    std::cout << line << std::endl;
     std::stringstream stream(line);
     int typeOfPacket = 0;
     stream >> typeOfPacket;

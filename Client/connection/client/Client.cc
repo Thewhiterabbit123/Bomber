@@ -5,7 +5,7 @@
 
 Client::Client(std::string name, QObject* parent): QObject(parent) {
     myName = name;
-
+    getParam();
     socket = new QTcpSocket(this);
     connect(socket, SIGNAL(readyRead()), this, SLOT(readyRead()));
     connect(socket, SIGNAL(connected()), this, SLOT(connected()));
@@ -22,7 +22,7 @@ void Client::getParam() {
     try {
         configFile.open("/home/nadia/Technopark/project/Bomber/Client/connection/client/config.conf");
         configFile >> this->_host >> this->_port;
-        std::cout << _host << " " << _port << '\n';
+        //std::cout << _host << " " << _port << '\n';
     } catch (std::ifstream::failure e) {
         std::cerr << "EXEPTION CONFIGFILE" << std::endl;
     }
@@ -37,12 +37,15 @@ std::string Client::getInputMessage() {
 void Client::readyRead() {
     while(socket->bytesAvailable()) {
         inputMessage = QString::fromUtf8(socket->readLine()).trimmed().toStdString();
-        std::cout << inputMessage << std::endl;
+       // std::cout << inputMessage << std::endl;
     }
     std::string message;
     std::stringstream stream(inputMessage);
-    std::getline(stream, message, '|');
-    messageQueue.push(message);
+    while(std::getline(stream, message, '|')) {
+        messageQueue.push(message);
+        std::cout << messageQueue.front() << "ETTO IS READYREAD" << std::endl;
+    }
+
     emit socketGetMessage();
 }
 
@@ -108,6 +111,7 @@ std::queue<std::string> Client::getMessageQueue() {
 
 std::string Client::getOneMessageFromQueue() {
     std::string message = messageQueue.front();
+    std::cout << messageQueue.front() << "this is gEtoNe..." << std::endl;
     messageQueue.pop();
     return message;
 }

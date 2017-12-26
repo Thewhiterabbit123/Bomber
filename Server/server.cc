@@ -25,6 +25,7 @@ void client_session(socket_ptr sock, int threadNum)
  		std::string nickName = game.GetPlayerNameById(playersId[i]);
  		line << " " << playersId[i] << " " << nickName << " " << game.GetPlayerPositionById(playersId[i]);
  	}
+ 	line << " |";
 	std::string msg = line.str(); 	
 	try {
 		sock->send(boost::asio::buffer(msg)); 
@@ -146,7 +147,7 @@ void server_loop()
 void SendMovePlayer(int idPlayer, Event moveType) {
 	Event event = MOVE_PLAYER;
 	std::stringstream line;
-	line << event << " " << idPlayer << " " << moveType;
+	line << event << " " << idPlayer << " " << moveType << " |";
 	std::string msg = line.str();
 
 	for (int i = 0; i < PLAYER_COUNT; i++) {
@@ -158,7 +159,7 @@ void SendMovePlayer(int idPlayer, Event moveType) {
 void SendBombPlanted (int id, int coord) {
 	Event event = BOMB_PLANTED;
 	std::stringstream line;
-	line << event << " " << id << " " << coord;
+	line << event << " " << id << " " << coord << " |";
 	std::string msg = line.str();
 
 	for (int i = 0; i < PLAYER_COUNT; i++) {
@@ -169,7 +170,7 @@ void SendBombPlanted (int id, int coord) {
 void SendBombExplode (int id, int radius=1) {
 	Event event = BOMB_EXPLODE;
 	std::stringstream line;
-	line << event << " " << id;
+	line << event << " " << id << " |";
 	std::string msg = line.str();
 
 	for (int i = 0; i < PLAYER_COUNT; i++) {
@@ -180,7 +181,7 @@ void SendBombExplode (int id, int radius=1) {
 void SendPlayerDead (int idPlayer) {
 	Event event = PLAYER_DEAD;
 	std::stringstream line;
-	line << event << " " << idPlayer;
+	line << event << " " << idPlayer << " |";
 	std::string msg = line.str();
 
 	for (int i = 0; i < PLAYER_COUNT; i++) {
@@ -191,7 +192,7 @@ void SendPlayerDead (int idPlayer) {
 void SendPlusHP(int idPlayer) {
 	Event event = PLUS_HP;
 	std::stringstream line;
-	line << event << " " << idPlayer;
+	line << event << " " << idPlayer << " |";
 	std::string msg = line.str();
 
 	for (int i = 0; i < PLAYER_COUNT; i++) {
@@ -202,7 +203,7 @@ void SendPlusHP(int idPlayer) {
 void SendMinusHP(int idPlayer) {
 	Event event = MINUS_HP;
 	std::stringstream line;
-	line << event << " " << idPlayer;
+	line << event << " " << idPlayer << " |";
 	std::string msg = line.str();
 
 	for (int i = 0; i < PLAYER_COUNT; i++) {
@@ -213,7 +214,7 @@ void SendMinusHP(int idPlayer) {
 void SendBoxExplode(int id, int newType=1) {
 	Event event = BOX_EXPLODE;
 	std::stringstream line;
-	line << event << " " << id;
+	line << event << " " << id << " |";
 	std::string msg = line.str();
 
 	for (int i = 0; i < PLAYER_COUNT; i++) {
@@ -224,7 +225,7 @@ void SendBoxExplode(int id, int newType=1) {
 void SendEndGame(int idPlayer) {
 	Event event = END_GAME;
 	std::stringstream line;
-	line << event << " " << idPlayer;
+	line << event << " " << idPlayer << " |";
 	std::string msg = line.str();
 
 	for (int i = 0; i < PLAYER_COUNT; i++) {
