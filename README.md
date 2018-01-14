@@ -13,7 +13,7 @@ Game on c++ with graphic on qt
 
 # Compile
 
-Compile with flags:
+Compile server with flags:
 
 ```bash
 g++ *.cc -lboost_system -lboost_thread -std=c++11
