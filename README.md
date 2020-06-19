@@ -1,4 +1,4 @@
-# MiniCar
+# BOMBER
 
 Final project for 1st semestr of technopark
 Autumn 2017
